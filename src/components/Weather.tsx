@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import {Container, Paper, Typography} from '@mui/material';
+import {Typography} from '@mui/material';
 
 export interface IWeather {
     description: string;
@@ -33,18 +33,14 @@ export const Weather: React.FC<IWeatherProps> = (props: IWeatherProps) => {
     }, [props.location, props.units, setWeather]);
 
     return (
-        <Container maxWidth='sm'>
-            <Paper elevation={3}>
-                <div>
-                    <Typography variant={'h2'} component={'div'}>
-                        {weather?.temperature || '-'}°C
-                    </Typography>
+        <div>
+            <Typography variant={'h2'} component={'div'}>
+                {weather?.temperature || '-'}°C
+            </Typography>
 
-                    <Typography variant={'h3'} component={'div'}>
-                        {weather?.description || '-'}
-                    </Typography>
-                </div>
-            </Paper>
-        </Container>
+            <Typography variant={'h3'} component={'div'}>
+                {weather?.description || '-'}
+            </Typography>
+        </div>
     );
 };
