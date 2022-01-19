@@ -2,7 +2,9 @@ import * as React from 'react';
 import axios from 'axios';
 
 import {Box} from '@mui/material';
+
 import {WeatherIcon} from './WeatherIcon';
+import {SunriseSunset} from './SunriseSunset';
 
 export interface IWeather {
     description: string;
@@ -25,6 +27,14 @@ export const Weather: React.FC<IWeatherProps> = (props: IWeatherProps) => {
         sunset: 0,
         temperature: 0,
     });
+    const [time, setTime] = React.useState(Date.now());
+
+    React.useEffect(() => {
+        const interval = setInterval(() => setTime(Date.now()), 1000);
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
 
     React.useEffect(() => {
         (async () => {
@@ -40,8 +50,8 @@ export const Weather: React.FC<IWeatherProps> = (props: IWeatherProps) => {
                 description: '',
                 temperature: result.data.current.temp,
                 icon: result.data.current.weather[0].id,
-                sunrise: result.data.current.temp.sunrise * 1000,
-                sunset: result.data.current.temp.sunset * 1000,
+                sunrise: result.data.current.sunrise * 1000,
+                sunset: result.data.current.sunset * 1000,
             });
         })();
     }, [props.location, props.units, setWeather]);
@@ -57,8 +67,11 @@ export const Weather: React.FC<IWeatherProps> = (props: IWeatherProps) => {
                 width: '100%',
                 textAlign: 'center',
                 fontSize: '32px',
+                display: 'flex',
+                justifyContent: 'space-between',
             }}>
-                Wien
+                <Box>Wien</Box>
+                <Box>{new Date(time).toLocaleString()}</Box>
             </Box>
 
             <Box sx={{
@@ -66,17 +79,20 @@ export const Weather: React.FC<IWeatherProps> = (props: IWeatherProps) => {
                 textAlign: 'center',
                 fontSize: '42px',
             }}>
-                {weather.temperature || '-'}°C
-            </Box>
-
-            <Box>
                 <WeatherIcon
                     iconId={weather.icon}
                     sunset={weather.sunset}
                     sunrise={weather.sunrise}
                 />
+                {weather.temperature || '-'}°C
             </Box>
 
+            <Box>
+                <SunriseSunset
+                    sunrise={weather?.sunrise}
+                    sunset={weather?.sunset}
+                />
+            </Box>
         </Box>
     );
 };

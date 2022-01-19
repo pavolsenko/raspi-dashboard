@@ -1,10 +1,7 @@
 import * as React from 'react';
+import * as WeatherIcons from 'react-icons/wi';
 
-import Icon from '@mdi/react'
-import {
-    mdiWeatherNight,
-    mdiWeatherSunny,
-} from '@mdi/js';
+import {Box} from '@mui/material';
 
 export interface IWeatherIconProps {
     iconId: number;
@@ -15,17 +12,25 @@ export interface IWeatherIconProps {
 export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProps) => {
     const isDay = Date.now() > props.sunrise * 1000 && Date.now() < props.sunset * 1000;
 
-    if (props.iconId === 800) {
-        if (isDay) {
+    const renderIcon = (): React.ReactNode => {
+        if (props.iconId === 800 && isDay) {
             return (
-                <Icon size={4} path={mdiWeatherSunny}/>
-            );
-        } else {
-            return (
-                <Icon size={4} path={mdiWeatherNight}/>
+                <WeatherIcons.WiDaySunny/>
             );
         }
-    }
 
-    return null;
-}
+        if (props.iconId === 800 && !isDay) {
+            return (
+                <WeatherIcons.WiNightClear/>
+            );
+        }
+    };
+
+    return (
+        <Box sx={{
+            fontSize: '72px',
+        }}>
+            {renderIcon()}
+        </Box>
+    );
+};

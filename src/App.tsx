@@ -3,6 +3,7 @@ import React from 'react';
 import {Box, Typography} from '@mui/material';
 
 import {Weather} from './components/Weather';
+import {WienerLinien} from './components/WienerLinien';
 
 export const DISPLAY_HEIGHT = 400;
 export const DISPLAY_WIDTH = 1280;
@@ -37,9 +38,7 @@ export const App: React.FC = () => {
             </Box>
 
             <Box sx={boxStyle}>
-                lorem ipsum
-
-                <Typography variant={'h2'} component={'div'}>Tu by mohli byt wiener linien odchody</Typography>
+                <WienerLinien/>
             </Box>
 
             <Box sx={boxStyle}>
