@@ -1,9 +1,13 @@
 import React from 'react';
 
-import {Box, Typography} from '@mui/material';
+import {Box, Button, Typography} from '@mui/material';
 
 import {Weather} from './components/Weather';
 import {WienerLinien} from './components/WienerLinien';
+import {Fade} from './transition-test/Fade';
+import TestCard from './transition-test/TestCard';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
+import {themeConfig} from './config/themeConfig';
 
 export const DISPLAY_HEIGHT = 400;
 export const DISPLAY_WIDTH = 1280;
@@ -28,23 +32,34 @@ export const App: React.FC = () => {
         fontFamily: 'Lato',
     };
 
+    const [inProp, setInProp] = React.useState<boolean>(false);
+
     return (
-        <Box sx={containerStyle}>
-            <Box sx={boxStyle}>
-                <Weather
-                    location={'Vienna, Austria'}
-                    units={'metric'}
-                />
+        <ThemeProvider theme={createTheme(themeConfig)}>
+            <Box sx={containerStyle}>
+                <Box sx={boxStyle}>
+                    <Weather
+                        location={'Vienna, Austria'}
+                        units={'metric'}
+                    />
+                </Box>
+
+                <Box sx={boxStyle}>
+                    <WienerLinien/>
+                </Box>
+
+                <Box sx={boxStyle}>
+                    lorem ipsum
+                    <Typography variant={'h2'} component={'div'}>tu by mohlo byt crypto</Typography>
+                </Box>
             </Box>
 
-            <Box sx={boxStyle}>
-                <WienerLinien/>
+            <Box sx={{margin: 40}}>
+                <Button variant={'contained'} onClick={() => setInProp(!inProp)}>click me</Button>
+                <Fade in={inProp}>
+                    <TestCard/>
+                </Fade>
             </Box>
-
-            <Box sx={boxStyle}>
-                lorem ipsum
-                <Typography variant={'h2'} component={'div'}>tu by mohlo byt crypto</Typography>
-            </Box>
-        </Box>
+        </ThemeProvider>
     );
 };
