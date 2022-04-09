@@ -1,38 +1,38 @@
 import React from 'react';
 
-import {Box, Button, Typography} from '@mui/material';
+import {Box, SxProps, Typography, useTheme} from '@mui/material';
 
 import {Weather} from './components/Weather';
 import {WienerLinien} from './components/WienerLinien';
-import {Fade} from './transition-test/Fade';
-import TestCard from './transition-test/TestCard';
+
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {themeConfig} from './config/themeConfig';
 
-export const DISPLAY_HEIGHT = 400;
+export const DISPLAY_HEIGHT = 720;
 export const DISPLAY_WIDTH = 1280;
 
 export const App: React.FC = () => {
-    const containerStyle = {
+    const theme = useTheme();
+
+    const containerStyle: SxProps = {
         width: DISPLAY_WIDTH,
         height: DISPLAY_HEIGHT,
-        backgroundColor: '#1d1d1d',
+        backgroundColor: '#000000',
         color: 'white',
         display: 'flex',
         justifyContent: 'space-between',
+        padding: theme.spacing(2),
     };
 
-    const boxStyle = {
+    const boxStyle: SxProps = {
         width: 400,
         height: DISPLAY_HEIGHT - 20,
         border: '2px solid #101010',
         borderRadius: '5px',
-        background: 'linear-gradient(0.15turn, #030303, #282828)',
+        backgroundColor: '#191C24',
         margin: '10px',
         fontFamily: 'Lato',
     };
-
-    const [inProp, setInProp] = React.useState<boolean>(false);
 
     return (
         <ThemeProvider theme={createTheme(themeConfig)}>
@@ -52,13 +52,6 @@ export const App: React.FC = () => {
                     lorem ipsum
                     <Typography variant={'h2'} component={'div'}>tu by mohlo byt crypto</Typography>
                 </Box>
-            </Box>
-
-            <Box sx={{margin: 40}}>
-                <Button variant={'contained'} onClick={() => setInProp(!inProp)}>click me</Button>
-                <Fade in={inProp}>
-                    <TestCard/>
-                </Fade>
             </Box>
         </ThemeProvider>
     );

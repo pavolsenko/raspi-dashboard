@@ -1,10 +1,11 @@
 import * as React from 'react';
-import axios from 'axios';
 
 import {Box} from '@mui/material';
 
 import {WeatherIcon} from './WeatherIcon';
 import {SunriseSunset} from './SunriseSunset';
+import {useTime} from '../hooks/useTime';
+import {useWeather} from '../hooks/useWeather';
 
 export interface IWeather {
     description: string;
@@ -20,41 +21,19 @@ export interface IWeatherProps {
 }
 
 export const Weather: React.FC<IWeatherProps> = (props: IWeatherProps) => {
-    const [weather, setWeather] = React.useState<IWeather>({
-        description: '',
-        icon: 0,
-        sunrise: 0,
-        sunset: 0,
-        temperature: 0,
-    });
-    const [time, setTime] = React.useState(Date.now());
+    const time = useTime();
+    const {
+        weather,
+        loadWeather,
+        isError,
+        isLoading,
+    } = useWeather();
 
-    React.useEffect(() => {
-        const interval = setInterval(() => setTime(Date.now()), 1000);
-        return () => {
-            clearInterval(interval);
-        };
-    }, []);
-
-    React.useEffect(() => {
-        (async () => {
-            const result = await axios.get('http://api.openweathermap.org/data/2.5/onecall', {
-                params: {
-                    appId: process.env.REACT_APP_API_KEY,
-                    lat: 48.2085,
-                    lon: 16.3721,
-                    units: props.units || 'metric',
-                },
-            });
-            setWeather({
-                description: '',
-                temperature: result.data.current.temp,
-                icon: result.data.current.weather[0].id,
-                sunrise: result.data.current.sunrise * 1000,
-                sunset: result.data.current.sunset * 1000,
-            });
+    React.useEffect( () => {
+        (async function load() {
+            await loadWeather();
         })();
-    }, [props.location, props.units, setWeather]);
+    }, [loadWeather]);
 
     return (
         <Box sx={{

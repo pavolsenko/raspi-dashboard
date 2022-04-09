@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as WeatherIcons from 'react-icons/wi';
 
 import {Box} from '@mui/material';
+import {isDay} from '../helpers/timeHelpers';
 
 export interface IWeatherIconProps {
     iconId: number;
@@ -10,20 +11,16 @@ export interface IWeatherIconProps {
 }
 
 export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProps) => {
-    const isDay = Date.now() > props.sunrise * 1000 && Date.now() < props.sunset * 1000;
+    const icons: Record<string, {day: React.ReactNode, night: React.ReactNode}> = {
+        '800': {day: <WeatherIcons.WiDaySunny/>, night: <WeatherIcons.WiNightClear/>},
+    };
 
     const renderIcon = (): React.ReactNode => {
-        if (props.iconId === 800 && isDay) {
-            return (
-                <WeatherIcons.WiDaySunny/>
-            );
+        if (props.iconId === 800) {
+            return isDay(props.sunrise, props.sunset) ? icons[props.iconId.toString()].day : icons[props.iconId.toString()].night;
         }
 
-        if (props.iconId === 800 && !isDay) {
-            return (
-                <WeatherIcons.WiNightClear/>
-            );
-        }
+        return icons['800'].day;
     };
 
     return (
