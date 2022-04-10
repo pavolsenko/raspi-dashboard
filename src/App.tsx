@@ -1,12 +1,12 @@
 import React from 'react';
 
-import {Box, SxProps, Typography, useTheme} from '@mui/material';
-
-import {Weather} from './components/Weather';
-import {WienerLinien} from './components/WienerLinien';
-
+import {Box, SxProps, useTheme} from '@mui/material';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
+
 import {themeConfig} from './config/themeConfig';
+import {WeatherWidget} from './components/WeatherWidget/WeatherWidget';
+import {WienerLinienWidget} from './components/WienerLinienWidget/WienerLinienWidget';
+import {CryptoWidget} from './components/CryptoWIdget/CryptoWidget';
 
 export const DISPLAY_HEIGHT = 720;
 export const DISPLAY_WIDTH = 1280;
@@ -22,35 +22,28 @@ export const App: React.FC = () => {
         display: 'flex',
         justifyContent: 'space-between',
         padding: theme.spacing(2),
+        fontFamily: '"Open Sans"',
+        fontWeight: 300,
     };
 
     const boxStyle: SxProps = {
-        width: 400,
+        width: '400px',
         height: DISPLAY_HEIGHT - 20,
-        border: '2px solid #101010',
-        borderRadius: '5px',
-        backgroundColor: '#191C24',
-        margin: '10px',
-        fontFamily: 'Lato',
     };
 
     return (
         <ThemeProvider theme={createTheme(themeConfig)}>
             <Box sx={containerStyle}>
                 <Box sx={boxStyle}>
-                    <Weather
-                        location={'Vienna, Austria'}
-                        units={'metric'}
-                    />
+                    <WeatherWidget/>
                 </Box>
 
                 <Box sx={boxStyle}>
-                    <WienerLinien/>
+                    <WienerLinienWidget/>
                 </Box>
 
                 <Box sx={boxStyle}>
-                    lorem ipsum
-                    <Typography variant={'h2'} component={'div'}>tu by mohlo byt crypto</Typography>
+                    <CryptoWidget/>
                 </Box>
             </Box>
         </ThemeProvider>

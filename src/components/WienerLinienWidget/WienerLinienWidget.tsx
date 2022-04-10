@@ -1,12 +1,13 @@
 import * as React from 'react';
 import axios from 'axios';
+import {AppConfig} from '../../config/appConfig';
 
-export const WienerLinien: React.FC = () => {
+export const WienerLinienWidget: React.FC = () => {
     const [departures, setDepartures] = React.useState<Record<string, any>[]>([]);
 
     React.useEffect(() => {
         (async () => {
-            const result = await axios.get('https://apps.static-access.net/ViennaTransport/monitor/', {
+            const result = await axios.get(AppConfig.wienerLinienApiEndpoint, {
                 params: {
                     line: 'u1',
                     station: 'Südtiroler Platz',

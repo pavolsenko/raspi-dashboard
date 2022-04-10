@@ -1,9 +1,8 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import {IWeather} from '../components/Weather';
-
-export type TUnits = 'metric' | 'imperial';
+import {IWeather, TUnits} from '../interfaces';
+import {AppConfig} from '../../../config/appConfig';
 
 export const useWeather = (
     units?: TUnits,
@@ -25,9 +24,9 @@ export const useWeather = (
 
         let result: any;
         try {
-            result = await axios.get('http://api.openweathermap.org/data/2.5/onecall', {
+            result = await axios.get(AppConfig.openWeatherApiEndpoint, {
                 params: {
-                    appId: process.env.REACT_APP_API_KEY,
+                    appId: AppConfig.openWeatherAppId,
                     lat: 48.2085,
                     lon: 16.3721,
                     units: units || 'metric',
