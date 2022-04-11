@@ -17,7 +17,7 @@ export const App: React.FC = () => {
     const containerStyle: SxProps = {
         width: DISPLAY_WIDTH,
         height: DISPLAY_HEIGHT,
-        backgroundColor: '#000000',
+        background: 'linear-gradient(45deg, rgba(7, 153, 41, 0.3) 15%, rgba(7, 183, 250, 0.3) 100%)',
         color: 'white',
         display: 'flex',
         justifyContent: 'space-between',
