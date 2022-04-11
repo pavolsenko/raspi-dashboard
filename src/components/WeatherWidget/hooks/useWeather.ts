@@ -10,13 +10,7 @@ export const useWeather = (
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError, setIsError] = React.useState<boolean>(false);
 
-    const [weather, setWeather] = React.useState<IWeather>({
-        description: '',
-        icon: 0,
-        sunrise: 0,
-        sunset: 0,
-        temperature: 0,
-    });
+    const [weather, setWeather] = React.useState<IWeather | undefined>();
 
     const loadWeather = async (): Promise<void> => {
         setIsError(false);
@@ -39,11 +33,8 @@ export const useWeather = (
         }
 
         setWeather({
-            description: '',
-            temperature: result.data.current.temp,
-            icon: result.data.current.weather[0].id,
-            sunrise: result.data.current.sunrise * 1000,
-            sunset: result.data.current.sunset * 1000,
+            ...result.data.current,
+            pop: result.data.hourly[0].pop,
         });
 
         setIsLoading(false);

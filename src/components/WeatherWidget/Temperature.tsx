@@ -2,7 +2,7 @@ import * as React from 'react';
 import {Box} from '@mui/material';
 
 export interface ITemperatureProps {
-    value: number;
+    value?: number;
 }
 
 export const Temperature: React.FC<ITemperatureProps> = (props: ITemperatureProps) => {

@@ -5,9 +5,9 @@ import {Box} from '@mui/material';
 import {isDay} from '../../helpers/timeHelpers';
 
 export interface IWeatherIconProps {
-    iconId: number;
-    sunset: number;
-    sunrise: number;
+    iconId?: number;
+    sunset?: number;
+    sunrise?: number;
 }
 
 export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProps) => {

@@ -40,27 +40,11 @@ export const SunriseSunset: React.FC<ISunriseSunsetProps> = (props: ISunriseSuns
             display: 'flex',
             justifyContent: 'space-between',
         }}>
-            <Box sx={{
-                display: 'flex',
-            }}>
-                <Box sx={{
-                    fontSize: '32px',
-                }}>
-                    <WeatherIcons.WiSunrise/>
-                </Box>
-                {getTime('sunrise')}
-            </Box>
+            <WeatherIcons.WiSunrise/>
+            {getTime('sunrise')}
 
-            <Box sx={{
-                display: 'flex',
-            }}>
-                <Box sx={{
-                    fontSize: '32px',
-                }}>
-                    <WeatherIcons.WiSunset/>
-                </Box>
-                {getTime('sunset')}
-            </Box>
+            <WeatherIcons.WiSunset/>
+            {getTime('sunset')}
         </Box>
     );
 }
