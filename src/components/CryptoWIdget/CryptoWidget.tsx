@@ -1,6 +1,8 @@
 import * as React from 'react';
+
+import {Alert, Box, CircularProgress} from '@mui/material';
+
 import {useCrypto} from './hooks/useCrypto';
-import {Alert, CircularProgress} from '@mui/material';
 import {AppConfig} from '../../config/appConfig';
 
 export const CryptoWidget = () => {
@@ -40,8 +42,27 @@ export const CryptoWidget = () => {
     }
 
     return (
-        <>
-            {cryptoStats?.portfolio.p.EUR.toFixed(2)}
-        </>
+        <Box sx={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+        }}>
+            <Box sx={{
+                width: '100%',
+                backgroundColor: '#01B0F1',
+            }}>
+                {cryptoStats?.portfolio.p.EUR.toFixed(2)}
+            </Box>
+
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                backgroundColor: '#ffffff',
+                color: '#333333',
+            }}>
+                test
+            </Box>
+        </Box>
     );
-}
+};
