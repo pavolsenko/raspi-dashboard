@@ -10,6 +10,7 @@ import {Temperature} from './Temperature';
 import {Time} from './Time';
 import {Rain} from './Rain';
 import {Wind} from './Wind';
+import {Forecast} from './Forecast';
 
 export interface IWeatherProps {
     units?: 'metric' | 'imperial';
@@ -101,7 +102,6 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 display: 'flex',
                 justifyContent: 'space-between',
                 backgroundColor: '#ffffff',
-                color: '#333333',
             }}>
                 <Rain
                     value={weather?.pop}
@@ -123,9 +123,8 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 justifyContent: 'space-between',
                 flexGrow: 1,
                 backgroundColor: '#ffffff',
-                color: '#333333',
             }}>
-                test
+                <Forecast days={weather?.daily}/>
             </Box>
         </Box>
     );

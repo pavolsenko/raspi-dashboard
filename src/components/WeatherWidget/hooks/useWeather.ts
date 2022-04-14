@@ -34,6 +34,7 @@ export const useWeather = (
 
         setWeather({
             ...result.data.current,
+            daily: result.data.daily,
             pop: result.data.hourly[0].pop,
         });
 

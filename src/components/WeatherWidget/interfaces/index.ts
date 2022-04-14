@@ -1,6 +1,7 @@
 export type TUnits = 'metric' | 'imperial';
 
 export interface IWeather {
+    daily: Record<string, any>[];
     description?: string;
     icon?: number;
     pop?: number;

@@ -13,8 +13,8 @@ export const palette: PaletteOptions = {
     },
     text: {
         disabled: '#606060',
-        primary: '#2b1800',
-        secondary: '#2b1800',
+        primary: '#333333',
+        secondary: '#333333',
     },
     common: {
         black: '#000',
