@@ -5,6 +5,7 @@ import {Box} from '@mui/material';
 import {isDay} from '../../helpers/timeHelpers';
 
 export interface IWeatherIconProps {
+    fontSize?: number;
     iconId?: number;
     sunset?: number;
     sunrise?: number;
@@ -24,7 +25,7 @@ export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProp
     };
 
     return (
-        <Box sx={{fontSize: '130px'}}>
+        <Box sx={{fontSize: props.fontSize}}>
             {renderIcon()}
         </Box>
     );

@@ -6,13 +6,14 @@ import {WeatherIcon} from './WeatherIcon';
 import {SunriseSunset} from './SunriseSunset';
 import {useWeather} from './hooks/useWeather';
 import {AppConfig} from '../../config/appConfig';
+import {IWidgetProps} from '../../interfaces';
 import {Temperature} from './Temperature';
-import {Time} from './Time';
+import {Time} from '../Time';
 import {Rain} from './Rain';
 import {Wind} from './Wind';
 import {Forecast} from './Forecast';
 
-export interface IWeatherProps {
+export interface IWeatherProps extends IWidgetProps {
     units?: 'metric' | 'imperial';
 }
 
@@ -69,16 +70,20 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
         }}>
             <Box sx={{
                 width: '100%',
-                backgroundColor: '#01B0F1',
+                backgroundColor: props.headerBackgroundColor,
+                color: '#ffffff',
+                height: '160px',
             }}>
                 <Box sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    fontSize: '32px',
                     margin: '16px',
                 }}>
-                    <Box>Wien</Box>
+                    <Box>
+                        <Box sx={{fontSize: '26px', lineHeight: '22px'}}>Weather</Box>
+                        <Box sx={{fontSize: '14px'}}>Wien, Österreich</Box>
+                    </Box>
                     <Time/>
                 </Box>
 

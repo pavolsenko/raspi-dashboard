@@ -13,9 +13,9 @@ export const SunriseSunset: React.FC<ISunriseSunsetProps> = (props: ISunriseSuns
         let date: Date = new Date();
 
         if (type === 'sunrise' && props.sunrise) {
-            date = new Date(props.sunrise);
+            date = new Date(props.sunrise * 1000);
         } else if (type === 'sunset' && props.sunset) {
-            date = new Date(props.sunset);
+            date = new Date(props.sunset * 1000);
         }
 
         let result: string;

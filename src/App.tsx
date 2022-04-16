@@ -17,7 +17,7 @@ export const App: React.FC = () => {
     const containerStyle: SxProps = {
         width: DISPLAY_WIDTH,
         height: DISPLAY_HEIGHT,
-        background: 'linear-gradient(45deg, rgba(7, 153, 41, 0.3) 15%, rgba(7, 183, 250, 0.3) 100%)',
+        background: 'linear-gradient(45deg, #56A3A6 25%, #4F6D7A 85%)',
         display: 'flex',
         justifyContent: 'space-between',
         padding: theme.spacing(2),
@@ -26,23 +26,23 @@ export const App: React.FC = () => {
     };
 
     const boxStyle: SxProps = {
-        width: '400px',
-        height: DISPLAY_HEIGHT - 20,
+        width: '415px',
+        height: DISPLAY_HEIGHT - 5,
     };
 
     return (
         <ThemeProvider theme={createTheme(themeConfig)}>
             <Box sx={containerStyle}>
                 <Box sx={boxStyle}>
-                    <WeatherWidget/>
+                    <WeatherWidget headerBackgroundColor={'#084C61'}/>
                 </Box>
 
                 <Box sx={boxStyle}>
-                    <WienerLinienWidget/>
+                    <WienerLinienWidget headerBackgroundColor={'#DB504A'}/>
                 </Box>
 
                 <Box sx={boxStyle}>
-                    <CryptoWidget/>
+                    <CryptoWidget headerBackgroundColor={'#E3B505'}/>
                 </Box>
             </Box>
         </ThemeProvider>

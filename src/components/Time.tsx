@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import {Box} from '@mui/material';
 
-import {useTime} from './hooks/useTime';
+import {useTime} from './WeatherWidget/hooks/useTime';
 
 export const Time: React.FC = () => {
     const dateTime = useTime();
@@ -24,6 +24,9 @@ export const Time: React.FC = () => {
     };
 
     return (
-        <Box>{getHours()}:{getMinutes()}</Box>
+        <Box sx={{textAlign: 'right'}}>
+            <Box sx={{fontSize: '26px', lineHeight: '22px'}}>{getHours()}:{getMinutes()}</Box>
+            <Box sx={{fontSize: '14px'}}>{dateTime.toLocaleDateString()}</Box>
+        </Box>
     );
 };

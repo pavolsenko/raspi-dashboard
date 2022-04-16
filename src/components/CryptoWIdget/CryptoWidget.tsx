@@ -4,8 +4,10 @@ import {Alert, Box, CircularProgress} from '@mui/material';
 
 import {useCrypto} from './hooks/useCrypto';
 import {AppConfig} from '../../config/appConfig';
+import {IWidgetProps} from '../../interfaces';
+import {Time} from '../Time';
 
-export const CryptoWidget = () => {
+export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
     const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
 
     const {
@@ -50,16 +52,40 @@ export const CryptoWidget = () => {
         }}>
             <Box sx={{
                 width: '100%',
-                backgroundColor: '#01B0F1',
+                backgroundColor: props.headerBackgroundColor,
+                color: '#ffffff',
+                height: '160px',
             }}>
-                {cryptoStats?.portfolio.p.EUR.toFixed(2)}
+                <Box sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
+                    margin: '16px',
+                }}>
+                    <Box>
+                        <Box sx={{fontSize: '26px', lineHeight: '22px'}}>CoinStats</Box>
+                        <Box sx={{fontSize: '14px'}}>Crypto portfolio</Box>
+                    </Box>
+                    <Time/>
+                </Box>
+
+                <Box sx={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    fontSize: '60px',
+                }}>
+                    <Box>€{Math.floor(cryptoStats?.portfolio.p.EUR)}</Box>
+                    <Box sx={{fontSize: '26px', paddingTop: '12px'}}>
+                        {Math.floor((cryptoStats?.portfolio.p.EUR % 1) * 100)}
+                    </Box>
+                </Box>
             </Box>
 
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
                 backgroundColor: '#ffffff',
-                color: '#333333',
             }}>
                 test
             </Box>
