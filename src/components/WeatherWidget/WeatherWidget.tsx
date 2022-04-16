@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Alert, Box, CircularProgress} from '@mui/material';
+import {Alert, Box} from '@mui/material';
 
 import {WeatherIcon} from './WeatherIcon';
 import {SunriseSunset} from './SunriseSunset';
@@ -8,10 +8,11 @@ import {useWeather} from './hooks/useWeather';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
 import {Temperature} from './Temperature';
-import {Time} from '../Time';
 import {Rain} from './Rain';
 import {Wind} from './Wind';
 import {Forecast} from './Forecast';
+import {WidgetHeader} from '../WidgetHeader';
+import {Loading} from '../Loading';
 
 export interface IWeatherProps extends IWidgetProps {
     units?: 'metric' | 'imperial';
@@ -43,15 +44,7 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
 
     if (isLoading) {
         return (
-            <Box sx={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                <CircularProgress/>
-            </Box>
+            <Loading/>
         );
     }
 
@@ -68,45 +61,25 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
             display: 'flex',
             flexDirection: 'column',
         }}>
-            <Box sx={{
-                width: '100%',
-                backgroundColor: props.headerBackgroundColor,
-                color: '#ffffff',
-                height: '160px',
-            }}>
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    margin: '16px',
-                }}>
-                    <Box>
-                        <Box sx={{fontSize: '26px', lineHeight: '22px'}}>Weather</Box>
-                        <Box sx={{fontSize: '14px'}}>Wien, Österreich</Box>
-                    </Box>
-                    <Time/>
-                </Box>
-
-                <Box sx={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '60px',
-                }}>
-                    <WeatherIcon
-                        iconId={weather?.icon}
-                        sunset={weather?.sunset}
-                        sunrise={weather?.sunrise}
-
-                    />
-                    <Temperature value={weather?.temperature}/>
-                </Box>
-            </Box>
+            <WidgetHeader
+                title={'Weather'}
+                subtitle={'Wien, Österreich'}
+                backgroundColor={props.headerBackgroundColor}
+            >
+                <WeatherIcon
+                    iconId={weather?.icon}
+                    sunset={weather?.sunset}
+                    sunrise={weather?.sunrise}
+                    size={'56px'}
+                    sx={{marginTop: '14px', marginRight: '4px'}}
+                />
+                <Temperature value={weather?.temp}/>
+            </WidgetHeader>
 
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                backgroundColor: '#ffffff',
+                backgroundColor: '#f0f0f0',
             }}>
                 <Rain
                     value={weather?.pop}
@@ -125,9 +98,10 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
 
             <Box sx={{
                 display: 'flex',
+                flexDirection: 'column',
                 justifyContent: 'space-between',
                 flexGrow: 1,
-                backgroundColor: '#ffffff',
+                backgroundColor: '#f0f0f0',
             }}>
                 <Forecast days={weather?.daily}/>
             </Box>

@@ -1,11 +1,14 @@
 import * as React from 'react';
 
-import {Alert, Box, CircularProgress} from '@mui/material';
+import {Alert, Box} from '@mui/material';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 
 import {useCrypto} from './hooks/useCrypto';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
-import {Time} from '../Time';
+import {WidgetHeader} from '../WidgetHeader';
+import {Loading} from '../Loading';
 
 export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
     const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
@@ -33,7 +36,7 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
 
     if (isLoading) {
         return (
-            <CircularProgress/>
+            <Loading/>
         );
     }
 
@@ -43,6 +46,14 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
         );
     }
 
+    const renderArrow = (): React.ReactNode => {
+        if (cryptoStats.currentValue < cryptoStats.previousValue) {
+            return <ArrowDownwardIcon fontSize={'inherit'}/>
+        }
+
+        return <ArrowUpwardIcon fontSize={'inherit'}/>
+    };
+
     return (
         <Box sx={{
             width: '100%',
@@ -50,44 +61,35 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
             display: 'flex',
             flexDirection: 'column',
         }}>
-            <Box sx={{
-                width: '100%',
-                backgroundColor: props.headerBackgroundColor,
-                color: '#ffffff',
-                height: '160px',
-            }}>
+            <WidgetHeader
+                title={'CoinStats'}
+                subtitle={'Crypto portfolio'}
+                backgroundColor={props.headerBackgroundColor}
+            >
+                <Box sx={{marginTop: '8px', fontSize: '60px'}}>{renderArrow()}</Box>
+                <Box sx={{fontSize: '60px'}}>{Math.floor(cryptoStats.currentValue)}</Box>
                 <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    margin: '16px',
+                    fontSize: '24px',
+                    paddingTop: '12px',
                 }}>
-                    <Box>
-                        <Box sx={{fontSize: '26px', lineHeight: '22px'}}>CoinStats</Box>
-                        <Box sx={{fontSize: '14px'}}>Crypto portfolio</Box>
-                    </Box>
-                    <Time/>
-                </Box>
-
-                <Box sx={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    fontSize: '60px',
-                }}>
-                    <Box>€{Math.floor(cryptoStats?.portfolio.p.EUR)}</Box>
-                    <Box sx={{fontSize: '26px', paddingTop: '12px'}}>
-                        {Math.floor((cryptoStats?.portfolio.p.EUR % 1) * 100)}
+                    {(cryptoStats.currentValue % 1).toString().substring(2, 4) || '00'}
+                    <Box sx={{
+                        fontSize: '26px',
+                        marginTop: '-10px',
+                        marginLeft: '6px',
+                    }}>
+                        €
                     </Box>
                 </Box>
-            </Box>
+            </WidgetHeader>
 
             <Box sx={{
                 display: 'flex',
+                flexGrow: '1',
                 justifyContent: 'space-between',
-                backgroundColor: '#ffffff',
+                backgroundColor: '#f0f0f0',
             }}>
-                test
+
             </Box>
         </Box>
     );

@@ -1,19 +1,23 @@
 import * as React from 'react';
-import * as WeatherIcons from 'react-icons/wi';
 
-import {Box} from '@mui/material';
+import {Box, SxProps} from '@mui/material';
+import Icon from '@mdi/react';
+import {mdiWeatherSunny} from '@mdi/js';
+import {mdiWeatherNight} from '@mdi/js';
+
 import {isDay} from '../../helpers/timeHelpers';
 
 export interface IWeatherIconProps {
-    fontSize?: number;
+    size?: string;
     iconId?: number;
     sunset?: number;
     sunrise?: number;
+    sx?: SxProps;
 }
 
 export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProps) => {
     const icons: Record<string, {day: React.ReactNode, night: React.ReactNode}> = {
-        '800': {day: <WeatherIcons.WiDaySunny/>, night: <WeatherIcons.WiNightClear/>},
+        '800': {day: <Icon path={mdiWeatherSunny} size={props.size}/>, night: <Icon path={mdiWeatherNight} size={props.size}/>},
     };
 
     const renderIcon = (): React.ReactNode => {
@@ -25,7 +29,7 @@ export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProp
     };
 
     return (
-        <Box sx={{fontSize: props.fontSize}}>
+        <Box sx={props.sx}>
             {renderIcon()}
         </Box>
     );

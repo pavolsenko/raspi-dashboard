@@ -15,10 +15,13 @@ export const Forecast: React.FC<IForecastProps> = (props: IForecastProps) => {
 
         const result: React.ReactNode[] = [];
 
-        props.days.forEach((day: Record<string, any>) => {
+        props.days.forEach((day: Record<string, any>, index: number) => {
             result.push(
-                <Box>
-                    <WeatherIcon iconId={day.weather[0].id}/>
+                <Box
+                    key={index.toString()}
+                    sx={{display: 'flex'}}
+                >
+                    <WeatherIcon iconId={day.weather[0].id} size={'24px'}/>
                     <Box>{day.temp.day}°C</Box>
                     <Box>{day.pop * 100}%</Box>
                 </Box>
@@ -26,11 +29,11 @@ export const Forecast: React.FC<IForecastProps> = (props: IForecastProps) => {
         });
 
         return result;
-    }
+    };
 
     return (
         <>
             {renderDays()}
         </>
     );
-}
+};

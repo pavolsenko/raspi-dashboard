@@ -7,7 +7,7 @@ export interface IWeather {
     pop?: number;
     sunrise?: number;
     sunset?: number;
-    temperature?: number;
+    temp?: number;
     wind_deg?: number;
     wind_speed?: number;
 }

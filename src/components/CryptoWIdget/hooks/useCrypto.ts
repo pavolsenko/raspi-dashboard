@@ -2,12 +2,17 @@ import * as React from 'react';
 import axios from 'axios';
 
 import {AppConfig} from '../../../config/appConfig';
+import {ICryptoStats} from '../interfaces';
 
 export const useCrypto = () => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError, setIsError] = React.useState<boolean>(false);
 
-    const [cryptoStats, setCryptoStats] = React.useState<Record<string, any> | undefined>();
+    const [cryptoStats, setCryptoStats] = React.useState<ICryptoStats>({
+        currentValue: 0,
+        previousValue: 0,
+        portfolio: [],
+    });
 
     const loadCryptoStats = async (): Promise<void> => {
         setIsError(false);
@@ -26,7 +31,11 @@ export const useCrypto = () => {
             return;
         }
 
-        setCryptoStats(result.data);
+        setCryptoStats({
+            currentValue: result.data.portfolio.p.EUR,
+            previousValue: cryptoStats.currentValue,
+            portfolio: result.data.portfolio.pi,
+        });
 
         setIsLoading(false);
     };

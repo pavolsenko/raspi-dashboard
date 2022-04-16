@@ -2,10 +2,11 @@ import * as React from 'react';
 import axios from 'axios';
 
 import {Box} from '@mui/material';
+import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
 
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
-import {Time} from '../Time';
+import {WidgetHeader} from '../WidgetHeader';
 
 export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
     const [departures, setDepartures] = React.useState<Record<string, any>[]>([]);
@@ -30,39 +31,21 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
             display: 'flex',
             flexDirection: 'column',
         }}>
-            <Box sx={{
-                width: '100%',
-                backgroundColor: props.headerBackgroundColor,
-                color: '#ffffff',
-                height: '160px',
-            }}>
-                <Box sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    margin: '16px',
-                }}>
-                    <Box>
-                        <Box sx={{fontSize: '26px', lineHeight: '22px'}}>Wiener Linien</Box>
-                        <Box sx={{fontSize: '14px'}}>Departures</Box>
-                    </Box>
-                    <Time/>
+            <WidgetHeader
+                title={'Wiener Linien'}
+                subtitle={'Departures'}
+                backgroundColor={props.headerBackgroundColor}
+            >
+                <Box sx={{fontSize: '60px'}}>
+                    <DepartureBoardIcon fontSize={'inherit'}/>
                 </Box>
-
-                <Box sx={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    fontSize: '60px',
-                }}>
-                    Wiener Linien
-                </Box>
-            </Box>
+            </WidgetHeader>
 
             <Box sx={{
                 display: 'flex',
+                flexGrow: '1',
                 justifyContent: 'space-between',
-                backgroundColor: '#ffffff',
+                backgroundColor: '#f0f0f0',
             }}>
                 {departures[0]?.countdown}
             </Box>
