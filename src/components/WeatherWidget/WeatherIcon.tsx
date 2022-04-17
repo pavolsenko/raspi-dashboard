@@ -2,10 +2,11 @@ import * as React from 'react';
 
 import {Box, SxProps} from '@mui/material';
 import Icon from '@mdi/react';
-import {mdiWeatherSunny} from '@mdi/js';
-import {mdiWeatherNight} from '@mdi/js';
 
 import {isDay} from '../../helpers/timeHelpers';
+import {weatherIcons} from './helpers/weatherIconHelpers';
+
+const DEFAULT_WEATHER_ICON_ID = '800';
 
 export interface IWeatherIconProps {
     size?: string;
@@ -16,16 +17,24 @@ export interface IWeatherIconProps {
 }
 
 export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProps) => {
-    const icons: Record<string, {day: React.ReactNode, night: React.ReactNode}> = {
-        '800': {day: <Icon path={mdiWeatherSunny} size={props.size}/>, night: <Icon path={mdiWeatherNight} size={props.size}/>},
-    };
-
     const renderIcon = (): React.ReactNode => {
-        if (props.iconId === 800) {
-            return isDay(props.sunrise, props.sunset) ? icons[props.iconId.toString()].day : icons[props.iconId.toString()].night;
-        }
+        const icon = props.iconId ? props.iconId.toString() : DEFAULT_WEATHER_ICON_ID;
 
-        return icons['800'].day;
+        if (isDay(props.sunrise, props.sunset)) {
+            return (
+                <Icon
+                    path={weatherIcons[icon].day}
+                    size={props.size}
+                />
+            );
+        } else {
+            return (
+                <Icon
+                    path={weatherIcons[icon].night}
+                    size={props.size}
+                />
+            );
+        }
     };
 
     return (

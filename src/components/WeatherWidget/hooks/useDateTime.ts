@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-export const useTime = (): Date => {
+export const useDateTime = (): Date => {
     const [dateTime, setDateTime] = React.useState<Date>(new Date());
 
     React.useEffect(() => {

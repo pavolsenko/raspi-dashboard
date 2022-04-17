@@ -1,15 +1,12 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import {IWeather, TUnits} from '../interfaces';
+import {ILatLon, IWeather, TUnits} from '../interfaces';
 import {AppConfig} from '../../../config/appConfig';
 
-export const useWeather = (
-    units?: TUnits,
-) => {
+export const useWeather = (location: ILatLon, units?: TUnits) => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError, setIsError] = React.useState<boolean>(false);
-
     const [weather, setWeather] = React.useState<IWeather | undefined>();
 
     const loadWeather = async (): Promise<void> => {

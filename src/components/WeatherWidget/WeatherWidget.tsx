@@ -15,6 +15,9 @@ import {WidgetHeader} from '../WidgetHeader';
 import {Loading} from '../Loading';
 import {Sunrise} from './Sunrise';
 import {Humidity} from './Humidity';
+import {ILatLon} from './interfaces';
+
+export const DEFAULT_LOCATION: ILatLon = {lat: 48.2085, lon: 16.3721};
 
 export interface IWeatherProps extends IWidgetProps {
     units?: 'metric' | 'imperial';
@@ -28,7 +31,7 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
         loadWeather,
         isError,
         isLoading,
-    } = useWeather(props.units);
+    } = useWeather(DEFAULT_LOCATION, props.units);
 
     React.useEffect(() => {
         if (isInitialLoad) {
@@ -81,9 +84,8 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'space-between',
-                backgroundColor: '#f0f0f0',
-                borderBottom: '1px solid #cccccc',
-                color: '#777777',
+                backgroundColor: '#e0e0e0',
+                color: '#666666',
             }}>
                 <Rain percentage={weather?.pop}/>
                 <Humidity humidity={weather?.humidity}/>
@@ -98,9 +100,9 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
             <Box sx={{
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'space-between',
                 flexGrow: 1,
                 backgroundColor: '#f0f0f0',
+                color: '#666666',
             }}>
                 <Forecast days={weather?.daily}/>
             </Box>
