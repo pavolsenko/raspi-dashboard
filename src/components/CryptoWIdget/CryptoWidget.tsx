@@ -1,8 +1,9 @@
 import * as React from 'react';
 
 import {Alert, Box} from '@mui/material';
-import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
-import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import Icon from '@mdi/react';
+import {mdiArrowUp} from '@mdi/js';
+import {mdiArrowDown} from '@mdi/js';
 
 import {useCrypto} from './hooks/useCrypto';
 import {AppConfig} from '../../config/appConfig';
@@ -48,10 +49,10 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
 
     const renderArrow = (): React.ReactNode => {
         if (cryptoStats.currentValue < cryptoStats.previousValue) {
-            return <ArrowDownwardIcon fontSize={'inherit'}/>
+            return <Icon path={mdiArrowDown} size={'60px'}/>
         }
 
-        return <ArrowUpwardIcon fontSize={'inherit'}/>
+        return <Icon path={mdiArrowUp} size={' 60px'}/>
     };
 
     return (
@@ -66,7 +67,7 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
                 subtitle={'Crypto portfolio'}
                 backgroundColor={props.headerBackgroundColor}
             >
-                <Box sx={{marginTop: '8px', fontSize: '60px'}}>{renderArrow()}</Box>
+                <Box sx={{marginTop: '12px'}}>{renderArrow()}</Box>
                 <Box sx={{fontSize: '60px'}}>{Math.floor(cryptoStats.currentValue)}</Box>
                 <Box sx={{
                     fontSize: '24px',

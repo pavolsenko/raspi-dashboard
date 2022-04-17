@@ -1,17 +1,18 @@
 import * as React from 'react';
 
-import {Box} from '@mui/material';
-import UmbrellaIcon from '@mui/icons-material/Umbrella';
+import {mdiUmbrellaOutline} from '@mdi/js';
+
+import {WidgetSubtitle} from '../WidgetSubtitle';
 
 export interface IRainProps {
-    value?: number;
+    percentage?: number;
 }
 
 export const Rain: React.FC<IRainProps> = (props: IRainProps) => {
     return (
-        <Box>
-            <UmbrellaIcon fontSize={'large'}/>
-            {(props.value || 0) * 100}%
-        </Box>
+        <WidgetSubtitle
+            icon={mdiUmbrellaOutline}
+            value={((props.percentage || 0) * 100) + '%'}
+        />
     );
 };

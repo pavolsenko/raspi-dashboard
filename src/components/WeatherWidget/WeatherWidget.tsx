@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Alert, Box} from '@mui/material';
 
 import {WeatherIcon} from './WeatherIcon';
-import {SunriseSunset} from './SunriseSunset';
+import {Sunset} from './Sunset';
 import {useWeather} from './hooks/useWeather';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
@@ -13,6 +13,8 @@ import {Wind} from './Wind';
 import {Forecast} from './Forecast';
 import {WidgetHeader} from '../WidgetHeader';
 import {Loading} from '../Loading';
+import {Sunrise} from './Sunrise';
+import {Humidity} from './Humidity';
 
 export interface IWeatherProps extends IWidgetProps {
     units?: 'metric' | 'imperial';
@@ -80,20 +82,17 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 display: 'flex',
                 justifyContent: 'space-between',
                 backgroundColor: '#f0f0f0',
+                borderBottom: '1px solid #cccccc',
+                color: '#777777',
             }}>
-                <Rain
-                    value={weather?.pop}
-                />
-
+                <Rain percentage={weather?.pop}/>
+                <Humidity humidity={weather?.humidity}/>
                 <Wind
                     direction={weather?.wind_deg}
                     speed={weather?.wind_speed}
                 />
-
-                <SunriseSunset
-                    sunrise={weather?.sunrise}
-                    sunset={weather?.sunset}
-                />
+                <Sunrise sunrise={weather?.sunrise}/>
+                <Sunset sunset={weather?.sunset}/>
             </Box>
 
             <Box sx={{

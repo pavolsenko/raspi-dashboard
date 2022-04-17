@@ -8,7 +8,7 @@ import {WeatherWidget} from './components/WeatherWidget/WeatherWidget';
 import {WienerLinienWidget} from './components/WienerLinienWidget/WienerLinienWidget';
 import {CryptoWidget} from './components/CryptoWIdget/CryptoWidget';
 
-export const DISPLAY_HEIGHT = 720;
+export const DISPLAY_HEIGHT = 650;
 export const DISPLAY_WIDTH = 1280;
 
 export const App: React.FC = () => {

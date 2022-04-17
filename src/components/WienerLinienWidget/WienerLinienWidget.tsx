@@ -2,7 +2,8 @@ import * as React from 'react';
 import axios from 'axios';
 
 import {Box} from '@mui/material';
-import DepartureBoardIcon from '@mui/icons-material/DepartureBoard';
+import Icon from '@mdi/react';
+import {mdiBusClock} from '@mdi/js';
 
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
@@ -36,8 +37,8 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                 subtitle={'Departures'}
                 backgroundColor={props.headerBackgroundColor}
             >
-                <Box sx={{fontSize: '60px'}}>
-                    <DepartureBoardIcon fontSize={'inherit'}/>
+                <Box sx={{marginTop: '12px'}}>
+                    <Icon path={mdiBusClock} size={'58px'}/>
                 </Box>
             </WidgetHeader>
 
