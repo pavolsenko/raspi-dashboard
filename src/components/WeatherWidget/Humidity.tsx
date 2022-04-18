@@ -12,7 +12,8 @@ export const Humidity: React.FC<IHumidityProps> = (props: IHumidityProps) => {
     return (
         <WidgetSubtitle
             icon={mdiWaterOpacity}
-            value={(props?.humidity || 0).toString() + '%'}
+            units={'%'}
+            value={(props?.humidity || 0).toString()}
         />
     );
 };

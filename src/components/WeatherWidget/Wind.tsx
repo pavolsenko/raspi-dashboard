@@ -14,7 +14,8 @@ export const Wind: React.FC<IWindProps> = (props: IWindProps) => {
         <WidgetSubtitle
             icon={mdiArrowUp}
             iconRotation={props.direction}
-            value={(props.speed?.toFixed(1) || 0) + 'm/s'}
+            units={'m/s'}
+            value={(props.speed?.toFixed(1) || 0).toString()}
         />
     );
 };

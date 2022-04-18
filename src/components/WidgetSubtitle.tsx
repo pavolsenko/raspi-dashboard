@@ -6,10 +6,27 @@ import Icon from '@mdi/react';
 interface IWidgetSubtitleProps {
     icon: string;
     iconRotation?: number;
+    units?: string;
     value: string;
 }
 
 export const WidgetSubtitle: React.FC<IWidgetSubtitleProps> = (props: IWidgetSubtitleProps) => {
+    const renderUnits = (): React.ReactNode => {
+        if (!props.units) {
+            return null;
+        }
+
+        return (
+            <Box sx={{
+                fontSize: '12px',
+                marginTop: '-4px',
+                marginLeft: '2px',
+            }}>
+                {props.units}
+            </Box>
+        );
+    };
+
     return (
         <Box sx={{
             display: 'flex',
@@ -26,6 +43,7 @@ export const WidgetSubtitle: React.FC<IWidgetSubtitleProps> = (props: IWidgetSub
                 />
             </Box>
             <Box>{props.value}</Box>
+            {renderUnits()}
         </Box>
     );
 };
