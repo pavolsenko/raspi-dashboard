@@ -10,12 +10,13 @@ import {IWidgetProps} from '../../interfaces';
 import {Temperature} from './Temperature';
 import {Rain} from './Rain';
 import {Wind} from './Wind';
-import {Forecast} from './Forecast';
+import {DailyForecast} from './DailyForecast';
 import {WidgetHeader} from '../WidgetHeader';
 import {Loading} from '../Loading';
 import {Sunrise} from './Sunrise';
 import {Humidity} from './Humidity';
 import {ILatLon} from './interfaces';
+import {HourlyForecast} from './HourlyForecast';
 
 export const DEFAULT_LOCATION: ILatLon = {lat: 48.2085, lon: 16.3721};
 
@@ -73,8 +74,8 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
             >
                 <WeatherIcon
                     iconId={weather?.icon}
-                    sunset={weather?.sunset}
-                    sunrise={weather?.sunrise}
+                    sunsetMs={weather?.sunset}
+                    sunriseMs={weather?.sunrise}
                     size={'56px'}
                     sx={{marginTop: '14px', marginRight: '4px'}}
                 />
@@ -104,7 +105,13 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 backgroundColor: '#f0f0f0',
                 color: '#666666',
             }}>
-                <Forecast days={weather?.daily}/>
+                <HourlyForecast
+                    hours={weather?.hourly}
+                    sunrise={weather?.sunrise}
+                    sunset={weather?.sunset}
+                />
+
+                <DailyForecast days={weather?.daily}/>
             </Box>
         </Box>
     );

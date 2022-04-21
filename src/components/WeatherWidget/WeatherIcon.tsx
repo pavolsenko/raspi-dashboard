@@ -11,8 +11,9 @@ const DEFAULT_WEATHER_ICON_ID = '800';
 export interface IWeatherIconProps {
     size?: string;
     iconId?: number;
-    sunset?: number;
-    sunrise?: number;
+    sunsetMs?: number;
+    sunriseMs?: number;
+    dateTimeMs?: number;
     sx?: SxProps;
 }
 
@@ -20,7 +21,7 @@ export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProp
     const renderIcon = (): React.ReactNode => {
         const icon = props.iconId ? props.iconId.toString() : DEFAULT_WEATHER_ICON_ID;
 
-        if (isDay(props.sunrise, props.sunset)) {
+        if (isDay(props.sunriseMs, props.sunsetMs, props.dateTimeMs)) {
             return (
                 <Icon
                     path={weatherIcons[icon].day}

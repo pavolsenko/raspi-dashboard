@@ -9,6 +9,12 @@ export const useWeather = (location: ILatLon, units?: TUnits) => {
     const [isError, setIsError] = React.useState<boolean>(false);
     const [weather, setWeather] = React.useState<IWeather | undefined>();
 
+    const getHourlyForecast = (hourly: Record<string, any>[]): Record<string, any>[] => {
+        return hourly
+            .slice(2, 12)
+            .filter((item: Record<string, any>, index: number) => index % 2 === 0);
+    }
+
     const loadWeather = async (): Promise<void> => {
         setIsError(false);
         setIsLoading(true);
@@ -31,7 +37,8 @@ export const useWeather = (location: ILatLon, units?: TUnits) => {
 
         setWeather({
             ...result.data.current,
-            daily: result.data.daily.slice(0, 5),
+            daily: result.data.daily.slice(1, 5),
+            hourly: getHourlyForecast(result.data.hourly),
             pop: result.data.hourly[0].pop,
         });
 

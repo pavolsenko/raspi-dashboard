@@ -7,6 +7,7 @@ export interface ILatLon {
 
 export interface IWeather {
     daily: Record<string, any>[];
+    hourly: Record<string, any>[];
     description?: string;
     humidity?: number;
     icon?: number;

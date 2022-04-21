@@ -1,7 +1,11 @@
-export const isDay = (sunrise?: number, sunset?: number): boolean => {
-    if (!sunrise || !sunset) {
+export const isDay = (sunriseMs?: number, sunsetMs?: number, dateTimeMs: number = Date.now()): boolean => {
+    if (!sunriseMs || !sunsetMs) {
         return true;
     }
 
-    return Date.now() > sunrise * 1000 && Date.now() < sunset * 1000;
+    const sunriseHours = new Date(sunriseMs * 1000).getHours();
+    const sunsetHours = new Date(sunsetMs * 1000).getHours();
+    const timeHours = new Date(dateTimeMs * 1000).getHours();
+
+    return timeHours > sunriseHours && timeHours < sunsetHours;
 };
