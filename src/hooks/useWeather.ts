@@ -1,19 +1,34 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import {ILatLon, IWeather, TUnits} from '../interfaces';
-import {AppConfig} from '../../../config/appConfig';
+import {AppConfig} from '../config/appConfig';
+import {getHourlyForecast} from '../helpers/weatherHelpers';
+
+export type TUnits = 'metric' | 'imperial';
+
+export interface ILatLon {
+    lat: number;
+    lon: number;
+}
+
+export interface IWeather {
+    daily: Record<string, any>[];
+    hourly: Record<string, any>[];
+    description?: string;
+    humidity?: number;
+    icon?: number;
+    pop?: number;
+    sunrise?: number;
+    sunset?: number;
+    temp?: number;
+    wind_deg?: number;
+    wind_speed?: number;
+}
 
 export const useWeather = (location: ILatLon, units?: TUnits) => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError, setIsError] = React.useState<boolean>(false);
     const [weather, setWeather] = React.useState<IWeather | undefined>();
-
-    const getHourlyForecast = (hourly: Record<string, any>[]): Record<string, any>[] => {
-        return hourly
-            .slice(2, 12)
-            .filter((item: Record<string, any>, index: number) => index % 2 === 0);
-    }
 
     const loadWeather = async (): Promise<void> => {
         setIsError(false);
@@ -37,8 +52,9 @@ export const useWeather = (location: ILatLon, units?: TUnits) => {
 
         setWeather({
             ...result.data.current,
-            daily: result.data.daily.slice(1, 5),
+            daily: result.data.daily.slice(1, 6),
             hourly: getHourlyForecast(result.data.hourly),
+            icon: result.data.current.weather[0].iconId,
             pop: result.data.hourly[0].pop,
         });
 

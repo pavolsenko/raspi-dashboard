@@ -31,7 +31,6 @@ export const WidgetSubtitle: React.FC<IWidgetSubtitleProps> = (props: IWidgetSub
         <Box sx={{
             display: 'flex',
             alignItems: 'center',
-            margin: '8px',
             fontSize: '18px',
             lineHeight: '16px',
         }}>

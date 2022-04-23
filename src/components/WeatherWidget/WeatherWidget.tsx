@@ -4,7 +4,7 @@ import {Alert, Box} from '@mui/material';
 
 import {WeatherIcon} from './WeatherIcon';
 import {Sunset} from './Sunset';
-import {useWeather} from './hooks/useWeather';
+import {ILatLon, useWeather} from '../../hooks/useWeather';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
 import {Temperature} from './Temperature';
@@ -15,7 +15,6 @@ import {WidgetHeader} from '../WidgetHeader';
 import {Loading} from '../Loading';
 import {Sunrise} from './Sunrise';
 import {Humidity} from './Humidity';
-import {ILatLon} from './interfaces';
 import {HourlyForecast} from './HourlyForecast';
 
 export const DEFAULT_LOCATION: ILatLon = {lat: 48.2085, lon: 16.3721};
@@ -87,6 +86,7 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 justifyContent: 'space-between',
                 backgroundColor: '#e0e0e0',
                 color: '#666666',
+                padding: '8px',
             }}>
                 <Rain percentage={weather?.pop}/>
                 <Humidity humidity={weather?.humidity}/>

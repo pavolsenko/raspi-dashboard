@@ -1,11 +1,11 @@
 import * as React from 'react';
 
 import {Box} from '@mui/material';
-import {mdiArrowUp, mdiUmbrellaOutline} from '@mdi/js';
+import {mdiArrowUp, mdiUmbrellaOutline, mdiThermometerChevronDown, mdiThermometerChevronUp} from '@mdi/js';
 
 import {WeatherIcon} from './WeatherIcon';
-import {getDayOfTheWeek} from './helpers/timeHelpers';
-import {DailyForecastItem} from './DailyForecastItem';
+import {getDayOfTheWeek} from '../../helpers/timeHelpers';
+import {WidgetSubtitle} from '../WidgetSubtitle';
 
 interface IForecastProps {
     days?: Record<string, any>[];
@@ -34,7 +34,7 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
                         {new Date(day.dt * 1000).toLocaleDateString()}
                     </Box>
 
-                    <Box sx={{display: 'flex', justifyContent: 'space-between'}}>
+                    <Box sx={{display: 'flex'}}>
                         <Box sx={{
                             display: 'flex',
                             margin: '4px',
@@ -50,19 +50,34 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
                             </Box>
                         </Box>
 
-                        <DailyForecastItem
-                            icon={mdiUmbrellaOutline}
-                            units={'%'}
-                            value={(day.pop * 100).toFixed()}
-                        />
+                        <Box sx={{marginRight: '16px'}}>
+                            <WidgetSubtitle
+                                icon={mdiThermometerChevronUp}
+                                units={'°C'}
+                                value={Math.floor(day.temp.max).toString()}
+                            />
 
-                        <DailyForecastItem
-                            icon={mdiArrowUp}
-                            iconRotation={day.wind_deg}
-                            units={'m/s'}
-                            value={day.wind_speed.toFixed()}
-                        />
+                            <WidgetSubtitle
+                                icon={mdiThermometerChevronDown}
+                                units={'°C'}
+                                value={Math.floor(day.temp.min).toString()}
+                            />
+                        </Box>
 
+                        <Box>
+                            <WidgetSubtitle
+                                icon={mdiUmbrellaOutline}
+                                units={'%'}
+                                value={Math.floor(day.pop * 100).toString()}
+                            />
+
+                            <WidgetSubtitle
+                                icon={mdiArrowUp}
+                                iconRotation={day.wind_deg}
+                                units={'m/s'}
+                                value={day.wind_speed.toFixed()}
+                            />
+                        </Box>
                     </Box>
                 </Box>
             );

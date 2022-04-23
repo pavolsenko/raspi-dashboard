@@ -4,7 +4,7 @@ import {Box, SxProps} from '@mui/material';
 import Icon from '@mdi/react';
 
 import {isDay} from '../../helpers/timeHelpers';
-import {weatherIcons} from './helpers/weatherIconHelpers';
+import {weatherIcons} from '../../helpers/weatherHelpers';
 
 const DEFAULT_WEATHER_ICON_ID = '800';
 

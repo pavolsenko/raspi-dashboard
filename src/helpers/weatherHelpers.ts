@@ -78,3 +78,9 @@ export const weatherIcons: Record<string, {day: string, night: string}> = {
     '803': {day: mdiWeatherCloudy, night: mdiWeatherCloudy},
     '804': {day: mdiWeatherCloudy, night: mdiWeatherCloudy},
 };
+
+export const getHourlyForecast = (hourly: Record<string, any>[]): Record<string, any>[] => {
+    return hourly
+        .slice(2, 12)
+        .filter((item: Record<string, any>, index: number) => index % 2 === 0);
+}

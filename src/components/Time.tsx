@@ -2,8 +2,8 @@ import * as React from 'react'
 
 import {Box} from '@mui/material';
 
-import {useDateTime} from './WeatherWidget/hooks/useDateTime';
-import {normalizeTime} from './WeatherWidget/helpers/timeHelpers';
+import {useDateTime} from '../hooks/useDateTime';
+import {normalizeTime} from '../helpers/timeHelpers';
 
 export const Time: React.FC = () => {
     const dateTime = useDateTime();

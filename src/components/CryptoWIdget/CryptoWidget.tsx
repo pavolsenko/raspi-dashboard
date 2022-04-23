@@ -5,7 +5,7 @@ import Icon from '@mdi/react';
 import {mdiArrowUp} from '@mdi/js';
 import {mdiArrowDown} from '@mdi/js';
 
-import {useCrypto} from './hooks/useCrypto';
+import {useCrypto} from '../../hooks/useCrypto';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../WidgetHeader';

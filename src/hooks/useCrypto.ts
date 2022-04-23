@@ -1,8 +1,13 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import {AppConfig} from '../../../config/appConfig';
-import {ICryptoStats} from '../interfaces';
+import {AppConfig} from '../config/appConfig';
+
+export interface ICryptoStats {
+    currentValue: number;
+    previousValue: number;
+    portfolio: Record<string, any>[];
+}
 
 export const useCrypto = () => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
