@@ -1,29 +1,62 @@
 import * as React from 'react';
-import axios from 'axios';
 
 import {Box} from '@mui/material';
 import Icon from '@mdi/react';
-import {mdiBusClock} from '@mdi/js';
+import {mdiBusClock, mdiWeatherCloudyAlert} from '@mdi/js';
 
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../WidgetHeader';
+import {Loading} from '../Loading';
+import {useDepartures} from '../../hooks/useDepartures';
 
 export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
-    const [departures, setDepartures] = React.useState<Record<string, any>[]>([]);
+    const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
+
+    const {
+        departures,
+        loadDepartures,
+        isError,
+        isLoading,
+    } = useDepartures();
 
     React.useEffect(() => {
-        (async () => {
-            const result = await axios.get(AppConfig.wienerLinienApiEndpoint, {
-                params: {
-                    line: 'u1',
-                    station: 'Südtiroler Platz',
-                    towards: 'Oberlaa',
-                },
-            });
-            setDepartures(result.data.data.monitors[0].lines[0].departures.departure);
-        })();
-    }, []);
+        if (isInitialLoad) {
+            (async () => {await loadDepartures()})();
+            setIsInitialLoad(false);
+        }
+
+        const interval = setInterval(
+            async () => {await loadDepartures()},
+            AppConfig.defaultUpdateInterval,
+        );
+
+        return () => clearInterval(interval);
+    }, [loadDepartures, isInitialLoad, setIsInitialLoad]);
+
+    const renderLoading = () => {
+        if (!isLoading) {
+            return null;
+        }
+
+        return (
+            <Box sx={{color: props.headerBackgroundColor}}>
+                <Loading/>
+            </Box>
+        );
+    };
+
+    const renderError = () => {
+        if (!isError) {
+            return null;
+        }
+
+        return (
+            <Box sx={{color: '#a0a0a0'}}>
+                <Icon path={mdiWeatherCloudyAlert} size={'36px'}/>
+            </Box>
+        );
+    };
 
     return (
         <Box sx={{
@@ -45,9 +78,12 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
             <Box sx={{
                 display: 'flex',
                 flexGrow: '1',
-                justifyContent: 'space-between',
+                justifyContent: 'center',
+                alignItems: 'center',
                 backgroundColor: '#f0f0f0',
             }}>
+                {renderLoading()}
+                {renderError()}
                 {departures[0]?.countdown}
             </Box>
         </Box>

@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-import {Alert, Box} from '@mui/material';
+import {Box} from '@mui/material';
+import Icon from '@mdi/react';
+import {mdiWeatherCloudyAlert} from '@mdi/js';
 
 import {WeatherIcon} from './WeatherIcon';
 import {Sunset} from './Sunset';
@@ -35,29 +37,41 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
 
     React.useEffect(() => {
         if (isInitialLoad) {
-            (async () => await loadWeather())();
+            (async () => {await loadWeather()})();
             setIsInitialLoad(false);
         }
 
         const interval = setInterval(
-            async () => await loadWeather(),
+            async () => {await loadWeather()},
             AppConfig.defaultUpdateInterval,
         );
 
         return () => clearInterval(interval);
     }, [loadWeather, isInitialLoad, setIsInitialLoad]);
 
-    if (isLoading) {
-        return (
-            <Loading/>
-        );
-    }
+    const renderLoading = () => {
+        if (!isLoading) {
+            return null;
+        }
 
-    if (isError) {
         return (
-            <Alert severity={'error'}>Sorry, something went wrong</Alert>
+            <Box sx={{color: props.headerBackgroundColor}}>
+                <Loading/>
+            </Box>
         );
-    }
+    };
+
+    const renderError = () => {
+        if (!isError) {
+            return null;
+        }
+
+        return (
+            <Box sx={{color: '#a0a0a0'}}>
+                <Icon path={mdiWeatherCloudyAlert} size={'36px'}/>
+            </Box>
+        );
+    };
 
     return (
         <Box sx={{
@@ -105,6 +119,9 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 backgroundColor: '#f0f0f0',
                 color: '#666666',
             }}>
+                {renderLoading()}
+                {renderError()}
+
                 <HourlyForecast
                     hours={weather?.hourly}
                     sunrise={weather?.sunrise}

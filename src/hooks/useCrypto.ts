@@ -2,6 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 
 import {AppConfig} from '../config/appConfig';
+import {getCurrentValueFromLocalStorage, setCurrentValueInLocalStorage} from '../helpers/cryptoHelpers';
 
 export interface ICryptoStats {
     currentValue: number;
@@ -14,8 +15,8 @@ export const useCrypto = () => {
     const [isError, setIsError] = React.useState<boolean>(false);
 
     const [cryptoStats, setCryptoStats] = React.useState<ICryptoStats>({
-        currentValue: 0,
-        previousValue: 0,
+        currentValue: getCurrentValueFromLocalStorage(),
+        previousValue: getCurrentValueFromLocalStorage(),
         portfolio: [],
     });
 
@@ -41,6 +42,8 @@ export const useCrypto = () => {
             previousValue: cryptoStats.currentValue,
             portfolio: result.data.portfolio.pi,
         });
+
+        setCurrentValueInLocalStorage(cryptoStats.currentValue);
 
         setIsLoading(false);
     };

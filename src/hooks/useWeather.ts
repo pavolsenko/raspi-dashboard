@@ -25,7 +25,14 @@ export interface IWeather {
     wind_speed?: number;
 }
 
-export const useWeather = (location: ILatLon, units?: TUnits) => {
+export interface IUseWeather {
+    weather?: IWeather;
+    loadWeather: () => void;
+    isLoading: boolean;
+    isError: boolean;
+}
+
+export const useWeather = (location: ILatLon, units?: TUnits): IUseWeather => {
     const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError, setIsError] = React.useState<boolean>(false);
     const [weather, setWeather] = React.useState<IWeather | undefined>();

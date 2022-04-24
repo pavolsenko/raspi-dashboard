@@ -10,9 +10,8 @@ export const Loading: React.FC = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: '#ffffff',
         }}>
-            <CircularProgress/>
+            <CircularProgress color={'inherit'}/>
         </Box>
     );
 }
