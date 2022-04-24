@@ -16,7 +16,7 @@ import {
     mdiWeatherSunny,
 } from '@mdi/js';
 
-export const weatherIcons: Record<string, {day: string, night: string}> = {
+const weatherIcons: Record<string, {day: string, night: string}> = {
     '200': {day: mdiWeatherLightning, night: mdiWeatherLightning},
     '201': {day: mdiWeatherLightning, night: mdiWeatherLightning},
     '202': {day: mdiWeatherLightning, night: mdiWeatherLightning},
@@ -79,8 +79,17 @@ export const weatherIcons: Record<string, {day: string, night: string}> = {
     '804': {day: mdiWeatherCloudy, night: mdiWeatherCloudy},
 };
 
+const DEFAULT_WEATHER_ICON_ID = '800';
+
+export const getWeatherIcon = (iconId: string | undefined, isDay: boolean): string => {
+    if (!iconId) {
+        iconId = DEFAULT_WEATHER_ICON_ID;
+    }
+    return isDay ? weatherIcons[iconId].day : weatherIcons[iconId].night;
+};
+
 export const getHourlyForecast = (hourly: Record<string, any>[]): Record<string, any>[] => {
     return hourly
         .slice(2, 12)
         .filter((item: Record<string, any>, index: number) => index % 2 === 0);
-}
+};

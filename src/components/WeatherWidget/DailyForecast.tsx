@@ -58,17 +58,17 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
                             />
 
                             <WidgetSubtitle
-                                icon={mdiThermometerChevronDown}
-                                units={'°C'}
-                                value={Math.floor(day.temp.min).toString()}
+                                icon={mdiUmbrellaOutline}
+                                units={'%'}
+                                value={Math.floor(day.pop * 100).toString()}
                             />
                         </Box>
 
                         <Box>
                             <WidgetSubtitle
-                                icon={mdiUmbrellaOutline}
-                                units={'%'}
-                                value={Math.floor(day.pop * 100).toString()}
+                                icon={mdiThermometerChevronDown}
+                                units={'°C'}
+                                value={Math.floor(day.temp.min).toString()}
                             />
 
                             <WidgetSubtitle

@@ -13,7 +13,7 @@ export const Rain: React.FC<IRainProps> = (props: IRainProps) => {
         <WidgetSubtitle
             icon={mdiUmbrellaOutline}
             units={'%'}
-            value={((props.percentage || 0) * 100).toFixed().toString()}
+            value={((props.percentage || 0) * 100).toFixed()}
         />
     );
 };

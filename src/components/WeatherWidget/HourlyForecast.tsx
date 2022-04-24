@@ -40,7 +40,7 @@ export const HourlyForecast: React.FC<IHourlyForecastProps> = (props: IHourlyFor
                         </Box>
                         <Box>
                             <Box sx={{fontSize: '12px'}}>{hour.temp.toFixed()}°C</Box>
-                            <Box sx={{fontSize: '12px'}}>{hour.pop * 100}%</Box>
+                            <Box sx={{fontSize: '12px'}}>{(hour.pop * 100).toFixed()}%</Box>
                         </Box>
                     </Box>
                 </Box>
