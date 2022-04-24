@@ -1,15 +1,14 @@
 import * as React from 'react';
 
 import {Alert, Box} from '@mui/material';
-import Icon from '@mdi/react';
-import {mdiArrowUp} from '@mdi/js';
-import {mdiArrowDown} from '@mdi/js';
 
 import {useCrypto} from '../../hooks/useCrypto';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../WidgetHeader';
 import {Loading} from '../Loading';
+import {CurrentValue} from './CurrentValue';
+import {CurrencyList} from './CurrencyList';
 
 export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
     const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
@@ -47,14 +46,6 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
         );
     }
 
-    const renderArrow = (): React.ReactNode => {
-        if (cryptoStats.currentValue < cryptoStats.previousValue) {
-            return <Icon path={mdiArrowDown} size={'60px'}/>
-        }
-
-        return <Icon path={mdiArrowUp} size={' 60px'}/>
-    };
-
     return (
         <Box sx={{
             width: '100%',
@@ -67,30 +58,20 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
                 subtitle={'Crypto portfolio'}
                 backgroundColor={props.headerBackgroundColor}
             >
-                <Box sx={{marginTop: '12px'}}>{renderArrow()}</Box>
-                <Box sx={{fontSize: '60px'}}>{Math.floor(cryptoStats.currentValue)}</Box>
-                <Box sx={{
-                    fontSize: '24px',
-                    paddingTop: '12px',
-                }}>
-                    {(cryptoStats.currentValue % 1).toString().substring(2, 4) || '00'}
-                    <Box sx={{
-                        fontSize: '26px',
-                        marginTop: '-10px',
-                        marginLeft: '6px',
-                    }}>
-                        €
-                    </Box>
-                </Box>
+                <CurrentValue
+                    currentValue={cryptoStats.currentValue}
+                    previousValue={cryptoStats.previousValue}
+                />
             </WidgetHeader>
 
             <Box sx={{
                 display: 'flex',
-                flexGrow: '1',
-                justifyContent: 'space-between',
+                flexDirection: 'column',
+                flexGrow: 1,
                 backgroundColor: '#f0f0f0',
+                color: '#666666',
             }}>
-
+                <CurrencyList currencies={cryptoStats.portfolio}/>
             </Box>
         </Box>
     );
