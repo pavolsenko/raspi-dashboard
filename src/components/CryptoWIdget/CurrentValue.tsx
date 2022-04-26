@@ -12,29 +12,29 @@ interface ICurrentValueProps {
 export const CurrentValue: React.FC<ICurrentValueProps> = (props: ICurrentValueProps) => {
     const renderArrow = (): React.ReactNode => {
         if (props.currentValue < props.previousValue) {
-            return <Icon path={mdiArrowDown} size={'60px'}/>
+            return <Icon path={mdiArrowDown} size={'72px'}/>
         }
 
-        return <Icon path={mdiArrowUp} size={' 60px'}/>
+        return <Icon path={mdiArrowUp} size={'72px'}/>
     };
 
     return (
-        <>
-            <Box sx={{marginTop: '12px'}}>{renderArrow()}</Box>
-            <Box sx={{fontSize: '60px'}}>{Math.floor(props.currentValue)}</Box>
+        <Box sx={{display: 'flex', marginLeft: '-16px'}}>
+            <Box sx={{marginTop: '18px'}}>{renderArrow()}</Box>
+            <Box sx={{fontSize: '72px'}}>{Math.floor(props.currentValue)}</Box>
             <Box sx={{
-                fontSize: '24px',
-                paddingTop: '12px',
+                fontSize: '28px',
+                paddingTop: '18px',
             }}>
                 {(props.currentValue % 1).toString().substring(2, 4) || '00'}
                 <Box sx={{
-                    fontSize: '26px',
+                    fontSize: '28px',
                     marginTop: '-10px',
                     marginLeft: '6px',
                 }}>
                     €
             </Box>
             </Box>
-        </>
+        </Box>
     );
 };

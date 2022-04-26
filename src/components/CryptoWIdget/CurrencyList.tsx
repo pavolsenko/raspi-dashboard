@@ -43,6 +43,7 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
                     <Box sx={{
                         display: 'flex',
                         alignItems: 'center',
+                        filter: 'grayscale(100%)',
                     }}>
                         <img
                             src={currency.iconUrl}
@@ -55,7 +56,7 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
                     </Box>
 
                     <Box>
-                        {currency.totalValueInEur?.toFixed(2)}
+                        € {currency.totalValueInEur?.toFixed(2)}
                     </Box>
                 </Box>
             );
@@ -71,7 +72,7 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
                 textAlign: 'center',
                 marginTop: '16px',
             }}>
-                +{counter} more ({currencyRestValue.toFixed(2)}€)
+                +{counter} more (€ {currencyRestValue.toFixed(2)})
             </Box>
         </>
     );

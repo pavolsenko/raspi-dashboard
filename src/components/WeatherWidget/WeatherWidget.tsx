@@ -9,7 +9,7 @@ import {Sunset} from './Sunset';
 import {ILatLon, useWeather} from '../../hooks/useWeather';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
-import {Temperature} from './Temperature';
+import {CurrentTemperature} from './CurrentTemperature';
 import {Rain} from './Rain';
 import {Wind} from './Wind';
 import {DailyForecast} from './DailyForecast';
@@ -89,10 +89,10 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                     iconId={weather?.icon}
                     sunsetMs={weather?.sunset}
                     sunriseMs={weather?.sunrise}
-                    size={'56px'}
-                    sx={{marginTop: '14px', marginRight: '4px'}}
+                    size={'68px'}
+                    sx={{marginTop: '16px', marginRight: '4px'}}
                 />
-                <Temperature value={weather?.temp}/>
+                <CurrentTemperature value={weather?.temp}/>
             </WidgetHeader>
 
             <Box sx={{

@@ -16,6 +16,10 @@ export interface IWeatherIconProps {
 }
 
 export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProps) => {
+    if (!props.iconId) {
+        return null;
+    }
+
     const icon: string = getWeatherIcon(
         props.iconId?.toString(),
         isDay(props.sunriseMs, props.sunsetMs, props.dateTimeMs),

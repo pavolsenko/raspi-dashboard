@@ -61,7 +61,7 @@ export const useWeather = (location: ILatLon, units?: TUnits): IUseWeather => {
             ...result.data.current,
             daily: result.data.daily.slice(1, 6),
             hourly: getHourlyForecast(result.data.hourly),
-            icon: result.data.current.weather[0].iconId,
+            icon: result.data.current.weather[0].id,
             pop: result.data.hourly[0].pop,
         });
 

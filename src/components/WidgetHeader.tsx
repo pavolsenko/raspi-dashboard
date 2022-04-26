@@ -16,7 +16,7 @@ export const WidgetHeader: React.FC<IWidgetHeaderProps> = (props:IWidgetHeaderPr
             width: '100%',
             backgroundColor: props.backgroundColor,
             color: '#ffffff',
-            height: '145px',
+            height: '165px',
         }}>
             <Box sx={{
                 display: 'flex',
