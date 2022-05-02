@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Box} from '@mui/material';
-import {mdiArrowUp, mdiUmbrellaOutline, mdiThermometerChevronDown, mdiThermometerChevronUp} from '@mdi/js';
+import {mdiArrowUp, mdiUmbrellaOutline} from '@mdi/js';
 
 import {WeatherIcon} from './WeatherIcon';
 import {getDayOfTheWeek} from '../../helpers/timeHelpers';
@@ -23,13 +23,17 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
             result.push(
                 <Box
                     key={index.toString()}
-                    sx={{
-                        margin: '0 16px',
-                        borderTop: '1px solid #cccccc',
-                        padding: '12px 0 0 0',
-                    }}
+                    sx={{margin: '4px 16px'}}
                 >
-                    <Box sx={{fontSize: '12px'}}>
+                    <Box sx={{
+                        fontSize: '12px',
+                        backgroundColor: '#dddddd',
+                        width: '130px',
+                        textAlign: 'center',
+                        borderRadius: '12px',
+                        padding: '0 8px',
+                        marginBottom: '4px',
+                    }}>
                         {getDayOfTheWeek(new Date(day.dt * 1000).getDay())},&nbsp;
                         {new Date(day.dt * 1000).toLocaleDateString()}
                     </Box>
@@ -42,21 +46,15 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
                         }}>
                             <WeatherIcon
                                 iconId={day.weather[0].id}
-                                size={'36px'}
+                                size={'42px'}
                             />
                             <Box sx={{display: 'flex', marginLeft: '8px'}}>
-                                <Box sx={{fontSize: '28px'}}>{day.temp.day.toFixed()}</Box>
+                                <Box sx={{fontSize: '32px'}}>{day.temp.day.toFixed()}</Box>
                                 <Box sx={{marginTop: '4px'}}>°C</Box>
                             </Box>
                         </Box>
 
-                        <Box sx={{marginRight: '16px'}}>
-                            <WidgetSubtitle
-                                icon={mdiThermometerChevronUp}
-                                units={'°C'}
-                                value={Math.floor(day.temp.max).toString()}
-                            />
-
+                        <Box sx={{margin: '14px 4px'}}>
                             <WidgetSubtitle
                                 icon={mdiUmbrellaOutline}
                                 units={'%'}
@@ -64,13 +62,7 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
                             />
                         </Box>
 
-                        <Box>
-                            <WidgetSubtitle
-                                icon={mdiThermometerChevronDown}
-                                units={'°C'}
-                                value={Math.floor(day.temp.min).toString()}
-                            />
-
+                        <Box sx={{margin: '14px 4px'}}>
                             <WidgetSubtitle
                                 icon={mdiArrowUp}
                                 iconRotation={day.wind_deg}
@@ -87,8 +79,11 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
     };
 
     return (
-        <>
+        <Box sx={{
+            display: 'grid',
+            columnCount: 2,
+        }}>
             {renderDays()}
-        </>
+        </Box>
     );
 };
