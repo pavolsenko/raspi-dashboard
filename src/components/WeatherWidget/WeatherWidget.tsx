@@ -81,9 +81,9 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
             flexDirection: 'column',
         }}>
             <WidgetHeader
-                title={'Weather'}
-                subtitle={'Wien, Österreich'}
                 backgroundColor={props.headerBackgroundColor}
+                subtitle={'Wien, Österreich'}
+                title={'Weather'}
             >
                 <WeatherIcon
                     iconId={weather?.icon}

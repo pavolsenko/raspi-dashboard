@@ -2,12 +2,11 @@ import * as React from 'react';
 
 import {Box} from '@mui/material';
 
-import {Time} from './Time';
-
 interface IWidgetHeaderProps extends React.PropsWithChildren<any> {
-    title: string;
-    subtitle: string;
+    align?: 'left' | 'center' | 'right';
     backgroundColor: string;
+    subtitle?: string;
+    title: string;
 }
 
 export const WidgetHeader: React.FC<IWidgetHeaderProps> = (props:IWidgetHeaderProps) => {
@@ -18,17 +17,11 @@ export const WidgetHeader: React.FC<IWidgetHeaderProps> = (props:IWidgetHeaderPr
             color: '#ffffff',
             height: '165px',
         }}>
-            <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                margin: '16px 16px 0 16px',
-            }}>
+            <Box sx={{margin: '16px 16px 0 16px', textAlign: props.align}}>
                 <Box>
-                    <Box sx={{fontSize: '26px', lineHeight: '22px'}}>{props.title}</Box>
-                    <Box sx={{fontSize: '14px'}}>{props.subtitle}</Box>
+                    <Box sx={{fontSize: '24px', lineHeight: '22px'}}>{props.title}</Box>
+                    <Box sx={{fontSize: '12px'}}>{props.subtitle}</Box>
                 </Box>
-                <Time/>
             </Box>
 
             <Box sx={{
