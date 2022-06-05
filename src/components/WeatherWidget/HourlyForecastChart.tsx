@@ -11,49 +11,45 @@ export const HourlyForecastChart: React.FC<IHourlyForecastProps> = (props: IHour
         return null;
     }
 
+    const series: ApexAxisChartSeries = [{
+        color: '#084c61',
+        data: props.hours.map((item: Record<string, any>) => Math.floor(item.temp)),
+        name: 'temperature',
+        type: 'line',
+    }];
+
     const chartOptions: ApexOptions = {
         chart: {
-            id: 'hourly-forecast',
             toolbar: {show: false},
         },
-        dataLabels: {enabled: true},
+        dataLabels: {
+            enabledOnSeries: [0],
+        },
         legend: {show: false},
-        yaxis: {show: false, axisTicks: {show: false}, },
+        stroke: {
+            width: [4],
+        },
         xaxis: {
+            axisBorder: {show: false},
             axisTicks: {show: false},
-            crosshairs: {show: false},
             labels: {show: false},
+        },
+        yaxis: {
+            axisBorder: {show: false},
+            axisTicks: {show: false},
+            labels: {show: false},
+            min: 10,
+            max: 40,
+            show: false,
         },
     };
 
-    const seriesTemperature: ApexAxisChartSeries = [{
-        name: 'temperature',
-        data: props.hours.slice(0, 11).map((item: Record<string, any>) => Math.floor(item.temp)),
-        color: '#777777',
-    }];
-
-    const seriesRain: ApexAxisChartSeries = [{
-        name: 'rain',
-        data: props.hours.slice(0, 11).map((item: Record<string, any>) => Math.ceil(item.pop * 100)),
-        color: '#333333',
-        type: 'bar',
-    }];
-
     return (
-        <>
-            <Chart
-                options={chartOptions}
-                series={seriesTemperature}
-                height={100}
-                width={400}
-                type={'line'}
-            />
-            <Chart
-                options={chartOptions}
-                series={seriesRain}
-                height={100}
-                type={'bar'}
-            />
-        </>
+        <Chart
+            height={200}
+            options={chartOptions}
+            series={series}
+            width={400}
+        />
     );
 };

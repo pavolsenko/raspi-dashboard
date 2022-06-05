@@ -17,7 +17,7 @@ import {WidgetHeader} from '../WidgetHeader';
 import {Loading} from '../Loading';
 import {Sunrise} from './Sunrise';
 import {Humidity} from './Humidity';
-import {HourlyForecast} from './HourlyForecast';
+import {HourlyForecastChart} from './HourlyForecastChart';
 
 export const DEFAULT_LOCATION: ILatLon = {lat: 48.2085, lon: 16.3721};
 
@@ -122,11 +122,7 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 {renderLoading()}
                 {renderError()}
 
-                <HourlyForecast
-                    hours={weather?.hourly}
-                    sunrise={weather?.sunrise}
-                    sunset={weather?.sunset}
-                />
+                <HourlyForecastChart hours={weather?.hourly}/>
 
                 <DailyForecast days={weather?.daily}/>
             </Box>
