@@ -20,13 +20,16 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
         const result: React.ReactNode[] = [];
 
         result.push(
-            <Box sx={{
-                backgroundColor: '#dddddd',
-                padding: '8px',
-                marginBottom: '12px',
-                display: 'flex',
-                justifyContent: 'space-around',
-            }}>
+            <Box
+                key={'tomorrow'}
+                sx={{
+                    backgroundColor: '#dddddd',
+                    padding: '8px',
+                    marginBottom: '12px',
+                    display: 'flex',
+                    justifyContent: 'space-around',
+                }}
+            >
                 <Box sx={{display: 'flex'}}>
                     <WeatherIcon
                         iconId={props.days[0].weather[0].id}
