@@ -8,7 +8,7 @@ interface ICurrencyListProps {
     currencies: ICurrency[];
 }
 
-const CURRENCY_THRESHOLD = 10;
+const CURRENCY_THRESHOLD = 5;
 
 export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListProps) => {
     let counter = 0;
@@ -40,19 +40,8 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
                         alignItems: 'center',
                     }}
                 >
-                    <Box sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        filter: 'grayscale(100%)',
-                    }}>
-                        <img
-                            src={currency.iconUrl}
-                            alt={currency.name}
-                            height={30}
-                        />
-                        <Box sx={{marginLeft: '8px'}}>
-                            {currency.name} ({currency.symbol})
-                        </Box>
+                    <Box>
+                        {currency.name} ({currency.symbol})
                     </Box>
 
                     <Box>
