@@ -10,11 +10,10 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
     return (
         <Box sx={{
             display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
+            fontSize: '22px',
         }}>
             <Box sx={{
-                width: '30px',
+                width: '38px',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
@@ -23,7 +22,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
             </Box>
 
             <Box sx={{
-                width: '30px',
+                width: '38px',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',

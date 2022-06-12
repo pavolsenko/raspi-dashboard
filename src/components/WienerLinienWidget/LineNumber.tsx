@@ -17,14 +17,14 @@ export const LineNumber: React.FC<ILineNumberProps> = (props: ILineNumberProps) 
 
     return (
         <Box sx={{
-            width: '28px',
-            height: '28px',
+            width: '38px',
+            height: '38px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: getBackgroundColor(),
             color: '#ffffff',
-            fontSize: '14px',
+            fontSize: '18px',
             borderRadius: '4px',
         }}>
             {props.value}

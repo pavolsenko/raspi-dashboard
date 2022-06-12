@@ -61,7 +61,7 @@ export const Stop: React.FC<IStopProps> = (props: IStopProps) => {
                 textAlign: 'center',
                 borderRadius: '12px',
                 padding: '0 8px',
-                marginBottom: '4px',
+                marginBottom: '16px',
             }}>
                 {props.name}
             </Box>

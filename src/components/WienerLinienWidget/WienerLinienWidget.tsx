@@ -7,7 +7,6 @@ import {mdiBusClock, mdiWeatherCloudyAlert} from '@mdi/js';
 import {AppConfig} from '../../config/appConfig';
 import {IStop, IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../WidgetHeader';
-import {Loading} from '../Loading';
 import {useDepartures} from '../../hooks/useDepartures';
 import {Stop} from './Stop';
 
@@ -18,7 +17,6 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
         departures,
         loadDepartures,
         isError,
-        isLoading,
     } = useDepartures();
 
     React.useEffect(() => {
@@ -29,23 +27,11 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
 
         const interval = setInterval(
             async () => {await loadDepartures()},
-            AppConfig.defaultUpdateInterval,
+            AppConfig.wienerLinienUpdateInterval,
         );
 
         return () => clearInterval(interval);
     }, [loadDepartures, isInitialLoad, setIsInitialLoad]);
-
-    const renderLoading = () => {
-        if (!isLoading) {
-            return null;
-        }
-
-        return (
-            <Box sx={{color: props.headerBackgroundColor}}>
-                <Loading/>
-            </Box>
-        );
-    };
 
     const renderError = () => {
         if (!isError) {
@@ -96,7 +82,6 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                 color: '#666666',
                 padding: '16px',
             }}>
-                {renderLoading()}
                 {renderError()}
                 {renderStops()}
             </Box>
