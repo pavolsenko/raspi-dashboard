@@ -5,10 +5,11 @@ import Icon from '@mdi/react';
 import {mdiBusClock, mdiWeatherCloudyAlert} from '@mdi/js';
 
 import {AppConfig} from '../../config/appConfig';
-import {IWidgetProps} from '../../interfaces';
+import {IStop, IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../WidgetHeader';
 import {Loading} from '../Loading';
 import {useDepartures} from '../../hooks/useDepartures';
+import {Stop} from './Stop';
 
 export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
     const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
@@ -58,6 +59,18 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
         );
     };
 
+    const renderStops = (): React.ReactNode[] => {
+        return departures.map((stop: IStop): React.ReactNode => {
+            return (
+                <Stop
+                    key={stop.name}
+                    lines={stop.lines}
+                    name={stop.name}
+                />
+            );
+        });
+    };
+
     return (
         <Box sx={{
             width: '100%',
@@ -77,14 +90,15 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
 
             <Box sx={{
                 display: 'flex',
-                flexGrow: '1',
-                justifyContent: 'center',
-                alignItems: 'center',
+                flexDirection: 'column',
+                flexGrow: 1,
                 backgroundColor: '#f0f0f0',
+                color: '#666666',
+                padding: '16px',
             }}>
                 {renderLoading()}
                 {renderError()}
-                {departures[0]?.countdown}
+                {renderStops()}
             </Box>
         </Box>
     );
