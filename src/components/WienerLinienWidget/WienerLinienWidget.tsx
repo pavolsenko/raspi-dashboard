@@ -39,7 +39,14 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
         }
 
         return (
-            <Box sx={{color: '#a0a0a0'}}>
+            <Box sx={{
+                color: '#a0a0a0',
+                width: '100%',
+                height: '100%',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+            }}>
                 <Icon path={mdiWeatherCloudyAlert} size={'36px'}/>
             </Box>
         );
