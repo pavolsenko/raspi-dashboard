@@ -3,12 +3,11 @@ import * as React from 'react';
 import {Box} from '@mui/material';
 
 import {ICurrency} from '../../hooks/useCrypto';
+import {CURRENCY_THRESHOLD} from '../../config/cryptoConfig';
 
 interface ICurrencyListProps {
     currencies: ICurrency[];
 }
-
-const CURRENCY_THRESHOLD = 10;
 
 export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListProps) => {
     let counter = 0;
