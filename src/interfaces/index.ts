@@ -8,11 +8,11 @@ export interface ILine {
     countdowns: number[];
 }
 
-export interface IStop {
+export interface IStation {
     name: string;
     lines: ILine[];
 }
 
 export interface IDepartures {
-    stops: IStop[];
+    stops: IStation[];
 }

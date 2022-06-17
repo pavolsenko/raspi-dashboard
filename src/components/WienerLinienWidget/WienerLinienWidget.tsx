@@ -4,34 +4,18 @@ import {Box} from '@mui/material';
 import Icon from '@mdi/react';
 import {mdiBusClock, mdiWeatherCloudyAlert} from '@mdi/js';
 
-import {AppConfig} from '../../config/appConfig';
-import {IStop, IWidgetProps} from '../../interfaces';
+import {IStation, IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../WidgetHeader';
 import {useDepartures} from '../../hooks/useDepartures';
 import {Stop} from './Stop';
 
 export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
-    const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
-
     const {
         departures,
-        loadDepartures,
         isError,
     } = useDepartures();
 
-    React.useEffect(() => {
-        if (isInitialLoad) {
-            (async () => {await loadDepartures()})();
-            setIsInitialLoad(false);
-        }
-
-        const interval = setInterval(
-            async () => {await loadDepartures()},
-            AppConfig.wienerLinienUpdateInterval,
-        );
-
-        return () => clearInterval(interval);
-    }, [loadDepartures, isInitialLoad, setIsInitialLoad]);
+    console.log(departures);
 
     const renderError = () => {
         if (!isError) {
@@ -53,8 +37,10 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
     };
 
     const renderStops = (): React.ReactNode[] => {
-        return departures.map((stop: IStop): React.ReactNode => {
-            return (
+        const result: React.ReactNode[] = [];
+
+        departures.forEach((stop: IStation) => {
+            result.push(
                 <Stop
                     key={stop.name}
                     lines={stop.lines}
@@ -62,6 +48,8 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                 />
             );
         });
+
+        return result;
     };
 
     return (
