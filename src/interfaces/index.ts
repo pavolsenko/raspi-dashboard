@@ -15,5 +15,5 @@ export interface IStation {
 
 export interface IStationRequest {
     name: string;
-    diva: string;
+    lines?: string[];
 }

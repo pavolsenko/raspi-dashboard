@@ -4,9 +4,13 @@ import {Map as ImmutableMap} from 'immutable';
 import {AppConfig} from '../config/appConfig';
 import {IStation, IStationRequest} from '../interfaces';
 import {processStations} from '../helpers/stationsHelper';
+import axios, {AxiosResponse} from 'axios';
 
 const STATIONS: IStationRequest[] = [
-    {name: 'Hauptbahnhof', diva: '60201349'},
+    {name: 'Südtiroler Platz'},
+    {name: 'Hauptbahnhof'},
+    {name: 'Alfred-Adler-Straße'},
+    {name: 'Scheugasse'},
 ];
 
 export const useDepartures = () => {
@@ -17,16 +21,15 @@ export const useDepartures = () => {
 
     React.useEffect(() => {
         const loadDeparture = () => {
-            fetch(
-                AppConfig.wienerLinienApiEndpoint + '?diva=' + STATIONS[currentStationIndex].diva,
-            {
-                method: 'GET',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
+            setIsError(false);
+
+            axios.get(
+                AppConfig.wienerLinienApiEndpoint,
+                {params: {
+                    station: STATIONS[currentStationIndex].name},
                 },
-            },)
-                .then((response: any) => {
+            )
+                .then((response: AxiosResponse) => {
                     const data = response?.data?.data?.monitors;
 
                     if (!data) {

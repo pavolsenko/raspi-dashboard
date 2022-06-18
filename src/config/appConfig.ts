@@ -18,7 +18,7 @@ export const AppConfig: IAppConfig = {
     coinStatsApiEndpoint: 'https://api.coin-stats.com/v2/portfolios/public',
     coinStatsPortfolioToken: process.env.REACT_APP_COINSTATS_PROTFOLIO_TOKEN || '',
 
-    wienerLinienApiEndpoint: 'https://www.wienerlinien.at/qando-fpa/monitor', //'https://apps.static-access.net/ViennaTransport/monitor/',
+    wienerLinienApiEndpoint: 'https://apps.static-access.net/ViennaTransport/monitor/',
     wienerLinienUpdateInterval: 1000 * 30,
 
     defaultUpdateInterval: 1000 * 60 * 60,
