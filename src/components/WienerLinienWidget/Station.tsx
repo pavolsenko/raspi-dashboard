@@ -7,12 +7,12 @@ import {LineNumber} from './LineNumber';
 import {Countdowns} from './Countdowns';
 import {LineDirection} from './LineDirection';
 
-interface IStopProps {
+interface IStationProps {
     name: string;
     lines?: ILine[];
 }
 
-export const Stop: React.FC<IStopProps> = (props: IStopProps) => {
+export const Station: React.FC<IStationProps> = (props: IStationProps) => {
     if (!props.lines) {
         return null;
     }
@@ -62,6 +62,7 @@ export const Stop: React.FC<IStopProps> = (props: IStopProps) => {
                 borderRadius: '12px',
                 padding: '0 8px',
                 marginBottom: '16px',
+                marginTop: '16px',
             }}>
                 {props.name}
             </Box>

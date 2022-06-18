@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import {Box} from '@mui/material';
+import {Box, CircularProgress} from '@mui/material';
 import Icon from '@mdi/react';
 import {mdiBusClock, mdiWeatherCloudyAlert} from '@mdi/js';
 
 import {IStation, IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../WidgetHeader';
 import {useDepartures} from '../../hooks/useDepartures';
-import {Stop} from './Stop';
+import {Station} from './Station';
 
 export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
     const {
@@ -15,11 +15,24 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
         isError,
     } = useDepartures();
 
-    console.log(departures);
-
-    const renderError = () => {
-        if (!isError) {
+    const renderStatus = () => {
+        if (!isError && departures && departures.count() > 0) {
             return null;
+        }
+
+        let status: React.ReactNode;
+
+        if (isError) {
+            status = (
+                <Icon path={mdiWeatherCloudyAlert} size={'36px'}/>
+            );
+        } else if (departures && departures.count() === 0) {
+            status = (
+                <CircularProgress
+                    color={'inherit'}
+                    size={42}
+                />
+            );
         }
 
         return (
@@ -31,7 +44,7 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                <Icon path={mdiWeatherCloudyAlert} size={'36px'}/>
+                {status}
             </Box>
         );
     };
@@ -41,7 +54,7 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
 
         departures.forEach((stop: IStation) => {
             result.push(
-                <Stop
+                <Station
                     key={stop.name}
                     lines={stop.lines}
                     name={stop.name}
@@ -75,9 +88,9 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                 flexGrow: 1,
                 backgroundColor: '#f0f0f0',
                 color: '#666666',
-                padding: '16px',
+                padding: '0 16px 16px 16px',
             }}>
-                {renderError()}
+                {renderStatus()}
                 {renderStops()}
             </Box>
         </Box>

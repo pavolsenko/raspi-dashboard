@@ -1,12 +1,28 @@
 import * as React from 'react';
 
-import {Box} from '@mui/material';
+import {Box, styled} from '@mui/material';
 
 interface ICountdownsProps {
     values: number[];
 }
 
+const Keyframes = styled(Box)({
+    '@keyframes blink': {
+        '50%': {opacity: 0},
+    },
+});
+
 export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) => {
+    const renderCountdown = (value: number): React.ReactNode => {
+        if (value === 0) {
+            return (
+                <Keyframes sx={{animation: '1s blink infinite'}}>•</Keyframes>
+            );
+        }
+
+        return value;
+    };
+
     return (
         <Box sx={{
             display: 'flex',
@@ -18,7 +34,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {props.values[0]}
+                {renderCountdown(props.values[0])}
             </Box>
 
             <Box sx={{
@@ -27,7 +43,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {props.values[1]}
+                {renderCountdown(props.values[1])}
             </Box>
         </Box>
     );

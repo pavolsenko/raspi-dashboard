@@ -1,82 +1,64 @@
 import * as React from 'react';
-import axios from 'axios';
 import {Map as ImmutableMap} from 'immutable';
 
 import {AppConfig} from '../config/appConfig';
-import {ILine, IStation} from '../interfaces';
+import {IStation, IStationRequest} from '../interfaces';
+import {processStations} from '../helpers/stationsHelper';
 
-const STATIONS = [
-    'Alfred-Adler-Straße',
-    'Hauptbahnhof',
+const STATIONS: IStationRequest[] = [
+    {name: 'Hauptbahnhof', diva: '60201349'},
 ];
 
 export const useDepartures = () => {
     const [departures, setDepartures] = React.useState<ImmutableMap<string, IStation>>(ImmutableMap([]));
-    const [isLoading, setIsLoading] = React.useState<boolean>(false);
     const [isError, setIsError] = React.useState<boolean>(false);
     const [currentStationIndex, setCurrentStationIndex] = React.useState<number>(0);
     const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
 
     React.useEffect(() => {
-        const loadDeparture = async (): Promise<Record<string, any> | undefined> => {
-            setIsError(false);
-            setIsLoading(true);
+        const loadDeparture = () => {
+            fetch(
+                AppConfig.wienerLinienApiEndpoint + '?diva=' + STATIONS[currentStationIndex].diva,
+            {
+                method: 'GET',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            },)
+                .then((response: any) => {
+                    const data = response?.data?.data?.monitors;
 
-            let result: Record<string, any>;
-            try {
-                result = await axios.get(
-                    AppConfig.wienerLinienApiEndpoint,
-                    {params: {station: STATIONS[currentStationIndex]}},
-                );
+                    if (!data) {
+                        return;
+                    }
 
-            } catch (error) {
-                setIsError(true);
-                setIsLoading(false);
-                setCurrentStationIndex(0);
-                return;
-            }
+                    const departure = processStations(data);
 
-            const data = result?.data?.data?.monitors;
-
-            if (!data) {
-                setIsLoading(false);
-                return;
-            }
-
-            const departure = {
-                name: data[0].locationStop.properties.title,
-                lines: data.map((monitor: Record<string, any>): ILine => {
-                    return {
-                        name: monitor.lines[0].name,
-                        direction: monitor.lines[0].towards,
-                        countdowns: [
-                            monitor.lines[0].departures.departure[0].departureTime.countdown,
-                            monitor.lines[0].departures.departure[1].departureTime.countdown,
-                        ],
-                    };
-                }),
-            };
-
-            setDepartures(
-                departures.set(departure.name, departure),
-            );
-
-            if (currentStationIndex === STATIONS.length - 1) {
-                setCurrentStationIndex(0);
-            } else {
-                setCurrentStationIndex(currentStationIndex + 1);
-            }
-
-            setIsLoading(false);
+                    setDepartures(
+                        departures.set(departure.name, departure),
+                    );
+                })
+                .catch(() => {
+                    setIsError(true);
+                })
+                .finally(() => {
+                    if (currentStationIndex === STATIONS.length - 1) {
+                        setCurrentStationIndex(0);
+                    } else {
+                        setCurrentStationIndex(currentStationIndex + 1);
+                    }
+                });
         };
 
         if (isInitialLoad) {
             loadDeparture();
             setIsInitialLoad(false);
+            return;
         }
 
         const intervalId = setInterval(
-            () => {loadDeparture()},
+            loadDeparture,
             AppConfig.wienerLinienUpdateInterval,
         );
 
@@ -86,6 +68,5 @@ export const useDepartures = () => {
     return {
         departures,
         isError,
-        isLoading,
     };
 };

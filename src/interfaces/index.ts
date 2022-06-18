@@ -13,6 +13,7 @@ export interface IStation {
     lines: ILine[];
 }
 
-export interface IDepartures {
-    stops: IStation[];
+export interface IStationRequest {
+    name: string;
+    diva: string;
 }

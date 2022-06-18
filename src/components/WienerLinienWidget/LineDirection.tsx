@@ -21,7 +21,15 @@ export const LineDirection: React.FC<ILineDirectionProps> = (props: ILineDirecti
                     size={'20px'}
                 />
             </Box>
-            {props.direction}
+
+            <Box sx={{
+                overflow: 'hidden',
+                textOverflow: 'ellipsis',
+                whiteSpace: 'nowrap',
+                maxWidth: '240px',
+            }}>
+                {props.direction}
+            </Box>
         </Box>
     );
 };
