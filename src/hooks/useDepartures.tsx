@@ -1,17 +1,11 @@
 import * as React from 'react';
 import {Map as ImmutableMap} from 'immutable';
+import axios, {AxiosResponse} from 'axios';
 
 import {AppConfig} from '../config/appConfig';
 import {IStation, IStationRequest} from '../interfaces';
-import {processStations} from '../helpers/stationsHelper';
-import axios, {AxiosResponse} from 'axios';
-
-const STATIONS: IStationRequest[] = [
-    {name: 'Südtiroler Platz'},
-    {name: 'Hauptbahnhof'},
-    {name: 'Alfred-Adler-Straße'},
-    {name: 'Scheugasse'},
-];
+import {decrementCountdowns, processStations} from '../helpers/stationsHelper';
+import {STATIONS} from '../config/stationConfig';
 
 export const useDepartures = () => {
     const [departures, setDepartures] = React.useState<ImmutableMap<string, IStation>>(ImmutableMap([]));
@@ -22,21 +16,27 @@ export const useDepartures = () => {
     React.useEffect(() => {
         const loadDeparture = () => {
             setIsError(false);
+            const station: IStationRequest = STATIONS[currentStationIndex];
 
             axios.get(
                 AppConfig.wienerLinienApiEndpoint,
                 {params: {
-                    station: STATIONS[currentStationIndex].name},
+                    station: station.name},
                 },
             )
                 .then((response: AxiosResponse) => {
                     const data = response?.data?.data?.monitors;
 
-                    if (!data) {
-                        return;
+                    let departure;
+                    if (data) {
+                        departure = processStations(station, data);
+                    } else {
+                        departure = decrementCountdowns(departures.get(station.name));
                     }
 
-                    const departure = processStations(data);
+                    if (!departure) {
+                        return;
+                    }
 
                     setDepartures(
                         departures.set(departure.name, departure),

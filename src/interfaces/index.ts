@@ -11,9 +11,14 @@ export interface ILine {
 export interface IStation {
     name: string;
     lines: ILine[];
+    order: number;
 }
 
 export interface IStationRequest {
     name: string;
-    lines?: string[];
+    lines?: {
+        name: string;
+        directions?: string[];
+    }[];
+    order: number;
 }

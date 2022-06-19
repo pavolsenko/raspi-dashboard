@@ -52,15 +52,17 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
     const renderStops = (): React.ReactNode[] => {
         const result: React.ReactNode[] = [];
 
-        departures.forEach((stop: IStation) => {
-            result.push(
-                <Station
-                    key={stop.name}
-                    lines={stop.lines}
-                    name={stop.name}
-                />
-            );
-        });
+        departures
+            .sort((a: IStation, b: IStation) => a.order - b.order)
+            .forEach((stop: IStation) => {
+                result.push(
+                    <Station
+                        key={stop.name}
+                        lines={stop.lines}
+                        name={stop.name}
+                    />
+                );
+            });
 
         return result;
     };
