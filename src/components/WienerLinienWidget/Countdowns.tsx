@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import {Box, styled} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
 interface ICountdownsProps {
     values: number[];
@@ -22,6 +23,19 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
 
         return value;
     };
+
+    if (props.values[0] === 0 && props.values[1] === 0) {
+        return (
+            <Box sx={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                fontSize: '16px',
+            }}>
+                <CloseIcon fontSize={'inherit'}/>
+            </Box>
+        );
+    }
 
     return (
         <Box sx={{
