@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import {Box, styled} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
+import CircleIcon from '@mui/icons-material/Circle';
 
 import {AppConfig} from '../../config/appConfig';
 import {processCountdowns} from '../../helpers/stationsHelper';
@@ -39,7 +40,13 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
     const renderCountdown = (value: number): React.ReactNode => {
         if (value === 0) {
             return (
-                <BlinkingBox sx={{animation: '1s blink infinite'}}>•</BlinkingBox>
+                <BlinkingBox sx={{
+                    animation: '1s blink infinite',
+                    fontSize: '12px',
+                    marginTop: '4px',
+                }}>
+                    <CircleIcon fontSize={'inherit'}/>
+                </BlinkingBox>
             );
         }
 
