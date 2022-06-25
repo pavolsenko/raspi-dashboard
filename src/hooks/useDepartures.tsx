@@ -4,7 +4,7 @@ import axios, {AxiosResponse} from 'axios';
 
 import {AppConfig} from '../config/appConfig';
 import {IStation, IStationRequest} from '../interfaces';
-import {decrementCountdowns, processStations} from '../helpers/stationsHelper';
+import {processStations} from '../helpers/stationsHelper';
 import {STATIONS} from '../config/stationConfig';
 
 export const useDepartures = () => {
@@ -30,8 +30,6 @@ export const useDepartures = () => {
                     let departure;
                     if (data) {
                         departure = processStations(station, data);
-                    } else {
-                        departure = decrementCountdowns(departures.get(station.name));
                     }
 
                     if (!departure) {
@@ -62,7 +60,7 @@ export const useDepartures = () => {
 
         const intervalId = setInterval(
             loadDeparture,
-            AppConfig.wienerLinienUpdateInterval,
+            AppConfig.wienerLinienApiUpdateInterval,
         );
 
         return () => clearInterval(intervalId);

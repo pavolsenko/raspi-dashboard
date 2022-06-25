@@ -3,34 +3,57 @@ import * as React from 'react';
 import {Box, styled} from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
+import {AppConfig} from '../../config/appConfig';
+import {processCountdowns} from '../../helpers/stationsHelper';
+
 interface ICountdownsProps {
-    values: number[];
+    values: string[];
 }
 
-const Keyframes = styled(Box)({
+const BlinkingBox = styled(Box)({
     '@keyframes blink': {
         '50%': {opacity: 0},
     },
 });
 
 export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) => {
+    const [countdowns, setCountdowns] = React.useState<number[]>([0, 0]);
+
+    const getCountdowns = React.useCallback(() => {
+        setCountdowns(processCountdowns(props.values));
+    }, [props.values]);
+
+    React.useEffect(() => {
+        getCountdowns();
+    }, [getCountdowns]);
+
+    React.useEffect(() => {
+        const intervalId = setInterval(
+            getCountdowns,
+            AppConfig.wienerLinienTimetableUpdateInterval,
+        );
+
+        return () => clearInterval(intervalId);
+    }, [getCountdowns, props.values]);
+
     const renderCountdown = (value: number): React.ReactNode => {
         if (value === 0) {
             return (
-                <Keyframes sx={{animation: '1s blink infinite'}}>•</Keyframes>
+                <BlinkingBox sx={{animation: '1s blink infinite'}}>•</BlinkingBox>
             );
         }
 
         return value;
     };
 
-    if (props.values[0] === 0 && props.values[1] === 0) {
+    if (countdowns[0] === 0 && countdowns[1] === 0) {
         return (
             <Box sx={{
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '16px',
+                marginRight: '24px',
             }}>
                 <CloseIcon fontSize={'inherit'}/>
             </Box>
@@ -48,7 +71,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {renderCountdown(props.values[0])}
+                {renderCountdown(countdowns[0])}
             </Box>
 
             <Box sx={{
@@ -57,7 +80,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {renderCountdown(props.values[1])}
+                {renderCountdown(countdowns[1])}
             </Box>
         </Box>
     );

@@ -42,7 +42,7 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
                         <LineNumber value={line.name}/>
                         <LineDirection direction={line.direction}/>
                     </Box>
-                    <Countdowns values={line.countdowns}/>
+                    <Countdowns values={line.departures}/>
                 </Box>
             );
         });

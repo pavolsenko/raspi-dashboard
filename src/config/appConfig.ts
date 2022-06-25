@@ -6,7 +6,8 @@ export interface IAppConfig {
     coinStatsPortfolioToken: string;
 
     wienerLinienApiEndpoint: string;
-    wienerLinienUpdateInterval: number;
+    wienerLinienApiUpdateInterval: number;
+    wienerLinienTimetableUpdateInterval: number;
 
     defaultUpdateInterval: number;
 }
@@ -19,7 +20,8 @@ export const AppConfig: IAppConfig = {
     coinStatsPortfolioToken: process.env.REACT_APP_COINSTATS_PROTFOLIO_TOKEN || '',
 
     wienerLinienApiEndpoint: 'https://apps.static-access.net/ViennaTransport/monitor/',
-    wienerLinienUpdateInterval: 1000 * 30,
+    wienerLinienApiUpdateInterval: 1000 * 45,
+    wienerLinienTimetableUpdateInterval: 1000 * 25,
 
     defaultUpdateInterval: 1000 * 60 * 60,
 };

@@ -23,10 +23,13 @@ export const processStations = (station: IStationRequest, data: Record<string, a
             return {
                 name: monitor.lines[0].name,
                 direction: monitor.lines[0].towards,
-                countdowns: [
-                    monitor.lines[0].departures.departure[0].departureTime.countdown,
-                    monitor.lines[0].departures.departure[1].departureTime.countdown,
-                ],
+                departures: monitor
+                    .lines[0]
+                    .departures
+                    .departure
+                    .map((item: Record<string, any>): string => {
+                        return item.departureTime.timeReal || item.departure.timePlanned;
+                    }),
             };
         });
 
@@ -37,20 +40,49 @@ export const processStations = (station: IStationRequest, data: Record<string, a
     };
 };
 
-export const decrementCountdowns = (station?: IStation): IStation | undefined => {
-    if (!station) {
-        return;
+export const predictNextDeparture = (firstDeparture: string, secondDeparture: string): number => {
+    const nowDate = Date.now();
+    const firstDepartureMinutes = Math.floor((new Date(firstDeparture).getTime() - nowDate) / 1000 / 60);
+    const secondDepartureMinutes = Math.floor((new Date(secondDeparture).getTime() - nowDate) / 1000 / 60);
+
+    return secondDepartureMinutes + (secondDepartureMinutes - firstDepartureMinutes);
+};
+
+export const processCountdowns = (values: string[]): number[] => {
+    let newCountdowns: number[] = [];
+
+    values.forEach((value: string) => {
+        if (!value) {
+            return;
+        }
+
+        if (newCountdowns.length === 2) {
+            return;
+        }
+
+        const nowDate = Date.now();
+        const valueDate = (new Date(value)).getTime();
+
+        const timeDifference = Math.floor((valueDate - nowDate) / 1000 / 60);
+
+        if (timeDifference < 0) {
+            return;
+        }
+
+        if (newCountdowns.length === 0) {
+            newCountdowns[0] = timeDifference;
+        } else {
+            newCountdowns[1] = timeDifference;
+        }
+    });
+
+    if (!newCountdowns) {
+        newCountdowns = [0, 0];
     }
 
-    return {
-        ...station,
-        lines: station.lines.map((line: ILine) => {
-            return {
-                ...line,
-                countdowns: line.countdowns.map((countdown: number) => {
-                    return countdown === 0 ? countdown : countdown - 1;
-                }),
-            };
-        }),
-    };
+    if (newCountdowns.length === 1) {
+        newCountdowns[1] = predictNextDeparture(values[0], values[1]);
+    }
+
+    return newCountdowns;
 };

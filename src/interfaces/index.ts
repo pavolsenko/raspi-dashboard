@@ -5,7 +5,7 @@ export interface IWidgetProps {
 export interface ILine {
     name: string;
     direction: string;
-    countdowns: number[];
+    departures: string[];
 }
 
 export interface IStation {
