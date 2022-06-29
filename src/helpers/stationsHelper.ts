@@ -28,7 +28,7 @@ export const processStations = (station: IStationRequest, data: Record<string, a
                     .departures
                     .departure
                     .map((item: Record<string, any>): string => {
-                        return item.departureTime.timeReal || item.departure.timePlanned;
+                        return item.departureTime.timeReal || item.departureTime.timePlanned;
                     }),
             };
         });
@@ -38,14 +38,6 @@ export const processStations = (station: IStationRequest, data: Record<string, a
         lines,
         order: station.order,
     };
-};
-
-export const predictNextDeparture = (firstDeparture: string, secondDeparture: string): number => {
-    const nowDate = Date.now();
-    const firstDepartureMinutes = Math.floor((new Date(firstDeparture).getTime() - nowDate) / 1000 / 60);
-    const secondDepartureMinutes = Math.floor((new Date(secondDeparture).getTime() - nowDate) / 1000 / 60);
-
-    return secondDepartureMinutes + (secondDepartureMinutes - firstDepartureMinutes);
 };
 
 export const processCountdowns = (values: string[]): number[] => {
@@ -78,10 +70,6 @@ export const processCountdowns = (values: string[]): number[] => {
 
     if (!newCountdowns) {
         newCountdowns = [0, 0];
-    }
-
-    if (newCountdowns.length === 1) {
-        newCountdowns[1] = predictNextDeparture(values[0], values[1]);
     }
 
     return newCountdowns;

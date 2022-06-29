@@ -11,7 +11,6 @@ export interface IWeatherIconProps {
     iconId?: number;
     sunsetMs?: number;
     sunriseMs?: number;
-    dateTimeMs?: number;
     sx?: SxProps;
 }
 
@@ -22,7 +21,7 @@ export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProp
 
     const icon: string = getWeatherIcon(
         props.iconId?.toString(),
-        isDay(props.sunriseMs, props.sunsetMs, props.dateTimeMs),
+        isDay(props.sunriseMs, props.sunsetMs, Date.now()),
     );
 
     return (

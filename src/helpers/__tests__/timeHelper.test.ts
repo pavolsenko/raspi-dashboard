@@ -1,4 +1,4 @@
-import {getDayOfTheWeek, normalizeTime} from '../timeHelpers';
+import {getDayOfTheWeek, isDay, normalizeTime} from '../timeHelpers';
 
 describe('normalizeTime', () => {
     it('should return midnight if no value is provided', () => {
@@ -35,5 +35,14 @@ describe('getDayOfTheWeek', () => {
     it('should return empty string on invalid day of the week', () => {
         expect(getDayOfTheWeek(24)).toBe('');
 
+    });
+});
+
+describe('isDay', () => {
+    it('should decide if current time is daytime or nighttime', () => {
+        expect(isDay(1656125700, 1656183543, 1656185296862)).toBeFalsy();
+        expect(isDay(1656125700, 1656183543, 1656152964827)).toBeTruthy();
+        expect(isDay(undefined, 1656183543, 1656152964827)).toBeTruthy();
+        expect(isDay(1656125700, undefined, 1656152964827)).toBeTruthy();
     });
 });

@@ -6,6 +6,7 @@ import {mdiArrowUp, mdiUmbrellaOutline} from '@mdi/js';
 import {WeatherIcon} from './WeatherIcon';
 import {getDayOfTheWeek} from '../../helpers/timeHelpers';
 import {WidgetSubtitle} from '../WidgetSubtitle';
+import {Thermometer} from './Thermometer';
 
 interface IForecastProps {
     days?: Record<string, any>[];
@@ -69,41 +70,38 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
                     sx={{margin: '4px 16px'}}
                 >
                     <Box sx={{
-                        fontSize: '12px',
-                        backgroundColor: '#dddddd',
-                        width: '130px',
-                        textAlign: 'center',
-                        borderRadius: '12px',
-                        padding: '0 8px',
-                        marginBottom: '4px',
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
+                        margin: '4px',
                     }}>
-                        {getDayOfTheWeek(new Date(day.dt * 1000).getDay())},&nbsp;
-                        {new Date(day.dt * 1000).toLocaleDateString()}
-                    </Box>
-
-                    <Box sx={{display: 'flex'}}>
                         <Box sx={{
-                            display: 'flex',
-                            margin: '4px',
-                            width: '120px',
+                            width: '20px',
+                            fontSize: '14px',
                         }}>
+                            {getDayOfTheWeek(new Date(day.dt * 1000).getDay()).substring(0, 3)}
+                        </Box>
+
+                        <Box sx={{display: 'flex', marginLeft: '8px'}}>
                             <WeatherIcon
                                 iconId={day.weather[0].id}
-                                size={'42px'}
+                                size={'36px'}
                             />
-                            <Box sx={{display: 'flex', marginLeft: '8px'}}>
-                                <Box sx={{fontSize: '32px'}}>{day.temp.day.toFixed()}</Box>
-                                <Box sx={{marginTop: '4px'}}>°C</Box>
+
+                            <Box sx={{
+                                fontSize: '28px',
+                                marginLeft: '8px',
+                            }}>
+                                {day.temp.day.toFixed()}
                             </Box>
+
+                            <Box sx={{marginTop: '4px'}}>°C</Box>
                         </Box>
 
-                        <Box sx={{margin: '14px 4px'}}>
-                            <WidgetSubtitle
-                                icon={mdiUmbrellaOutline}
-                                units={'%'}
-                                value={Math.floor(day.pop * 100).toString()}
-                            />
-                        </Box>
+                        <Thermometer
+                            low={Math.floor(day.temp.min)}
+                            high={Math.ceil(day.temp.max)}
+                        />
                     </Box>
                 </Box>
             );

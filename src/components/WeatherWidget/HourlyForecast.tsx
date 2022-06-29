@@ -35,7 +35,6 @@ export const HourlyForecast: React.FC<IHourlyForecastProps> = (props: IHourlyFor
                                 size={'28px'}
                                 sunriseMs={props.sunrise}
                                 sunsetMs={props.sunset}
-                                dateTimeMs={hour.dt}
                             />
                         </Box>
                         <Box>
