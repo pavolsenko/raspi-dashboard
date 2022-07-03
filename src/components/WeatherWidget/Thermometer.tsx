@@ -2,24 +2,29 @@ import * as React from 'react';
 
 import {Box} from '@mui/material';
 
+import {
+    DEFAULT_HIGHER_LIMIT_TEMPERATURE,
+    DEFAULT_LOWER_LIMIT_TEMPERATURE,
+    DEFAULT_TEMPERATURE_OFFSET
+} from '../../config/weatherConfig';
+
 interface IThermometerProps {
     low: number;
     high: number;
     height?: number;
+    lowerLimit?: number;
+    higherLimit?: number;
 }
 
 const DEFAULT_HEIGHT = 8;
 
-const LOWER_LIMIT = 0; // °C
-const HIGHER_LIMIT = 35; // °C
-
 export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProps) => {
     const getWidth = (value: number): number => {
-        const total = (LOWER_LIMIT * -1) + HIGHER_LIMIT;
-
-        const width = value + (LOWER_LIMIT * -1);
-
-        return width / (total / 100) - 1;
+        const lowerLimit = (props.lowerLimit || DEFAULT_LOWER_LIMIT_TEMPERATURE) * -1;
+        const higherLimit = props.higherLimit || DEFAULT_HIGHER_LIMIT_TEMPERATURE;
+        const total = lowerLimit + higherLimit;
+        const width = value + lowerLimit;
+        return width / (total / 100) - DEFAULT_TEMPERATURE_OFFSET;
     };
 
     return (
@@ -43,10 +48,10 @@ export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProp
             <Box sx={{
                 height: (props.height || DEFAULT_HEIGHT) + 'px',
                 flexGrow: 1,
-                border: '8px solid white',
-                borderRadius: '16px',
                 position: 'relative',
                 top: '-8px',
+                border: '8px solid white',
+                borderRadius: '16px',
             }}>
             </Box>
 
