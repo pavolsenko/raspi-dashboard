@@ -1,14 +1,18 @@
 import * as React from 'react';
-import {Map as ImmutableMap} from 'immutable';
+import {fromJS, Map as ImmutableMap} from 'immutable';
 import axios, {AxiosResponse} from 'axios';
 
 import {AppConfig} from '../config/appConfig';
 import {IStation, IStationRequest} from '../interfaces';
 import {processStations} from '../helpers/stationsHelper';
-import {STATIONS} from '../config/stationConfig';
+import {DEPARTURES_KEY, STATIONS} from '../config/departuresConfig';
 
 export const useDepartures = () => {
-    const [departures, setDepartures] = React.useState<ImmutableMap<string, IStation>>(ImmutableMap([]));
+    const [departures, setDepartures] = React.useState<ImmutableMap<string, IStation>>(
+        fromJS(
+            JSON.parse(window.localStorage.getItem(DEPARTURES_KEY) || '{}'),
+        ) as ImmutableMap<string, IStation>,
+    );
     const [isError, setIsError] = React.useState<boolean>(false);
     const [currentStationIndex, setCurrentStationIndex] = React.useState<number>(0);
     const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
@@ -36,8 +40,11 @@ export const useDepartures = () => {
                         return;
                     }
 
+                    const newDepartures = departures.set(departure.name, departure);
+                    window.localStorage.setItem(DEPARTURES_KEY, JSON.stringify(newDepartures.toJS()) || '');
+
                     setDepartures(
-                        departures.set(departure.name, departure),
+                        newDepartures,
                     );
                 })
                 .catch(() => {

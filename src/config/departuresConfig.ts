@@ -23,3 +23,5 @@ export const STATIONS: IStationRequest[] = [
         order: 4,
     },
 ];
+
+export const DEPARTURES_KEY = 'departures';
