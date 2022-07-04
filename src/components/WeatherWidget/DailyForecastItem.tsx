@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Box} from '@mui/material';
+import {Box, SxProps} from '@mui/material';
 
 import {getDayOfTheWeek} from '../../helpers/timeHelpers';
 import {WeatherIcon} from './WeatherIcon';
@@ -10,19 +10,21 @@ interface IDailyForecastItemProps {
     day: Record<string, any>;
     lowerLimit: number;
     higherLimit: number;
+    sx?: SxProps;
 }
 
 export const DailyForecastItem: React.FC<IDailyForecastItemProps> = (props: IDailyForecastItemProps) => {
     return (
         <Box sx={{
+            ...props.sx,
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            margin: '16px',
+            padding: '12px 16px',
         }}>
             <Box sx={{
                 width: '20px',
-                fontSize: '14px',
+                fontSize: '18px',
             }}>
                 {getDayOfTheWeek(new Date(props.day.dt * 1000).getDay()).substring(0, 3)}
             </Box>
@@ -30,11 +32,11 @@ export const DailyForecastItem: React.FC<IDailyForecastItemProps> = (props: IDai
             <Box sx={{display: 'flex', marginLeft: '8px'}}>
                 <WeatherIcon
                     iconId={props.day.weather[0].id}
-                    size={'36px'}
+                    size={'42px'}
                 />
 
                 <Box sx={{
-                    fontSize: '28px',
+                    fontSize: '32px',
                     marginLeft: '8px',
                 }}>
                     {props.day.temp.day.toFixed()}

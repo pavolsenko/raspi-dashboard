@@ -16,7 +16,7 @@ interface IThermometerProps {
     higherLimit?: number;
 }
 
-const DEFAULT_HEIGHT = 8;
+const DEFAULT_HEIGHT = 10;
 
 export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProps) => {
     const getWidth = (value: number): number => {
@@ -32,7 +32,7 @@ export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProp
             background: 'linear-gradient(132deg, rgba(75,168,213,1) 20%, rgba(17,172,38,1) 40%, rgba(200,179,10,1) 60%, rgba(228,68,68,1) 80%);',
             minWidth: '200px',
             height: (props.height || DEFAULT_HEIGHT) + 'px',
-            borderRadius: '16px',
+            borderRadius: Math.ceil((props.height || DEFAULT_HEIGHT) * 2) + 'px',
             overflow: 'hidden',
             boxShadow: '0 0 8px #dddddd',
             display: 'flex',
@@ -51,7 +51,7 @@ export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProp
                 position: 'relative',
                 top: '-8px',
                 border: '8px solid white',
-                borderRadius: '16px',
+                borderRadius: Math.ceil((props.height || DEFAULT_HEIGHT) * 2) + 'px',
             }}>
             </Box>
 
