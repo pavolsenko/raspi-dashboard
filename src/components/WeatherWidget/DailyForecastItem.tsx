@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Box, SxProps} from '@mui/material';
+import {Box} from '@mui/material';
 
 import {getDayOfTheWeek} from '../../helpers/timeHelpers';
 import {WeatherIcon} from './WeatherIcon';
@@ -10,13 +10,11 @@ interface IDailyForecastItemProps {
     day: Record<string, any>;
     lowerLimit: number;
     higherLimit: number;
-    sx?: SxProps;
 }
 
 export const DailyForecastItem: React.FC<IDailyForecastItemProps> = (props: IDailyForecastItemProps) => {
     return (
         <Box sx={{
-            ...props.sx,
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',

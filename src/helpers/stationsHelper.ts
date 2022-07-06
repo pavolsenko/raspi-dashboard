@@ -7,6 +7,11 @@ export const processStations = (station: IStationRequest, data: Record<string, a
                 return true;
             }
 
+            // exclude lines heading to depots
+            if (monitor.lines[0].towards.includes('Betriebsbhf')) {
+                return false;
+            }
+
             for (const line of station.lines) {
                 if (line.name === monitor.lines[0].name && !line.directions) {
                     return true;
@@ -27,9 +32,10 @@ export const processStations = (station: IStationRequest, data: Record<string, a
                     .lines[0]
                     .departures
                     .departure
-                    .map((item: Record<string, any>): string => {
-                        return item.departureTime.timeReal || item.departureTime.timePlanned;
-                    }),
+                    .map((item: Record<string, any>): string | undefined => {
+                        return item.departureTime.timeReal || item.departureTime.timePlanned || undefined;
+                    })
+                    .filter((item: string | undefined) => item),
             };
         });
 

@@ -25,6 +25,10 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
         const result: React.ReactNode[] = [];
 
         props.lines.forEach((line: ILine, index: number) => {
+            if (!line.departures || line.departures.length === 0) {
+                return;
+            }
+
             result.push(
                 <Box
                     key={index.toString()}

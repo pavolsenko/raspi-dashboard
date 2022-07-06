@@ -38,7 +38,6 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
             day={props.days[0]}
             lowerLimit={lowerLimit - DEFAULT_TEMPERATURE_OFFSET}
             higherLimit={higherLimit + DEFAULT_TEMPERATURE_OFFSET}
-            sx={{backgroundColor: '#e0e0e0'}}
             key={'tomorrow'}
         />
     );
@@ -54,7 +53,6 @@ export const DailyForecast: React.FC<IForecastProps> = (props: IForecastProps) =
                 lowerLimit={lowerLimit - DEFAULT_TEMPERATURE_OFFSET}
                 higherLimit={higherLimit + DEFAULT_TEMPERATURE_OFFSET}
                 key={day.dt.toString()}
-                sx={index % 2 === 0 ? {backgroundColor: '#e0e0e0'} : undefined}
             />
         );
     });
