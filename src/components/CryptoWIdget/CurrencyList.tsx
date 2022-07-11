@@ -4,6 +4,7 @@ import {Box} from '@mui/material';
 
 import {ICurrency} from '../../hooks/useCrypto';
 import {CURRENCY_THRESHOLD} from '../../config/cryptoConfig';
+import {CurrencyListItem} from './CurrencyListItem';
 
 interface ICurrencyListProps {
     currencies: ICurrency[];
@@ -28,26 +29,10 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
             }
 
             result.push(
-                <Box
+                <CurrencyListItem
                     key={currency.symbol}
-                    sx={{
-                        margin: '0 16px',
-                        borderBottom: '1px solid #cccccc',
-                        padding: '8px 0',
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        fontSize: '22px',
-                    }}
-                >
-                    <Box>
-                        {currency.name} ({currency.symbol})
-                    </Box>
-
-                    <Box>
-                        € {currency.totalValueInEur?.toFixed(2)}
-                    </Box>
-                </Box>
+                    currency={currency}
+                />
             );
         });
 
