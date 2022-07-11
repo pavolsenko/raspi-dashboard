@@ -16,7 +16,7 @@ interface IThermometerProps {
     higherLimit?: number;
 }
 
-const DEFAULT_HEIGHT = 10;
+const DEFAULT_HEIGHT = 8;
 
 export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProps) => {
     const getWidth = (value: number): number => {
@@ -27,9 +27,20 @@ export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProp
         return width / (total / 100) - DEFAULT_TEMPERATURE_OFFSET;
     };
 
+    const getBackground = (): string => {
+        const lowerWidth = getWidth(props.low);
+
+        let result = 'linear-gradient(120deg, rgba(75,168,213,1) ';
+        result += (20 - lowerWidth).toString() + '%, rgba(17,172,38,1) ';
+        result += (40 - lowerWidth).toString() + '%, rgba(200,179,10,1) ';
+        result += (60 - lowerWidth).toString() + '%, rgba(228,68,68,1) ';
+        result += (80 - lowerWidth).toString() + '%);';
+
+        return result;
+    };
+
     return (
         <Box sx={{
-            background: 'linear-gradient(132deg, rgba(75,168,213,1) 20%, rgba(17,172,38,1) 40%, rgba(200,179,10,1) 60%, rgba(228,68,68,1) 80%);',
             minWidth: '200px',
             height: (props.height || DEFAULT_HEIGHT) + 'px',
             borderRadius: Math.ceil((props.height || DEFAULT_HEIGHT) * 2) + 'px',
@@ -42,25 +53,23 @@ export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProp
                 width: getWidth(props.low).toString() + '%',
                 background: '#ffffff',
                 height: (props.height || DEFAULT_HEIGHT) + 'px',
-            }}>
-            </Box>
+            }}/>
 
             <Box sx={{
                 height: (props.height || DEFAULT_HEIGHT) + 'px',
                 flexGrow: 1,
                 position: 'relative',
-                top: '-8px',
-                border: '8px solid white',
+                top: '-' + props.height + 'px',
+                border: props.height + 'px solid white',
                 borderRadius: Math.ceil((props.height || DEFAULT_HEIGHT) * 2) + 'px',
-            }}>
-            </Box>
+                background: getBackground(),
+            }}/>
 
             <Box sx={{
                 width: (100 - getWidth(props.high)).toString() + '%',
                 background: '#ffffff',
                 height: (props.height || DEFAULT_HEIGHT) + 'px',
-            }}>
-            </Box>
+            }}/>
         </Box>
     );
 };
