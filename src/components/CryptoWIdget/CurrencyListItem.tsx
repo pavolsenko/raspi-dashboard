@@ -20,7 +20,7 @@ export const CurrencyListItem: React.FC<ICurrencyListItemProps> = (props: ICurre
         }}>
             <Box>
                 <Box sx={{
-                    fontSize: '18px',
+                    fontSize: '22px',
                     display: 'flex',
                 }}>
                     {props.currency.name}

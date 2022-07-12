@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {fromJS, Map as ImmutableMap} from 'immutable';
+import {Map as ImmutableMap} from 'immutable';
 import axios, {AxiosResponse} from 'axios';
 
 import {AppConfig} from '../config/appConfig';
@@ -9,9 +9,7 @@ import {DEPARTURES_KEY, STATIONS} from '../config/departuresConfig';
 
 export const useDepartures = () => {
     const [departures, setDepartures] = React.useState<ImmutableMap<string, IStation>>(
-        fromJS(
-            JSON.parse(window.localStorage.getItem(DEPARTURES_KEY) || '{}'),
-        ) as ImmutableMap<string, IStation>,
+        ImmutableMap(JSON.parse(window.localStorage.getItem(DEPARTURES_KEY) || '{}')),
     );
     const [isError, setIsError] = React.useState<boolean>(false);
     const [currentStationIndex, setCurrentStationIndex] = React.useState<number>(0);
