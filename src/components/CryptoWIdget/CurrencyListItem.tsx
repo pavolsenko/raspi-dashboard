@@ -37,7 +37,7 @@ export const CurrencyListItem: React.FC<ICurrencyListItemProps> = (props: ICurre
             </Box>
 
             <Box sx={{display: 'flex'}}>
-                <Box sx={{fontSize: '34px'}}>
+                <Box sx={{fontSize: '36px'}}>
                     {props.currency.totalValueInEur?.toFixed()}
                 </Box>
 

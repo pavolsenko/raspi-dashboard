@@ -5,7 +5,7 @@ export const STATIONS: IStationRequest[] = [
         name: 'Südtiroler Platz',
         order: 1,
     }, {
-        name: 'Hauptbahnhof',
+        name: 'Hauptbahnhof S U',
         lines: [
             {name: '18'},
             {name: '13A'},
@@ -23,5 +23,12 @@ export const STATIONS: IStationRequest[] = [
         order: 4,
     },
 ];
+
+export const MERGE_STATIONS = [{
+    'Hauptbahnhof': [
+        'Südtiroler Platz',
+        'Hauptbahnhof S U',
+    ],
+}];
 
 export const DEPARTURES_KEY = 'departures';
