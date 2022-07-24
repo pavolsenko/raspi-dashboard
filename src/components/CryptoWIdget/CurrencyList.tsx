@@ -3,7 +3,7 @@ import * as React from 'react';
 import {Box} from '@mui/material';
 
 import {ICurrency} from '../../hooks/useCrypto';
-import {CURRENCY_THRESHOLD} from '../../config/cryptoConfig';
+import {CURRENCY_MAX_COUNT, CURRENCY_VALUE_THRESHOLD} from '../../config/cryptoConfig';
 import {CurrencyListItem} from './CurrencyListItem';
 
 interface ICurrencyListProps {
@@ -12,6 +12,7 @@ interface ICurrencyListProps {
 
 export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListProps) => {
     let counter = 0;
+    let valueCounter = 0;
     let currencyRestValue = 0;
 
     const renderCurrencies = (): React.ReactNode[] => {
@@ -22,8 +23,10 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
                 return;
             }
 
-            if (currency?.totalValueInEur < CURRENCY_THRESHOLD) {
-                counter++;
+            counter++;
+
+            if (currency?.totalValueInEur < CURRENCY_VALUE_THRESHOLD || counter > CURRENCY_MAX_COUNT) {
+                valueCounter++;
                 currencyRestValue = currencyRestValue + currency.totalValueInEur;
                 return;
             }
@@ -46,7 +49,7 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
                 textAlign: 'center',
                 marginTop: '16px',
             }}>
-                +{counter} more (€ {currencyRestValue.toFixed(2)})
+                +{valueCounter} more (€ {currencyRestValue.toFixed(2)})
             </Box>
         </>
     );

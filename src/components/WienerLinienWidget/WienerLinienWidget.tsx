@@ -13,6 +13,7 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
     const {
         departures,
         isError,
+        onResetCache,
     } = useDepartures();
 
     const renderStatus = () => {
@@ -79,8 +80,14 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                 subtitle={'Departures'}
                 backgroundColor={props.headerBackgroundColor}
             >
-                <Box sx={{marginTop: '12px'}}>
-                    <Icon path={mdiBusClock} size={'58px'}/>
+                <Box
+                    sx={{marginTop: '12px'}}
+                    onClick={onResetCache}
+                >
+                    <Icon
+                        path={mdiBusClock}
+                        size={'58px'}
+                    />
                 </Box>
             </WidgetHeader>
 

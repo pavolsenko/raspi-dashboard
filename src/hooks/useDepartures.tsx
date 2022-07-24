@@ -71,8 +71,13 @@ export const useDepartures = () => {
         return () => clearInterval(intervalId);
     }, [currentStationIndex, departures, isInitialLoad]);
 
+    const onResetCache = () => {
+        window.localStorage.setItem(DEPARTURES_KEY, '');
+    };
+
     return {
         departures,
         isError,
+        onResetCache,
     };
 };

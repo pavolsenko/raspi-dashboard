@@ -3,6 +3,9 @@ import {IStationRequest} from '../interfaces';
 export const STATIONS: IStationRequest[] = [
     {
         name: 'Südtiroler Platz',
+        lines: [
+            {name: 'U1', directions: ['H']},
+        ],
         order: 1,
     }, {
         name: 'Hauptbahnhof S U',
@@ -23,12 +26,5 @@ export const STATIONS: IStationRequest[] = [
         order: 4,
     },
 ];
-
-export const MERGE_STATIONS = [{
-    'Hauptbahnhof': [
-        'Südtiroler Platz',
-        'Hauptbahnhof S U',
-    ],
-}];
 
 export const DEPARTURES_KEY = 'departures';
