@@ -19,7 +19,7 @@ export const AppConfig: IAppConfig = {
     coinStatsApiEndpoint: 'https://api.coin-stats.com/v2/portfolios/public',
     coinStatsPortfolioToken: process.env.REACT_APP_COINSTATS_PROTFOLIO_TOKEN || '',
 
-    wienerLinienApiEndpoint: 'https://apps.static-access.net/ViennaTransport/monitor/',
+    wienerLinienApiEndpoint: 'https://vtapi.floscodes.net/monitor/',
     wienerLinienApiUpdateInterval: 1000 * 65,
     wienerLinienTimetableUpdateInterval: 1000 * 25,
 

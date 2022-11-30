@@ -8,7 +8,7 @@ export const STATIONS: IStationRequest[] = [
         ],
         order: 1,
     }, {
-        name: 'Hauptbahnhof S U',
+        name: 'Hauptbahnhof',
         lines: [
             {name: '18'},
             {name: '13A'},

@@ -17,7 +17,7 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
     } = useDepartures();
 
     const renderStatus = () => {
-        if (!isError && departures && departures.count() > 0) {
+        if (!isError || (departures && departures.count() > 0)) {
             return null;
         }
 
