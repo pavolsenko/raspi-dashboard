@@ -37,7 +37,7 @@ export const DailyForecastItem: React.FC<IDailyForecastItemProps> = (props: IDai
                     fontSize: '32px',
                     marginLeft: '8px',
                 }}>
-                    {props.day.temp.day.toFixed()}
+                    {Math.floor(props.day.temp.day)}
                 </Box>
 
                 <Box sx={{marginTop: '4px'}}>°C</Box>

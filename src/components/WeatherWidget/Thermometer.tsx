@@ -27,18 +27,6 @@ export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProp
         return width / (total / 100) - DEFAULT_TEMPERATURE_OFFSET;
     };
 
-    const getBackground = (): string => {
-        const lowerWidth = getWidth(props.low);
-
-        let result = 'linear-gradient(120deg, rgba(75,168,213,1) ';
-        result += (20 - lowerWidth).toString() + '%, rgba(17,172,38,1) ';
-        result += (40 - lowerWidth).toString() + '%, rgba(200,179,10,1) ';
-        result += (60 - lowerWidth).toString() + '%, rgba(228,68,68,1) ';
-        result += (80 - lowerWidth).toString() + '%);';
-
-        return result;
-    };
-
     return (
         <Box sx={{
             minWidth: '200px',
@@ -62,7 +50,7 @@ export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProp
                 top: '-' + props.height + 'px',
                 border: props.height + 'px solid white',
                 borderRadius: Math.ceil((props.height || DEFAULT_HEIGHT) * 2) + 'px',
-                background: getBackground(),
+                background: '#084C61',
             }}/>
 
             <Box sx={{
