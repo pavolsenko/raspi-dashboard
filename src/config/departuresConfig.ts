@@ -2,7 +2,7 @@ import {IStationRequest} from '../interfaces';
 
 export const STATIONS: IStationRequest[] = [
     {
-        name: 'Südtiroler Platz',
+        name: 'Keplerplatz',
         lines: [
             {name: 'U1', directions: ['H']},
         ],
