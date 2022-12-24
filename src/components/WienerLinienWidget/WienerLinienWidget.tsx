@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Box, CircularProgress} from '@mui/material';
+import {Box, CircularProgress, useTheme} from '@mui/material';
 import Icon from '@mdi/react';
 import {mdiBusClock, mdiWeatherCloudyAlert} from '@mdi/js';
 
@@ -10,11 +10,14 @@ import {useDepartures} from '../../hooks/useDepartures';
 import {Station} from './Station';
 
 export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
+    const theme = useTheme();
     const {
         departures,
         isError,
         onResetCache,
     } = useDepartures();
+
+    const date = new Date();
 
     const renderStatus = () => {
         if (!isError || (departures && departures.count() > 0)) {
@@ -81,13 +84,17 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                 backgroundColor={props.headerBackgroundColor}
             >
                 <Box
-                    sx={{marginTop: '12px'}}
+                    sx={{marginTop: '12px', display: 'flex'}}
                     onClick={onResetCache}
                 >
                     <Icon
                         path={mdiBusClock}
                         size={'58px'}
                     />
+                    <Box sx={{fontSize: '46px', marginLeft: theme.spacing(1)}}>
+                        {date.getHours()}:
+                        {date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}
+                    </Box>
                 </Box>
             </WidgetHeader>
 
