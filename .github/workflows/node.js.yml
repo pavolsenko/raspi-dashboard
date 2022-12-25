@@ -30,9 +30,9 @@ jobs:
     - name: Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.3
       with:
-        server: webtip.sk
-        protocol: ftps
-        port: 22
+        server: ftp.webtip.sk
+        protocol: ftp
+        port: 21
         username: github_deploy.webtip.sk
         password: ${{ secrets.FTP_PASSWORD }}
         dangerous-clean-slate: true
