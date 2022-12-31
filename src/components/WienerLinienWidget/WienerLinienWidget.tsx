@@ -8,16 +8,17 @@ import {IStation, IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../WidgetHeader';
 import {useDepartures} from '../../hooks/useDepartures';
 import {Station} from './Station';
+import {useDateTime} from '../../hooks/useDateTime';
+import {normalizeTime} from '../../helpers/timeHelpers';
 
 export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
     const theme = useTheme();
+    const dateTime = useDateTime();
     const {
         departures,
         isError,
         onResetCache,
     } = useDepartures();
-
-    const date = new Date();
 
     const renderStatus = () => {
         if (!isError || (departures && departures.count() > 0)) {
@@ -92,8 +93,7 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                         size={'58px'}
                     />
                     <Box sx={{fontSize: '46px', marginLeft: theme.spacing(1)}}>
-                        {date.getHours()}:
-                        {date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}
+                        {normalizeTime(dateTime)}
                     </Box>
                 </Box>
             </WidgetHeader>

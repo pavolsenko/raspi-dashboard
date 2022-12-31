@@ -1,8 +1,8 @@
 import * as React from 'react';
 
 import {Box, styled} from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import CircleIcon from '@mui/icons-material/Circle';
+import {mdiClose, mdiCircle} from '@mdi/js';
+import Icon from '@mdi/react';
 
 import {AppConfig} from '../../config/appConfig';
 import {processCountdowns} from '../../helpers/stationsHelper';
@@ -45,7 +45,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
                     fontSize: '12px',
                     marginTop: '4px',
                 }}>
-                    <CircleIcon fontSize={'inherit'}/>
+                    <Icon path={mdiCircle} size={'12px'}/>
                 </BlinkingBox>
             );
         }
@@ -62,7 +62,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
                 fontSize: '16px',
                 marginRight: '24px',
             }}>
-                <CloseIcon fontSize={'inherit'}/>
+                <Icon path={mdiClose} size={'14px'}/>
             </Box>
         );
     }
