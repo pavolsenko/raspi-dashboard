@@ -3,8 +3,8 @@ import {render, screen} from '@testing-library/react';
 import {WrapperTestComponent} from '../../../testUtils';
 import {Humidity} from '../Humidity';
 
-describe('Humidity', () => {
-    it('displays humidity data correctly', () => {
+describe('<Humidity/> component"', () => {
+    it('should display humidity data correctly', () => {
         render(
             <WrapperTestComponent>
                 <Humidity humidity={35}/>
@@ -18,7 +18,7 @@ describe('Humidity', () => {
         expect(component).toBeInTheDocument();
     });
 
-    it('displays humidity as zero when no data is provided', () => {
+    it('should display humidity as zero when no data is provided', () => {
         render(
             <WrapperTestComponent>
                 <Humidity/>

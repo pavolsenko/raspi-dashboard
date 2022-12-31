@@ -3,8 +3,8 @@ import {render, screen} from '@testing-library/react';
 import {WrapperTestComponent} from '../../../testUtils';
 import {Rain} from '../Rain';
 
-describe('Rain', () => {
-    it('displays rain data correctly', () => {
+describe('<Rain/> component:', () => {
+    it('should display rain data correctly', () => {
         render(
             <WrapperTestComponent>
                 <Rain percentage={0.23}/>

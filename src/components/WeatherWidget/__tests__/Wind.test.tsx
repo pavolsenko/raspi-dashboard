@@ -3,8 +3,8 @@ import {render, screen} from '@testing-library/react';
 import {WrapperTestComponent} from '../../../testUtils';
 import {Wind} from '../Wind';
 
-describe('Wind', () => {
-    it('displays wind data correctly', () => {
+describe('<Wind/> component:', () => {
+    it('should display wind data correctly', () => {
         render(
             <WrapperTestComponent>
                 <Wind
