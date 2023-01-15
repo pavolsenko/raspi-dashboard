@@ -3,13 +3,13 @@ import * as React from 'react';
 import {Box} from '@mui/material';
 
 import {ILine} from '../../interfaces';
-import {LineNumber} from './LineNumber';
-import {Countdowns} from './Countdowns';
-import {LineDirection} from './LineDirection';
+import {Line} from './Line';
 
 interface IStationProps {
     name: string;
     lines?: ILine[];
+    onLineClick?: () => void;
+    onStationClick?: () => void;
 }
 
 export const Station: React.FC<IStationProps> = (props: IStationProps) => {
@@ -30,24 +30,10 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
             }
 
             result.push(
-                <Box
+                <Line
                     key={index.toString()}
-                    sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        width: '100%',
-                        marginTop: '8px',
-                    }}
-                >
-                    <Box sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                    }}>
-                        <LineNumber value={line.name}/>
-                        <LineDirection direction={line.direction}/>
-                    </Box>
-                    <Countdowns values={line.departures}/>
-                </Box>
+                    line={line}
+                />
             );
         });
 
@@ -58,16 +44,19 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
         <Box sx={{
             width: '100%',
         }}>
-            <Box sx={{
-                fontSize: '12px',
-                backgroundColor: '#dddddd',
-                width: '130px',
-                textAlign: 'center',
-                borderRadius: '12px',
-                padding: '0 8px',
-                marginBottom: '16px',
-                marginTop: '16px',
-            }}>
+            <Box
+                onClick={props.onStationClick}
+                sx={{
+                    fontSize: '12px',
+                    backgroundColor: '#dddddd',
+                    width: '130px',
+                    textAlign: 'center',
+                    borderRadius: '12px',
+                    padding: '0 8px',
+                    marginBottom: '16px',
+                    marginTop: '16px',
+                }}
+            >
                 {props.name}
             </Box>
             {renderLines()}

@@ -15,6 +15,10 @@ export const useDepartures = () => {
     const [currentStationIndex, setCurrentStationIndex] = React.useState<number>(0);
     const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
 
+    const setLocalStorageDepartures = (departuresData: ImmutableMap<string, IStation>) => {
+        window.localStorage.setItem(DEPARTURES_KEY, JSON.stringify(departuresData.toJS()) || '');
+    };
+
     React.useEffect(() => {
         const loadDeparture = () => {
             setIsError(false);
@@ -39,7 +43,7 @@ export const useDepartures = () => {
                     }
 
                     const newDepartures = departures.set(departure.name, departure);
-                    window.localStorage.setItem(DEPARTURES_KEY, JSON.stringify(newDepartures.toJS()) || '');
+                    setLocalStorageDepartures(newDepartures);
 
                     setDepartures(
                         newDepartures,
@@ -71,13 +75,21 @@ export const useDepartures = () => {
         return () => clearInterval(intervalId);
     }, [currentStationIndex, departures, isInitialLoad]);
 
-    const onResetCache = () => {
+    const removeStation = (index: string) => {
+        const newDepartures = departures.remove(index);
+        setDepartures(newDepartures);
+        setLocalStorageDepartures(newDepartures);
+    };
+
+
+    const resetCache = () => {
         window.localStorage.setItem(DEPARTURES_KEY, '');
     };
 
     return {
         departures,
         isError,
-        onResetCache,
+        resetCache,
+        removeStation,
     };
 };

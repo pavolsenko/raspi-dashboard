@@ -3,6 +3,7 @@ import * as React from 'react';
 import {Box} from '@mui/material';
 
 interface ILineNumberProps {
+    onClick?: () => void;
     value: string;
 }
 
@@ -40,17 +41,20 @@ export const LineNumber: React.FC<ILineNumberProps> = (props: ILineNumberProps) 
     };
 
     return (
-        <Box sx={{
-            width: '38px',
-            height: '38px',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: getBackgroundColor(),
-            color: '#ffffff',
-            fontSize: '18px',
-            borderRadius: '4px',
-        }}>
+        <Box
+            onClick={props.onClick}
+            sx={{
+                width: '38px',
+                height: '38px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                backgroundColor: getBackgroundColor(),
+                color: '#ffffff',
+                fontSize: '18px',
+                borderRadius: '4px',
+            }}
+        >
             {props.value}
         </Box>
     );

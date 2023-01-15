@@ -17,7 +17,8 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
     const {
         departures,
         isError,
-        onResetCache,
+        removeStation,
+        resetCache,
     } = useDepartures();
 
     const renderStatus = () => {
@@ -59,12 +60,13 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
 
         departures
             .sort((a: IStation, b: IStation) => a.order - b.order)
-            .forEach((station: IStation) => {
+            .forEach((station: IStation, index: string) => {
                 result.push(
                     <Station
                         key={station.name}
                         lines={station.lines}
                         name={station.name}
+                        onStationClick={() => removeStation(index)}
                     />
                 );
             });
@@ -86,7 +88,7 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
             >
                 <Box
                     sx={{marginTop: '12px', display: 'flex'}}
-                    onClick={onResetCache}
+                    onClick={resetCache}
                 >
                     <Icon
                         path={mdiBusClock}
