@@ -9,7 +9,7 @@ export const CurrentTemperature: React.FC<ITemperatureProps> = (props: ITemperat
     return (
         <Box sx={{display: 'flex'}}>
             <Box sx={{fontSize: '72px'}}>
-                {props.value?.toFixed()}
+                {Math.ceil(props.value || 0)}
             </Box>
             <Box sx={{
                 fontSize: '32px',
