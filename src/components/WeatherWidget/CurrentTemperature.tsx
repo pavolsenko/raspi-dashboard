@@ -6,10 +6,17 @@ export interface ITemperatureProps {
 }
 
 export const CurrentTemperature: React.FC<ITemperatureProps> = (props: ITemperatureProps) => {
+    const getValue = () => {
+        if (!props.value) {
+            return 0;
+        }
+
+        return props.value < 0 ? Math.floor(props.value) : Math.ceil(props.value);
+    }
     return (
         <Box sx={{display: 'flex'}}>
             <Box sx={{fontSize: '72px'}}>
-                {Math.ceil(props.value || 0)}
+                {getValue()}
             </Box>
             <Box sx={{
                 fontSize: '32px',
