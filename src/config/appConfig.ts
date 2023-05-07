@@ -20,14 +20,14 @@ export const AppConfig: IAppConfig = {
     openWeatherAppId: process.env.REACT_APP_OPENWEATHER_APP_ID || '',
 
     coinStatsApiEndpoint: 'https://api.coin-stats.com/v2/portfolios/public',
-    coinStatsPortfolioToken: process.env.REACT_APP_COINSTATS_PROTFOLIO_TOKEN || '',
+    coinStatsPortfolioToken: process.env.REACT_APP_COINSTATS_PORTFOLIO_TOKEN || '',
 
     wienerLinienApiEndpoint: 'https://vtapi.floscodes.net/monitor/',
     wienerLinienApiUpdateInterval: 1000 * 65,
     wienerLinienTimetableUpdateInterval: 1000 * 25,
 
     exchangeRateApiEndpoint: 'https://api.apilayer.com/exchangerates_data/latest?base=USD&symbols=EUR',
-    exchangeRateApiToken: process.env.REACT_APP_EXCHANGE_RATE_PROTFOLIO_TOKEN || '',
+    exchangeRateApiToken: process.env.REACT_APP_EXCHANGE_RATE_TOKEN || '',
 
     defaultUpdateInterval: 1000 * 60 * 60,
 };
