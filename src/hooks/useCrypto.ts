@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import {AppConfig} from '../config/appConfig';
 import {getCurrentValueFromLocalStorage, processCoins, setCurrentValueInLocalStorage} from '../helpers/cryptoHelpers';
+import {useCurrency} from "./useCurrency";
 
 export interface ICurrency {
     name?: string;
@@ -29,6 +30,8 @@ export const useCrypto = () => {
         portfolio: [],
     });
 
+    const {getUsdToEurExchangeRate} = useCurrency();
+
     const loadCryptoStats = async (): Promise<void> => {
         setIsError(false);
         setIsLoading(true);
@@ -46,10 +49,12 @@ export const useCrypto = () => {
             return;
         }
 
+        const exchangeRate = await getUsdToEurExchangeRate();
+
         setCryptoStats({
-            currentValue: result.data.portfolio.p.EUR,
+            currentValue: result.data.portfolio.p.EUR < 1 ? (result.data.portfolio.p.USD * exchangeRate) : result.data.portfolio.p.EUR,
             previousValue: cryptoStats.currentValue,
-            portfolio: processCoins(result.data.portfolio.pi),
+            portfolio: processCoins(result.data.portfolio.pi, exchangeRate),
         });
 
         setCurrentValueInLocalStorage(cryptoStats.currentValue);

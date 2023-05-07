@@ -9,6 +9,9 @@ export interface IAppConfig {
     wienerLinienApiUpdateInterval: number;
     wienerLinienTimetableUpdateInterval: number;
 
+    exchangeRateApiEndpoint: string;
+    exchangeRateApiToken: string;
+
     defaultUpdateInterval: number;
 }
 
@@ -22,6 +25,9 @@ export const AppConfig: IAppConfig = {
     wienerLinienApiEndpoint: 'https://vtapi.floscodes.net/monitor/',
     wienerLinienApiUpdateInterval: 1000 * 65,
     wienerLinienTimetableUpdateInterval: 1000 * 25,
+
+    exchangeRateApiEndpoint: 'https://api.apilayer.com/exchangerates_data/latest?base=USD&symbols=EUR',
+    exchangeRateApiToken: process.env.REACT_APP_EXCHANGE_RATE_PROTFOLIO_TOKEN || '',
 
     defaultUpdateInterval: 1000 * 60 * 60,
 };
