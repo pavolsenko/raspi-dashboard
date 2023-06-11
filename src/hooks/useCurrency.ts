@@ -17,14 +17,14 @@ export const useCurrency = () => {
                 },
             });
         } catch (Error) {
-            return cachedValue || 1;
+            return cachedValue;
         }
 
         if (!result) {
-            return cachedValue || 1;
+            return cachedValue;
         }
 
-        const currencyValue = result?.data?.rates?.EUR || cachedValue || 1;
+        const currencyValue = result?.data?.rates?.EUR || cachedValue;
         setCurrencyValueInLocalStorage(currencyValue);
         return currencyValue;
     }

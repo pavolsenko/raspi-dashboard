@@ -16,7 +16,7 @@ export const setCurrencyValueInLocalStorage = (value: number = 0) => {
 };
 
 export const getCurrencyValueFromLocalStorage = () => {
-    return parseFloat(localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY) || '0') || 0;
+    return parseFloat(localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY) || '1') || 1;
 };
 
 export const processCoins = (portfolio?: Record<string, any>[], exchangeRate: number = 1): ICurrency[] => {
