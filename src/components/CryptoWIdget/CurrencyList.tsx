@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import {Box} from '@mui/material';
 
-import {ICurrency} from '../../hooks/useCrypto';
 import {CURRENCY_MAX_COUNT, CURRENCY_VALUE_THRESHOLD} from '../../config/cryptoConfig';
 import {CurrencyListItem} from './CurrencyListItem';
+import {ICurrency} from "../../interfaces";
 
 interface ICurrencyListProps {
     currencies: ICurrency[];

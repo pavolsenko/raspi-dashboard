@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {Box} from '@mui/material';
 
-import {ICurrency} from '../../hooks/useCrypto';
+import {ICurrency} from "../../interfaces";
 
 interface ICurrencyListItemProps {
     currency: ICurrency;

@@ -22,3 +22,12 @@ export interface IStationRequest {
     }[];
     order: number;
 }
+
+export interface ICurrency {
+    name?: string;
+    symbol?: string;
+    iconUrl?: string;
+    count?: number;
+    priceInEur?: number;
+    totalValueInEur?: number;
+}

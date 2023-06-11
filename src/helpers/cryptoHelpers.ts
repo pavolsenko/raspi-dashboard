@@ -1,13 +1,22 @@
-import {ICurrency} from '../hooks/useCrypto';
+import {ICurrency} from "../interfaces";
 
-const LOCAL_STORAGE_CRYPTO_KEY = 'crypto_value'
+const LOCAL_STORAGE_CRYPTO_KEY: string = 'crypto_value'
+const LOCAL_STORAGE_CURRENCY_KEY: string = 'crypto_currency'
 
-export const getCurrentValueFromLocalStorage = () => {
+export const getCryptoValueFromLocalStorage = () => {
     return parseFloat(localStorage.getItem(LOCAL_STORAGE_CRYPTO_KEY) || '0') || 0;
 };
 
-export const setCurrentValueInLocalStorage = (value: number = 0) => {
+export const setCryptoValueInLocalStorage = (value: number = 0) => {
     localStorage.setItem(LOCAL_STORAGE_CRYPTO_KEY, value.toString());
+};
+
+export const setCurrencyValueInLocalStorage = (value: number = 0) => {
+    localStorage.setItem(LOCAL_STORAGE_CURRENCY_KEY, value.toString());
+};
+
+export const getCurrencyValueFromLocalStorage = () => {
+    return parseFloat(localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY) || '0') || 0;
 };
 
 export const processCoins = (portfolio?: Record<string, any>[], exchangeRate: number = 1): ICurrency[] => {
@@ -16,7 +25,7 @@ export const processCoins = (portfolio?: Record<string, any>[], exchangeRate: nu
     }
 
     return portfolio
-        .map((item: Record<string, any>) => {
+        .map((item: Record<string, any>): ICurrency => {
             const eurValue = item.p?.EUR ? item.p?.EUR : item.p?.USD * exchangeRate;
 
             return {

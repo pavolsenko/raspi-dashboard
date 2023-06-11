@@ -2,17 +2,9 @@ import * as React from 'react';
 import axios from 'axios';
 
 import {AppConfig} from '../config/appConfig';
-import {getCurrentValueFromLocalStorage, processCoins, setCurrentValueInLocalStorage} from '../helpers/cryptoHelpers';
+import {getCryptoValueFromLocalStorage, processCoins, setCryptoValueInLocalStorage} from '../helpers/cryptoHelpers';
 import {useCurrency} from "./useCurrency";
-
-export interface ICurrency {
-    name?: string;
-    symbol?: string;
-    iconUrl?: string;
-    count?: number;
-    priceInEur?: number;
-    totalValueInEur?: number;
-}
+import {ICurrency} from "../interfaces";
 
 export interface ICryptoStats {
     currentValue: number;
@@ -25,8 +17,8 @@ export const useCrypto = () => {
     const [isError, setIsError] = React.useState<boolean>(false);
 
     const [cryptoStats, setCryptoStats] = React.useState<ICryptoStats>({
-        currentValue: getCurrentValueFromLocalStorage(),
-        previousValue: getCurrentValueFromLocalStorage(),
+        currentValue: getCryptoValueFromLocalStorage(),
+        previousValue: getCryptoValueFromLocalStorage(),
         portfolio: [],
     });
 
@@ -57,7 +49,7 @@ export const useCrypto = () => {
             portfolio: processCoins(result.data.portfolio.pi, exchangeRate),
         });
 
-        setCurrentValueInLocalStorage(cryptoStats.currentValue);
+        setCryptoValueInLocalStorage(cryptoStats.currentValue);
 
         setIsLoading(false);
     };
