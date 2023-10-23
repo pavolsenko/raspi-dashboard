@@ -2,6 +2,13 @@ import {IStationRequest} from '../interfaces';
 
 export const STATIONS: IStationRequest[] = [
     {
+        name: 'Alfred-Adler-Straße',
+        lines: [
+            {name: 'D', directions: ['H']},
+            {name: '69A', directions: ['H']},
+        ],
+        order: 0,
+    }, {
         name: 'Keplerplatz',
         lines: [
             {name: 'U1', directions: ['H']},
@@ -14,13 +21,6 @@ export const STATIONS: IStationRequest[] = [
             {name: '13A'},
         ],
         order: 2,
-    }, {
-        name: 'Alfred-Adler-Straße',
-        lines: [
-            {name: '69A', directions: ['H']},
-            {name: 'D', directions: ['H']},
-        ],
-        order: 3,
     }, {
         name: 'Scheugasse',
         order: 4,
