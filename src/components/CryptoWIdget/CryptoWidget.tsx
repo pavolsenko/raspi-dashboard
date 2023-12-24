@@ -5,8 +5,8 @@ import {Alert, Box} from '@mui/material';
 import {useCrypto} from '../../hooks/useCrypto';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
-import {WidgetHeader} from '../WidgetHeader';
-import {Loading} from '../Loading';
+import {WidgetHeader} from '../Widget/WidgetHeader';
+import {Loading} from '../Widget/Loading';
 import {CurrentValue} from './CurrentValue';
 import {CurrencyList} from './CurrencyList';
 

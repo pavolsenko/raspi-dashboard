@@ -3,7 +3,6 @@ import React from 'react';
 import {Box, SxProps, useTheme} from '@mui/material';
 import {createTheme, ThemeProvider} from '@mui/material/styles';
 
-import {themeConfig} from './config/themeConfig';
 import {WeatherWidget} from './components/WeatherWidget/WeatherWidget';
 import {WienerLinienWidget} from './components/WienerLinienWidget/WienerLinienWidget';
 import {CryptoWidget} from './components/CryptoWIdget/CryptoWidget';
@@ -31,7 +30,7 @@ export const App: React.FC = () => {
     };
 
     return (
-        <ThemeProvider theme={createTheme(themeConfig)}>
+        <ThemeProvider theme={createTheme()}>
             <Box sx={containerStyle}>
                 <Box sx={boxStyle}>
                     <WeatherWidget headerBackgroundColor={'#084C61'}/>

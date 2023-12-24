@@ -5,7 +5,7 @@ import Icon from '@mdi/react';
 import {mdiBusClock, mdiWeatherCloudyAlert} from '@mdi/js';
 
 import {IStation, IWidgetProps} from '../../interfaces';
-import {WidgetHeader} from '../WidgetHeader';
+import {WidgetHeader} from '../Widget/WidgetHeader';
 import {useDepartures} from '../../hooks/useDepartures';
 import {Station} from './Station';
 import {useDateTime} from '../../hooks/useDateTime';
@@ -59,7 +59,7 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
         const result: React.ReactNode[] = [];
 
         departures
-            .sort((a: IStation, b: IStation) => a.order - b.order)
+            .sort((a: IStation, b: IStation): number => a.order - b.order)
             .forEach((station: IStation, index: string) => {
                 result.push(
                     <Station

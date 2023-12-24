@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {mdiWeatherSunsetUp} from '@mdi/js';
 
-import {WidgetSubtitle} from '../WidgetSubtitle';
+import {WidgetSubtitle} from '../Widget/WidgetSubtitle';
 import {normalizeTime} from '../../helpers/timeHelpers';
 
 export interface ISunriseSunsetProps {
