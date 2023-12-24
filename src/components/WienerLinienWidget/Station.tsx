@@ -8,13 +8,29 @@ import {Line} from './Line';
 interface IStationProps {
     name: string;
     lines?: ILine[];
-    onLineClick?: () => void;
-    onStationClick?: () => void;
+    onLineClick?: (stationIndex: string, lineIndex: number) => void;
+    onStationClick?: (stationIndex: string) => void;
 }
 
 export const Station: React.FC<IStationProps> = (props: IStationProps) => {
+    React.useEffect(() => {
+        if (!props.lines || props.lines.length === 0) {
+            props.onStationClick?.(props.name);
+        }
+    }, [props]);
+
     if (!props.lines) {
         return null;
+    }
+
+    const onLineClick = (index: number) => {
+        return function() {
+            props.onLineClick?.(props.name, index);
+        }
+    };
+
+    const onStationClick = () => {
+        props.onStationClick?.(props.name);
     }
 
     const renderLines = (): React.ReactNode | React.ReactNode[] => {
@@ -31,8 +47,11 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
 
             result.push(
                 <Line
+                    stationIndex={props.name}
+                    lineIndex={index}
                     key={index.toString()}
                     line={line}
+                    onClick={onLineClick(index)}
                 />
             );
         });
@@ -45,7 +64,7 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
             width: '100%',
         }}>
             <Box
-                onClick={props.onStationClick}
+                onClick={onStationClick}
                 sx={{
                     fontSize: '12px',
                     backgroundColor: '#dddddd',

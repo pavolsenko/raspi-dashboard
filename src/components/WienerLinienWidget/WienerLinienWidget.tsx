@@ -18,6 +18,7 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
         departures,
         isError,
         removeStation,
+        removeLine,
         resetCache,
     } = useDepartures();
 
@@ -60,13 +61,14 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
 
         departures
             .sort((a: IStation, b: IStation): number => a.order - b.order)
-            .forEach((station: IStation, index: string) => {
+            .forEach((station: IStation) => {
                 result.push(
                     <Station
                         key={station.name}
                         lines={station.lines}
                         name={station.name}
-                        onStationClick={() => removeStation(index)}
+                        onStationClick={removeStation}
+                        onLineClick={removeLine}
                     />
                 );
             });

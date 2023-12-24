@@ -8,7 +8,10 @@ import {AppConfig} from '../../config/appConfig';
 import {processCountdowns} from '../../helpers/stationsHelper';
 
 interface ICountdownsProps {
+    stationIndex: string;
+    lineIndex: number;
     values: string[];
+    onLineClick?: (stationIndex: string, lineIndex: number) => void;
 }
 
 const BlinkingBox = styled(Box)({
@@ -36,6 +39,12 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
 
         return () => clearInterval(intervalId);
     }, [getCountdowns, props.values]);
+
+    React.useEffect(() => {
+        if (countdowns[0] === 0 && countdowns[1] === 0) {
+            props.onLineClick?.(props.stationIndex, props.lineIndex);
+        }
+    }, [props, countdowns]);
 
     const renderCountdown = (value: number): React.ReactNode => {
         if (value === 0) {

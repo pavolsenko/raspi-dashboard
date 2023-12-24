@@ -75,12 +75,17 @@ export const useDepartures = () => {
         return () => clearInterval(intervalId);
     }, [currentStationIndex, departures, isInitialLoad]);
 
-    const removeStation = (index: string) => {
-        const newDepartures = departures.remove(index);
+    const removeStation = (stationIndex: string) => {
+        const newDepartures = departures.remove(stationIndex);
         setDepartures(newDepartures);
         setLocalStorageDepartures(newDepartures);
     };
 
+    const removeLine = (stationIndex: string, lineIndex: number) => {
+        const newDepartures = departures.removeIn([stationIndex, 'lines', lineIndex]);
+        setDepartures(newDepartures);
+        setLocalStorageDepartures(newDepartures);
+    }
 
     const resetCache = () => {
         window.localStorage.setItem(DEPARTURES_KEY, '');
@@ -91,5 +96,6 @@ export const useDepartures = () => {
         isError,
         resetCache,
         removeStation,
+        removeLine,
     };
 };

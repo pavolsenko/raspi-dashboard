@@ -8,6 +8,8 @@ import {Countdowns} from './Countdowns';
 import {ILine} from '../../interfaces';
 
 interface ILineProps {
+    stationIndex: string;
+    lineIndex: number;
     line: ILine;
     onClick?: () => void;
 }
@@ -32,7 +34,12 @@ export const Line: React.FC<ILineProps> = (props: ILineProps) => {
                 />
                 <LineDirection direction={props.line.direction}/>
             </Box>
-            <Countdowns values={props.line.departures}/>
+            <Countdowns
+                stationIndex={props.stationIndex}
+                lineIndex={props.lineIndex}
+                values={props.line.departures}
+                onLineClick={props.onClick}
+            />
         </Box>
     );
 }
