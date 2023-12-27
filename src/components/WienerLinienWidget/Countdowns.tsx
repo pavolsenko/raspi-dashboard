@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import {Box, styled} from '@mui/material';
-import {mdiClose, mdiCircle} from '@mdi/js';
+import {mdiCircle} from '@mdi/js';
 import Icon from '@mdi/react';
 
 import {AppConfig} from '../../config/appConfig';
@@ -61,20 +61,6 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
 
         return value;
     };
-
-    if (countdowns[0] === 0 && countdowns[1] === 0) {
-        return (
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                fontSize: '16px',
-                marginRight: '24px',
-            }}>
-                <Icon path={mdiClose} size={'14px'}/>
-            </Box>
-        );
-    }
 
     return (
         <Box sx={{
