@@ -46,10 +46,10 @@ export const processStations = (station: IStationRequest, data: Record<string, a
     };
 };
 
-export const processCountdowns = (values: string[]): number[] => {
+export const getFirstTwoCountdowns = (departures: string[]): number[] => {
     let newCountdowns: number[] = [];
 
-    values.forEach((value: string) => {
+    departures.forEach((value: string) => {
         if (!value) {
             return;
         }
@@ -58,10 +58,7 @@ export const processCountdowns = (values: string[]): number[] => {
             return;
         }
 
-        const nowDate = Date.now();
-        const valueDate = (new Date(value)).getTime();
-
-        const timeDifference = Math.floor((valueDate - nowDate) / 1000 / 60);
+        const timeDifference = getTimeDifference(value);
 
         if (timeDifference < 0) {
             return;
@@ -80,3 +77,10 @@ export const processCountdowns = (values: string[]): number[] => {
 
     return newCountdowns;
 };
+
+export const getTimeDifference = (dateTime: string): number => {
+    const nowDate = Date.now();
+    const valueDate = (new Date(dateTime)).getTime();
+
+    return Math.floor((valueDate - nowDate) / 1000 / 60);
+}

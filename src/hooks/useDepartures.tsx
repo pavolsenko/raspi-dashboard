@@ -1,37 +1,47 @@
-import * as React from 'react';
+import {useEffect, useState} from "react";
 import {Map as ImmutableMap} from 'immutable';
 import axios, {AxiosResponse} from 'axios';
 
 import {AppConfig} from '../config/appConfig';
-import {IStation, IStationRequest} from '../interfaces';
-import {processStations} from '../helpers/stationsHelper';
 import {DEPARTURES_KEY, STATIONS} from '../config/departuresConfig';
+import {ILine, IStation, IStationRequest} from '../interfaces';
+import {processStations} from '../helpers/stationsHelper';
 
 export const useDepartures = () => {
-    const [departures, setDepartures] = React.useState<ImmutableMap<string, IStation>>(
-        ImmutableMap(JSON.parse(window.localStorage.getItem(DEPARTURES_KEY) || '{}')),
+    const [departures, setDepartures] = useState<ImmutableMap<string, IStation>>(
+        ImmutableMap<string, IStation>(JSON.parse(window.localStorage.getItem(DEPARTURES_KEY) || '{}')),
     );
-    const [isError, setIsError] = React.useState<boolean>(false);
-    const [currentStationIndex, setCurrentStationIndex] = React.useState<number>(0);
-    const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
+    const [isError, setIsError] = useState<boolean>(false);
+    const [currentStationIndex, setCurrentStationIndex] = useState<number>(0);
+    const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
     const setLocalStorageDepartures = (departuresData: ImmutableMap<string, IStation>) => {
         window.localStorage.setItem(DEPARTURES_KEY, JSON.stringify(departuresData.toJS()) || '');
     };
 
-    React.useEffect(() => {
+    useEffect(() => {
+        const intervalId = setInterval(
+            updateDeparturesCountdowns,
+            AppConfig.wienerLinienTimetableUpdateInterval,
+        );
+
+        return () => clearInterval(intervalId);
+    }, []);
+
+    useEffect(() => {
         const loadDeparture = () => {
             setIsError(false);
             const station: IStationRequest = STATIONS[currentStationIndex];
 
             axios.get(
-                AppConfig.wienerLinienApiEndpoint,
-                {params: {
-                    station: station.name},
+                AppConfig.wienerLinienApiEndpoint,{
+                    params: {
+                        station: station.name,
+                    },
                 },
             )
                 .then((response: AxiosResponse) => {
-                    const data = response?.data?.data?.monitors;
+                    const data = response?.data?.data?.monitors as unknown;
 
                     let departure;
                     if (data) {
@@ -74,6 +84,16 @@ export const useDepartures = () => {
 
         return () => clearInterval(intervalId);
     }, [currentStationIndex, departures, isInitialLoad]);
+
+    const updateDeparturesCountdowns = () => {
+        setDepartures((departures: ImmutableMap<string, IStation>) => departures.map((station: IStation): IStation => ({
+            ...station,
+            lines: station.lines.map((line: ILine): ILine => ({
+                ...line,
+
+            })),
+        })));
+    }
 
     const removeStation = (stationIndex: string) => {
         const newDepartures = departures.remove(stationIndex);

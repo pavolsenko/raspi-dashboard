@@ -6,6 +6,7 @@ import {LineNumber} from './LineNumber';
 import {LineDirection} from './LineDirection';
 import {Countdowns} from './Countdowns';
 import {ILine} from '../../interfaces';
+import {getFirstTwoCountdowns} from "../../helpers/stationsHelper";
 
 interface ILineProps {
     stationIndex: string;
@@ -34,12 +35,7 @@ export const Line: React.FC<ILineProps> = (props: ILineProps) => {
                 />
                 <LineDirection direction={props.line.direction}/>
             </Box>
-            <Countdowns
-                stationIndex={props.stationIndex}
-                lineIndex={props.lineIndex}
-                values={props.line.departures}
-                onLineClick={props.onClick}
-            />
+            <Countdowns values={getFirstTwoCountdowns(props.line.departures)}/>
         </Box>
     );
 }

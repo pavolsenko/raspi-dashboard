@@ -4,14 +4,8 @@ import {Box, styled} from '@mui/material';
 import {mdiCircle} from '@mdi/js';
 import Icon from '@mdi/react';
 
-import {AppConfig} from '../../config/appConfig';
-import {processCountdowns} from '../../helpers/stationsHelper';
-
 interface ICountdownsProps {
-    stationIndex: string;
-    lineIndex: number;
-    values: string[];
-    onLineClick?: (stationIndex: string, lineIndex: number) => void;
+    values: number[];
 }
 
 const BlinkingBox = styled(Box)({
@@ -21,31 +15,6 @@ const BlinkingBox = styled(Box)({
 });
 
 export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) => {
-    const [countdowns, setCountdowns] = React.useState<number[]>([0, 0]);
-
-    const getCountdowns = React.useCallback(() => {
-        setCountdowns(processCountdowns(props.values));
-    }, [props.values]);
-
-    React.useEffect(() => {
-        getCountdowns();
-    }, [getCountdowns]);
-
-    React.useEffect(() => {
-        const intervalId = setInterval(
-            getCountdowns,
-            AppConfig.wienerLinienTimetableUpdateInterval,
-        );
-
-        return () => clearInterval(intervalId);
-    }, [getCountdowns, props.values]);
-
-    React.useEffect(() => {
-        if (countdowns[0] === 0 && countdowns[1] === 0) {
-            props.onLineClick?.(props.stationIndex, props.lineIndex);
-        }
-    }, [props, countdowns]);
-
     const renderCountdown = (value: number): React.ReactNode => {
         if (value === 0) {
             return (
@@ -73,7 +42,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {renderCountdown(countdowns[0])}
+                {renderCountdown(props.values[0])}
             </Box>
 
             <Box sx={{
@@ -82,7 +51,7 @@ export const Countdowns: React.FC<ICountdownsProps> = (props: ICountdownsProps) 
                 justifyContent: 'center',
                 alignItems: 'center',
             }}>
-                {renderCountdown(countdowns[1])}
+                {renderCountdown(props.values[1])}
             </Box>
         </Box>
     );
