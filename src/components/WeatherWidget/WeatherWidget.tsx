@@ -6,7 +6,7 @@ import {mdiWeatherCloudyAlert} from '@mdi/js';
 
 import {WeatherIcon} from './WeatherIcon';
 import {Sunset} from './Sunset';
-import {ILatLon, useWeather} from '../../hooks/useWeather';
+import {useWeather} from '../../hooks/useWeather';
 import {AppConfig} from '../../config/appConfig';
 import {IWidgetProps} from '../../interfaces';
 import {CurrentTemperature} from './CurrentTemperature';
@@ -18,8 +18,8 @@ import {Loading} from '../Widget/Loading';
 import {Sunrise} from './Sunrise';
 import {Humidity} from './Humidity';
 import {HourlyForecast} from './HourlyForecast';
-
-export const DEFAULT_LOCATION: ILatLon = {lat: 48.2085, lon: 16.3721};
+import {Widget} from "../Widget/Widget";
+import {DEFAULT_LOCATION} from "../../config/weatherConfig";
 
 export interface IWeatherProps extends IWidgetProps {
     units?: 'metric' | 'imperial';
@@ -74,12 +74,7 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
     };
 
     return (
-        <Box sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-        }}>
+        <Widget>
             <WidgetHeader
                 backgroundColor={props.headerBackgroundColor}
                 subtitle={'Wien, Österreich'}
@@ -130,6 +125,6 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
 
                 <DailyForecast days={weather?.daily}/>
             </Box>
-        </Box>
+        </Widget>
     );
 };

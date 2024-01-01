@@ -17,7 +17,7 @@ export const LineDirection: React.FC<ILineDirectionProps> = (props: ILineDirecti
         }}>
             <Box sx={{margin: '4px 4px 0 4px'}}>
                 <Icon
-                    path={mdiArrowRight }
+                    path={mdiArrowRight}
                     size={'20px'}
                 />
             </Box>

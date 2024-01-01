@@ -1,8 +1,8 @@
-import * as React from 'react';
+import {ReactNode} from "react";
 
-import {Box, CircularProgress, useTheme} from '@mui/material';
+import {Box, useTheme} from '@mui/material';
 import Icon from '@mdi/react';
-import {mdiBusClock, mdiWeatherCloudyAlert} from '@mdi/js';
+import {mdiBusClock} from '@mdi/js';
 
 import {IStation, IWidgetProps} from '../../interfaces';
 import {WidgetHeader} from '../Widget/WidgetHeader';
@@ -10,8 +10,10 @@ import {useDepartures} from '../../hooks/useDepartures';
 import {Station} from './Station';
 import {useDateTime} from '../../hooks/useDateTime';
 import {normalizeTime} from '../../helpers/timeHelpers';
+import {Widget} from "../Widget/Widget";
+import {Error} from "../Widget/Error";
 
-export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
+export function WienerLinienWidget(props: IWidgetProps) {
     const theme = useTheme();
     const dateTime = useDateTime();
     const {
@@ -22,43 +24,20 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
         resetCache,
     } = useDepartures();
 
-    const renderStatus = () => {
-        if (!isError || (departures && departures.count() > 0)) {
+    function renderStatus(): ReactNode {
+        if (isError) {
+            return <Error/>;
+        }
+
+        return null;
+    }
+
+    function renderStations(): ReactNode | ReactNode[] {
+        if (departures.count() === 0 || isError) {
             return null;
         }
 
-        let status: React.ReactNode;
-
-        if (isError) {
-            status = (
-                <Icon path={mdiWeatherCloudyAlert} size={'36px'}/>
-            );
-        } else if (departures && departures.count() === 0) {
-            status = (
-                <CircularProgress
-                    color={'inherit'}
-                    size={42}
-                />
-            );
-        }
-
-        return (
-            <Box sx={{
-                color: '#a0a0a0',
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
-                {status}
-            </Box>
-        );
-    };
-
-    const renderStations = (): React.ReactNode[] => {
         const result: React.ReactNode[] = [];
-
         departures
             .sort((a: IStation, b: IStation): number => a.order - b.order)
             .forEach((station: IStation) => {
@@ -74,18 +53,13 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
             });
 
         return result;
-    };
+    }
 
     return (
-        <Box sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-        }}>
+        <Widget>
             <WidgetHeader
-                title={'Wiener Linien'}
-                subtitle={'Departures'}
+                title="Wiener Linien"
+                subtitle="Departures"
                 backgroundColor={props.headerBackgroundColor}
             >
                 <Box
@@ -113,6 +87,6 @@ export const WienerLinienWidget: React.FC<IWidgetProps> = (props: IWidgetProps) 
                 {renderStatus()}
                 {renderStations()}
             </Box>
-        </Box>
+        </Widget>
     );
-};
+}

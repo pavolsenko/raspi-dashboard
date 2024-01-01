@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import {Alert, Box} from '@mui/material';
+import {Box} from '@mui/material';
 
 import {useCrypto} from '../../hooks/useCrypto';
 import {AppConfig} from '../../config/appConfig';
@@ -9,8 +9,10 @@ import {WidgetHeader} from '../Widget/WidgetHeader';
 import {Loading} from '../Widget/Loading';
 import {CurrentValue} from './CurrentValue';
 import {CurrencyList} from './CurrencyList';
+import {Widget} from "../Widget/Widget";
+import {Error} from "../Widget/Error";
 
-export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
+export function CryptoWidget(props: IWidgetProps) {
     const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
 
     const {
@@ -40,19 +42,16 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
         );
     }
 
-    if (isError) {
-        return (
-            <Alert severity={'error'}>Sorry, something went wrong</Alert>
-        );
+    function renderCurrencyList() {
+        if (isError) {
+            return <Error/>;
+        }
+
+        return <CurrencyList currencies={cryptoStats.portfolio}/>;
     }
 
     return (
-        <Box sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-        }}>
+        <Widget>
             <WidgetHeader
                 title={'CoinStats'}
                 subtitle={'Crypto portfolio'}
@@ -71,8 +70,8 @@ export const CryptoWidget: React.FC<IWidgetProps> = (props: IWidgetProps) => {
                 backgroundColor: '#f0f0f0',
                 color: '#666666',
             }}>
-                <CurrencyList currencies={cryptoStats.portfolio}/>
+                {renderCurrencyList()}
             </Box>
-        </Box>
+        </Widget>
     );
-};
+}

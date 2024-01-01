@@ -16,7 +16,7 @@ interface IThermometerProps {
     higherLimit?: number;
 }
 
-const DEFAULT_HEIGHT = 8;
+const DEFAULT_HEIGHT = 12;
 
 export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProps) => {
     const getWidth = (value: number): number => {
@@ -47,8 +47,6 @@ export const Thermometer: React.FC<IThermometerProps> = (props: IThermometerProp
                 height: (props.height || DEFAULT_HEIGHT) + 'px',
                 flexGrow: 1,
                 position: 'relative',
-                top: '-' + props.height + 'px',
-                border: props.height + 'px solid white',
                 borderRadius: Math.ceil((props.height || DEFAULT_HEIGHT) * 2) + 'px',
                 background: '#084C61',
             }}/>

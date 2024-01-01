@@ -9,8 +9,6 @@ import {ILine} from '../../interfaces';
 import {getFirstTwoCountdowns} from "../../helpers/stationsHelper";
 
 interface ILineProps {
-    stationIndex: string;
-    lineIndex: number;
     line: ILine;
     onClick?: () => void;
 }

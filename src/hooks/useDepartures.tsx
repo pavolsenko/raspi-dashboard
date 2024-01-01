@@ -4,7 +4,7 @@ import axios, {AxiosResponse} from 'axios';
 
 import {AppConfig} from '../config/appConfig';
 import {DEPARTURES_KEY, STATIONS} from '../config/departuresConfig';
-import {ILine, IStation, IStationRequest} from '../interfaces';
+import {IStation, IStationRequest} from '../interfaces';
 import {processStations} from '../helpers/stationsHelper';
 
 export const useDepartures = () => {
@@ -18,15 +18,6 @@ export const useDepartures = () => {
     const setLocalStorageDepartures = (departuresData: ImmutableMap<string, IStation>) => {
         window.localStorage.setItem(DEPARTURES_KEY, JSON.stringify(departuresData.toJS()) || '');
     };
-
-    useEffect(() => {
-        const intervalId = setInterval(
-            updateDeparturesCountdowns,
-            AppConfig.wienerLinienTimetableUpdateInterval,
-        );
-
-        return () => clearInterval(intervalId);
-    }, []);
 
     useEffect(() => {
         const loadDeparture = () => {
@@ -84,16 +75,6 @@ export const useDepartures = () => {
 
         return () => clearInterval(intervalId);
     }, [currentStationIndex, departures, isInitialLoad]);
-
-    const updateDeparturesCountdowns = () => {
-        setDepartures((departures: ImmutableMap<string, IStation>) => departures.map((station: IStation): IStation => ({
-            ...station,
-            lines: station.lines.map((line: ILine): ILine => ({
-                ...line,
-
-            })),
-        })));
-    }
 
     const removeStation = (stationIndex: string) => {
         const newDepartures = departures.remove(stationIndex);

@@ -13,12 +13,6 @@ interface IStationProps {
 }
 
 export const Station: React.FC<IStationProps> = (props: IStationProps) => {
-    React.useEffect(() => {
-        if (!props.lines || props.lines.length === 0) {
-            props.onStationClick?.(props.name);
-        }
-    }, [props]);
-
     if (!props.lines) {
         return null;
     }
@@ -47,8 +41,6 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
 
             result.push(
                 <Line
-                    stationIndex={props.name}
-                    lineIndex={index}
                     key={index.toString()}
                     line={line}
                     onClick={onLineClick(index)}
