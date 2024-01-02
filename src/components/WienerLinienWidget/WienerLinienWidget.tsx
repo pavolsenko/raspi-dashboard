@@ -1,17 +1,18 @@
-import {ReactNode} from "react";
-
-import {Box, useTheme} from '@mui/material';
+import { ReactNode } from 'react';
+import { Box, useTheme } from '@mui/material';
 import Icon from '@mdi/react';
-import {mdiBusClock} from '@mdi/js';
+import { mdiBusClock } from '@mdi/js';
 
-import {IStation, IWidgetProps} from '../../interfaces';
-import {WidgetHeader} from '../Widget/WidgetHeader';
-import {useDepartures} from '../../hooks/useDepartures';
-import {Station} from './Station';
-import {useDateTime} from '../../hooks/useDateTime';
-import {normalizeTime} from '../../helpers/timeHelpers';
-import {Widget} from "../Widget/Widget";
-import {Error} from "../Widget/Error";
+import { IStation } from '../../interfaces';
+import { WidgetHeader } from '../Widget/WidgetHeader';
+import { useDepartures } from '../../hooks/useDepartures';
+import { Station } from './Station';
+import { useDateTime } from '../../hooks/useDateTime';
+import { normalizeTime } from '../../helpers/timeHelpers';
+import { IWidgetProps, Widget } from '../Widget/Widget';
+import { Error } from '../Widget/Error';
+
+import { departuresIconStyles, departuresStyles, departuresTimeStyles } from './styles';
 
 export function WienerLinienWidget(props: IWidgetProps) {
     const theme = useTheme();
@@ -37,7 +38,7 @@ export function WienerLinienWidget(props: IWidgetProps) {
             return null;
         }
 
-        const result: React.ReactNode[] = [];
+        const result: ReactNode[] = [];
         departures
             .sort((a: IStation, b: IStation): number => a.order - b.order)
             .forEach((station: IStation) => {
@@ -63,27 +64,20 @@ export function WienerLinienWidget(props: IWidgetProps) {
                 backgroundColor={props.headerBackgroundColor}
             >
                 <Box
-                    sx={{marginTop: '12px', display: 'flex'}}
+                    sx={departuresIconStyles}
                     onClick={resetCache}
                 >
                     <Icon
                         path={mdiBusClock}
                         size={'58px'}
                     />
-                    <Box sx={{fontSize: '46px', marginLeft: theme.spacing(1)}}>
+                    <Box sx={departuresTimeStyles(theme)}>
                         {normalizeTime(dateTime)}
                     </Box>
                 </Box>
             </WidgetHeader>
 
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                flexGrow: 1,
-                backgroundColor: '#f0f0f0',
-                color: '#666666',
-                padding: '0 16px 16px 16px',
-            }}>
+            <Box sx={departuresStyles}>
                 {renderStatus()}
                 {renderStations()}
             </Box>

@@ -1,7 +1,3 @@
-export interface IWidgetProps {
-    headerBackgroundColor: string;
-}
-
 export interface ILine {
     name: string;
     direction: string;
@@ -19,6 +15,7 @@ export interface IStationRequest {
     lines?: {
         name: string;
         directions?: string[];
+        order?: number;
     }[];
     order: number;
 }

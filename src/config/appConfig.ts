@@ -31,3 +31,10 @@ export const AppConfig: IAppConfig = {
 
     defaultUpdateInterval: 1000 * 60 * 60,
 };
+
+export const DISPLAY_HEIGHT = 740;
+export const DISPLAY_WIDTH = 1280;
+
+export const WIDGET1_BACKGROUND_COLOR = '#084c61';
+export const WIDGET2_BACKGROUND_COLOR = '#db504a';
+export const WIDGET3_BACKGROUND_COLOR = '#e3b505';

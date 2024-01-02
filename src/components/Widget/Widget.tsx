@@ -1,16 +1,15 @@
-import {PropsWithChildren} from "react";
-import {Box} from "@mui/material";
+import { PropsWithChildren } from 'react';
+import { Box } from '@mui/material';
 
-export function Widget(props: PropsWithChildren) {
+import { widgetStyles } from './styles';
+
+export interface IWidgetProps extends PropsWithChildren {
+    headerBackgroundColor?: string;
+}
+
+export function Widget(props: IWidgetProps) {
     return (
-        <Box sx={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            borderRadius: '8px',
-            overflow: 'hidden',
-        }}>
+        <Box sx={widgetStyles}>
             {props.children}
         </Box>
     )

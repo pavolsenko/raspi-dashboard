@@ -1,49 +1,31 @@
-import React from 'react';
+import { Box, useTheme } from '@mui/material';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-import {Box, SxProps, useTheme} from '@mui/material';
-import {createTheme, ThemeProvider} from '@mui/material/styles';
+import { WeatherWidget } from './components/WeatherWidget/WeatherWidget';
+import { WienerLinienWidget } from './components/WienerLinienWidget/WienerLinienWidget';
+import { CryptoWidget } from './components/CryptoWIdget/CryptoWidget';
+import { WIDGET1_BACKGROUND_COLOR, WIDGET2_BACKGROUND_COLOR, WIDGET3_BACKGROUND_COLOR } from './config/appConfig';
 
-import {WeatherWidget} from './components/WeatherWidget/WeatherWidget';
-import {WienerLinienWidget} from './components/WienerLinienWidget/WienerLinienWidget';
-import {CryptoWidget} from './components/CryptoWIdget/CryptoWidget';
+import { appContainerStyles, appWidgetBoxStyles } from './styles';
 
-export const DISPLAY_HEIGHT = 740;
-export const DISPLAY_WIDTH = 1280;
-
-export const App: React.FC = () => {
+export function App() {
     const theme = useTheme();
-
-    const containerStyle: SxProps = {
-        width: DISPLAY_WIDTH,
-        height: DISPLAY_HEIGHT,
-        background: '#000000',
-        display: 'flex',
-        justifyContent: 'space-between',
-        padding: theme.spacing(2),
-        fontFamily: '"Open Sans"',
-        fontWeight: 300,
-    };
-
-    const boxStyle: SxProps = {
-        width: '415px',
-        height: DISPLAY_HEIGHT - 5,
-    };
 
     return (
         <ThemeProvider theme={createTheme()}>
-            <Box sx={containerStyle}>
-                <Box sx={boxStyle}>
-                    <WeatherWidget headerBackgroundColor={'#084C61'}/>
+            <Box sx={appContainerStyles(theme)}>
+                <Box sx={appWidgetBoxStyles}>
+                    <WeatherWidget headerBackgroundColor={WIDGET1_BACKGROUND_COLOR}/>
                 </Box>
 
-                <Box sx={boxStyle}>
-                    <WienerLinienWidget headerBackgroundColor={'#DB504A'}/>
+                <Box sx={appWidgetBoxStyles}>
+                    <WienerLinienWidget headerBackgroundColor={WIDGET2_BACKGROUND_COLOR}/>
                 </Box>
 
-                <Box sx={boxStyle}>
-                    <CryptoWidget headerBackgroundColor={'#E3B505'}/>
+                <Box sx={appWidgetBoxStyles}>
+                    <CryptoWidget headerBackgroundColor={WIDGET3_BACKGROUND_COLOR}/>
                 </Box>
             </Box>
         </ThemeProvider>
     );
-};
+}

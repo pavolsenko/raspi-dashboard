@@ -1,32 +1,31 @@
-import * as React from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 import Icon from '@mdi/react';
-import {mdiWeatherCloudyAlert} from '@mdi/js';
+import { mdiWeatherCloudyAlert } from '@mdi/js';
 
-import {WeatherIcon} from './WeatherIcon';
-import {Sunset} from './Sunset';
-import {useWeather} from '../../hooks/useWeather';
-import {AppConfig} from '../../config/appConfig';
-import {IWidgetProps} from '../../interfaces';
-import {CurrentTemperature} from './CurrentTemperature';
-import {Rain} from './Rain';
-import {Wind} from './Wind';
-import {DailyForecast} from './DailyForecast';
-import {WidgetHeader} from '../Widget/WidgetHeader';
-import {Loading} from '../Widget/Loading';
-import {Sunrise} from './Sunrise';
-import {Humidity} from './Humidity';
-import {HourlyForecast} from './HourlyForecast';
-import {Widget} from "../Widget/Widget";
-import {DEFAULT_LOCATION} from "../../config/weatherConfig";
+import { WeatherIcon } from './WeatherIcon';
+import { Sunset } from './Sunset';
+import { useWeather } from '../../hooks/useWeather';
+import { AppConfig } from '../../config/appConfig';
+import { CurrentTemperature } from './CurrentTemperature';
+import { Rain } from './Rain';
+import { Wind } from './Wind';
+import { DailyForecast } from './DailyForecast';
+import { WidgetHeader } from '../Widget/WidgetHeader';
+import { Loading } from '../Widget/Loading';
+import { Sunrise } from './Sunrise';
+import { Humidity } from './Humidity';
+import { HourlyForecast } from './HourlyForecast';
+import { IWidgetProps, Widget } from "../Widget/Widget";
+import { DEFAULT_LOCATION } from "../../config/weatherConfig";
 
 export interface IWeatherProps extends IWidgetProps {
     units?: 'metric' | 'imperial';
 }
 
-export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => {
-    const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
+export function WeatherWidget(props: IWeatherProps) {
+    const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
     const {
         weather,
@@ -35,21 +34,21 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
         isLoading,
     } = useWeather(DEFAULT_LOCATION, props.units);
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (isInitialLoad) {
-            (async () => {await loadWeather()})();
+            loadWeather();
             setIsInitialLoad(false);
         }
 
         const interval = setInterval(
-            async () => {await loadWeather()},
+            loadWeather,
             AppConfig.defaultUpdateInterval,
         );
 
         return () => clearInterval(interval);
     }, [loadWeather, isInitialLoad, setIsInitialLoad]);
 
-    const renderLoading = () => {
+    function renderLoading(): ReactNode {
         if (!isLoading) {
             return null;
         }
@@ -59,9 +58,9 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 <Loading/>
             </Box>
         );
-    };
+    }
 
-    const renderError = () => {
+    function renderError(): ReactNode {
         if (!isError) {
             return null;
         }
@@ -71,7 +70,7 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
                 <Icon path={mdiWeatherCloudyAlert} size={'36px'}/>
             </Box>
         );
-    };
+    }
 
     return (
         <Widget>
@@ -127,4 +126,4 @@ export const WeatherWidget: React.FC<IWeatherProps> = (props: IWeatherProps) => 
             </Box>
         </Widget>
     );
-};
+}

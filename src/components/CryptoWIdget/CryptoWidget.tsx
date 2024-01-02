@@ -1,19 +1,20 @@
-import * as React from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 
-import {useCrypto} from '../../hooks/useCrypto';
-import {AppConfig} from '../../config/appConfig';
-import {IWidgetProps} from '../../interfaces';
-import {WidgetHeader} from '../Widget/WidgetHeader';
-import {Loading} from '../Widget/Loading';
-import {CurrentValue} from './CurrentValue';
-import {CurrencyList} from './CurrencyList';
-import {Widget} from "../Widget/Widget";
-import {Error} from "../Widget/Error";
+import { useCrypto } from '../../hooks/useCrypto';
+import { AppConfig } from '../../config/appConfig';
+import { WidgetHeader } from '../Widget/WidgetHeader';
+import { Loading } from '../Widget/Loading';
+import { CurrentValue } from './CurrentValue';
+import { CurrencyList } from './CurrencyList';
+import { Error } from '../Widget/Error';
+import { IWidgetProps, Widget } from '../Widget/Widget';
+
+import { cryptoWidgetStyles } from './styles';
 
 export function CryptoWidget(props: IWidgetProps) {
-    const [isInitialLoad, setIsInitialLoad] = React.useState<boolean>(true);
+    const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
     const {
         isError,
@@ -22,27 +23,22 @@ export function CryptoWidget(props: IWidgetProps) {
         loadCryptoStats,
     } = useCrypto();
 
-    React.useEffect(() => {
+    useEffect(() => {
         if (isInitialLoad) {
-            (async () => await loadCryptoStats())();
+            loadCryptoStats();
             setIsInitialLoad(false);
         }
 
         const interval = setInterval(
-            async () => await loadCryptoStats(),
+            loadCryptoStats,
             AppConfig.defaultUpdateInterval,
         );
 
         return () => clearInterval(interval);
     }, [loadCryptoStats, isInitialLoad, setIsInitialLoad]);
 
-    if (isLoading) {
-        return (
-            <Loading/>
-        );
-    }
 
-    function renderCurrencyList() {
+    function renderCurrencyList(): ReactNode {
         if (isError) {
             return <Error/>;
         }
@@ -50,11 +46,17 @@ export function CryptoWidget(props: IWidgetProps) {
         return <CurrencyList currencies={cryptoStats.portfolio}/>;
     }
 
+    if (isLoading) {
+        return (
+            <Loading/>
+        );
+    }
+
     return (
         <Widget>
             <WidgetHeader
-                title={'CoinStats'}
-                subtitle={'Crypto portfolio'}
+                title="CoinStats"
+                subtitle="Crypto portfolio"
                 backgroundColor={props.headerBackgroundColor}
             >
                 <CurrentValue
@@ -63,13 +65,7 @@ export function CryptoWidget(props: IWidgetProps) {
                 />
             </WidgetHeader>
 
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                flexGrow: 1,
-                backgroundColor: '#f0f0f0',
-                color: '#666666',
-            }}>
+            <Box sx={cryptoWidgetStyles}>
                 {renderCurrencyList()}
             </Box>
         </Widget>

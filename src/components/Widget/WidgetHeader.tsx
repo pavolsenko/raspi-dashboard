@@ -1,36 +1,32 @@
-import * as React from 'react';
+import { PropsWithChildren } from 'react';
+import { Box } from '@mui/material';
 
-import {Box} from '@mui/material';
+import {
+    widgetHeaderContentStyles,
+    widgetHeaderStyles,
+    widgetHeaderSubtitleStyles,
+    widgetHeaderTitleStyles, widgetHeaderTitleWrapperStyles
+} from './styles';
 
-interface IWidgetHeaderProps extends React.PropsWithChildren<any> {
+interface IWidgetHeaderProps extends PropsWithChildren<any> {
     align?: 'left' | 'center' | 'right';
-    backgroundColor: string;
+    backgroundColor?: string;
     subtitle?: string;
     title: string;
 }
 
-export const WidgetHeader: React.FC<IWidgetHeaderProps> = (props:IWidgetHeaderProps) => {
+export function WidgetHeader(props:IWidgetHeaderProps) {
     return (
-        <Box sx={{
-            width: '100%',
-            backgroundColor: props.backgroundColor,
-            color: '#ffffff',
-            height: '165px',
-        }}>
-            <Box sx={{margin: '16px 16px 0 16px', textAlign: props.align}}>
+        <Box sx={widgetHeaderStyles(props.backgroundColor)}>
+            <Box sx={widgetHeaderTitleWrapperStyles(props.align)}>
                 <Box>
-                    <Box sx={{fontSize: '24px', lineHeight: '22px'}}>{props.title}</Box>
-                    <Box sx={{fontSize: '12px'}}>{props.subtitle}</Box>
+                    <Box sx={widgetHeaderTitleStyles}>{props.title}</Box>
+                    <Box sx={widgetHeaderSubtitleStyles}>{props.subtitle}</Box>
                 </Box>
             </Box>
-
-            <Box sx={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'center',
-            }}>
+            <Box sx={widgetHeaderContentStyles}>
                 {props.children}
             </Box>
         </Box>
     );
-};
+}
