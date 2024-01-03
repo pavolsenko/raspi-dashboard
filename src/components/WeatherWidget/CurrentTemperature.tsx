@@ -1,14 +1,16 @@
-import * as React from 'react';
-import {Box} from '@mui/material';
+import { ReactNode } from 'react';
+import { Box } from '@mui/material';
+
+import { currentTemperatureStyles } from './style';
 
 export interface ITemperatureProps {
     value?: number;
 }
 
-export const CurrentTemperature: React.FC<ITemperatureProps> = (props: ITemperatureProps) => {
-    const getValue = () => {
+export function CurrentTemperature(props: ITemperatureProps) {
+    function getValue(): ReactNode {
         if (!props.value) {
-            return 0;
+            return '--';
         }
 
         return props.value < 0 ? Math.floor(props.value) : Math.ceil(props.value);
@@ -18,12 +20,9 @@ export const CurrentTemperature: React.FC<ITemperatureProps> = (props: ITemperat
             <Box sx={{fontSize: '72px'}}>
                 {getValue()}
             </Box>
-            <Box sx={{
-                fontSize: '32px',
-                paddingTop: '16px',
-            }}>
+            <Box sx={currentTemperatureStyles}>
                 °C
             </Box>
         </Box>
     );
-};
+}

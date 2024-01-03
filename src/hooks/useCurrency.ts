@@ -1,12 +1,11 @@
-import axios from "axios";
+import axios from 'axios';
 
-import {AppConfig} from "../config/appConfig";
-import {getCurrencyValueFromLocalStorage, setCurrencyValueInLocalStorage} from "../helpers/cryptoHelpers";
+import {AppConfig} from '../config/appConfig';
+import {getCurrencyValueFromLocalStorage, setCurrencyValueInLocalStorage} from '../helpers/cryptoHelpers';
 
-export const useCurrency = () => {
+export function useCurrency() {
 
-    const getUsdToEurExchangeRate = async (): Promise<number> =>
-    {
+    async function getUsdToEurExchangeRate(): Promise<number> {
         const cachedValue = getCurrencyValueFromLocalStorage();
 
         let result;
@@ -31,5 +30,5 @@ export const useCurrency = () => {
 
     return {
         getUsdToEurExchangeRate,
-    }
+    };
 }

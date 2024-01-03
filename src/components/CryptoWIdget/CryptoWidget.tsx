@@ -5,7 +5,6 @@ import { Box } from '@mui/material';
 import { useCrypto } from '../../hooks/useCrypto';
 import { AppConfig } from '../../config/appConfig';
 import { WidgetHeader } from '../Widget/WidgetHeader';
-import { Loading } from '../Widget/Loading';
 import { CurrentValue } from './CurrentValue';
 import { CurrencyList } from './CurrencyList';
 import { Error } from '../Widget/Error';
@@ -18,7 +17,6 @@ export function CryptoWidget(props: IWidgetProps) {
 
     const {
         isError,
-        isLoading,
         cryptoStats,
         loadCryptoStats,
     } = useCrypto();
@@ -44,12 +42,6 @@ export function CryptoWidget(props: IWidgetProps) {
         }
 
         return <CurrencyList currencies={cryptoStats.portfolio}/>;
-    }
-
-    if (isLoading) {
-        return (
-            <Loading/>
-        );
     }
 
     return (

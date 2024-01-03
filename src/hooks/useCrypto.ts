@@ -1,10 +1,10 @@
 import * as React from 'react';
 import axios from 'axios';
 
-import {AppConfig} from '../config/appConfig';
-import {getCryptoValueFromLocalStorage, processCoins, setCryptoValueInLocalStorage} from '../helpers/cryptoHelpers';
-import {useCurrency} from "./useCurrency";
-import {ICurrency} from "../interfaces";
+import { AppConfig } from '../config/appConfig';
+import { getCryptoValueFromLocalStorage, processCoins, setCryptoValueInLocalStorage } from '../helpers/cryptoHelpers';
+import { useCurrency } from './useCurrency';
+import { ICurrency } from '../interfaces';
 
 export interface ICryptoStats {
     currentValue: number;
@@ -12,8 +12,7 @@ export interface ICryptoStats {
     portfolio: ICurrency[];
 }
 
-export const useCrypto = () => {
-    const [isLoading, setIsLoading] = React.useState<boolean>(false);
+export function useCrypto() {
     const [isError, setIsError] = React.useState<boolean>(false);
 
     const [cryptoStats, setCryptoStats] = React.useState<ICryptoStats>({
@@ -22,11 +21,10 @@ export const useCrypto = () => {
         portfolio: [],
     });
 
-    const {getUsdToEurExchangeRate} = useCurrency();
+    const { getUsdToEurExchangeRate } = useCurrency();
 
-    const loadCryptoStats = async (): Promise<void> => {
+    async function loadCryptoStats(): Promise<void> {
         setIsError(false);
-        setIsLoading(true);
 
         let result: any;
         try {
@@ -37,7 +35,6 @@ export const useCrypto = () => {
             });
         } catch (Error) {
             setIsError(true);
-            setIsLoading(false);
             return;
         }
 
@@ -50,14 +47,11 @@ export const useCrypto = () => {
         });
 
         setCryptoValueInLocalStorage(cryptoStats.currentValue);
-
-        setIsLoading(false);
-    };
+    }
 
     return {
         cryptoStats,
         loadCryptoStats,
-        isLoading,
         isError,
     };
-};
+}

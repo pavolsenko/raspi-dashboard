@@ -1,5 +1,4 @@
 import { ReactNode, useEffect, useState } from 'react';
-
 import { Box } from '@mui/material';
 import Icon from '@mdi/react';
 import { mdiWeatherCloudyAlert } from '@mdi/js';
@@ -13,12 +12,11 @@ import { Rain } from './Rain';
 import { Wind } from './Wind';
 import { DailyForecast } from './DailyForecast';
 import { WidgetHeader } from '../Widget/WidgetHeader';
-import { Loading } from '../Widget/Loading';
 import { Sunrise } from './Sunrise';
 import { Humidity } from './Humidity';
 import { HourlyForecast } from './HourlyForecast';
-import { IWidgetProps, Widget } from "../Widget/Widget";
-import { DEFAULT_LOCATION } from "../../config/weatherConfig";
+import { IWidgetProps, Widget } from '../Widget/Widget';
+import { DEFAULT_LOCATION } from '../../config/weatherConfig';
 
 export interface IWeatherProps extends IWidgetProps {
     units?: 'metric' | 'imperial';
@@ -31,7 +29,6 @@ export function WeatherWidget(props: IWeatherProps) {
         weather,
         loadWeather,
         isError,
-        isLoading,
     } = useWeather(DEFAULT_LOCATION, props.units);
 
     useEffect(() => {
@@ -47,18 +44,6 @@ export function WeatherWidget(props: IWeatherProps) {
 
         return () => clearInterval(interval);
     }, [loadWeather, isInitialLoad, setIsInitialLoad]);
-
-    function renderLoading(): ReactNode {
-        if (!isLoading) {
-            return null;
-        }
-
-        return (
-            <Box sx={{color: props.headerBackgroundColor}}>
-                <Loading/>
-            </Box>
-        );
-    }
 
     function renderError(): ReactNode {
         if (!isError) {
@@ -113,7 +98,6 @@ export function WeatherWidget(props: IWeatherProps) {
                 backgroundColor: '#f0f0f0',
                 color: '#666666',
             }}>
-                {renderLoading()}
                 {renderError()}
 
                 <HourlyForecast

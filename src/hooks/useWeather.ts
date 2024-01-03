@@ -1,9 +1,9 @@
-import * as React from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
-import {AppConfig} from '../config/appConfig';
-import {getHourlyForecast} from '../helpers/weatherHelpers';
-import {DAILY_FORECAST_COUNT} from '../config/weatherConfig';
+import { AppConfig } from '../config/appConfig';
+import { getHourlyForecast } from '../helpers/weatherHelpers';
+import { DAILY_FORECAST_COUNT, DEFAULT_LOCATION } from '../config/weatherConfig';
 
 export type TUnits = 'metric' | 'imperial';
 
@@ -29,32 +29,28 @@ export interface IWeather {
 export interface IUseWeather {
     weather?: IWeather;
     loadWeather: () => void;
-    isLoading: boolean;
     isError: boolean;
 }
 
-export const useWeather = (location: ILatLon, units?: TUnits): IUseWeather => {
-    const [isLoading, setIsLoading] = React.useState<boolean>(false);
-    const [isError, setIsError] = React.useState<boolean>(false);
-    const [weather, setWeather] = React.useState<IWeather | undefined>();
+export function useWeather(location: ILatLon, units?: TUnits): IUseWeather {
+    const [isError, setIsError] = useState<boolean>(false);
+    const [weather, setWeather] = useState<IWeather | undefined>();
 
     const loadWeather = async (): Promise<void> => {
         setIsError(false);
-        setIsLoading(true);
 
         let result: any;
         try {
             result = await axios.get(AppConfig.openWeatherApiEndpoint, {
                 params: {
                     appId: AppConfig.openWeatherAppId,
-                    lat: 48.2085,
-                    lon: 16.3721,
+                    lat: location.lat || DEFAULT_LOCATION.lat,
+                    lon: location.lon || DEFAULT_LOCATION.lon,
                     units: units || 'metric',
                 },
             });
         } catch (Error) {
             setIsError(true);
-            setIsLoading(false);
             return;
         }
 
@@ -65,14 +61,11 @@ export const useWeather = (location: ILatLon, units?: TUnits): IUseWeather => {
             icon: result.data.current.weather[0].id,
             pop: result.data.hourly[0].pop,
         });
-
-        setIsLoading(false);
     };
 
     return {
         weather,
         loadWeather,
-        isLoading,
         isError,
     };
-};
+}
