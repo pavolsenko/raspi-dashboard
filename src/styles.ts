@@ -9,7 +9,7 @@ export const appContainerStyles = (theme: Theme): SxProps => ({
     display: 'flex',
     justifyContent: 'space-between',
     padding: theme.spacing(2),
-    fontFamily: 'Roboto',
+    fontFamily: '"Open Sans", sans-serif',
     fontWeight: 400,
 });
 
