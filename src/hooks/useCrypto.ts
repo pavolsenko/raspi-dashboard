@@ -1,5 +1,4 @@
 import * as React from 'react';
-import axios from 'axios';
 
 import { AppConfig } from '../config/appConfig';
 import { getCryptoValueFromLocalStorage, processCoins, setCryptoValueInLocalStorage } from '../helpers/cryptoHelpers';
@@ -25,28 +24,21 @@ export function useCrypto() {
 
     async function loadCryptoStats(): Promise<void> {
         setIsError(false);
+     /*   const exchangeRate = await getUsdToEurExchangeRate();
 
-        let result: any;
-        try {
-            result = await axios.get(AppConfig.coinStatsApiEndpoint, {
-                params: {
-                    token: AppConfig.coinStatsPortfolioToken,
-                },
+        sdk.auth(AppConfig.coinStatsPortfolioToken);
+        sdk.getPortfolioCoins({sharetoken: 'ZlBDSlLodnesGt4'})
+            .then(({ data }: Record<string, any>) => {
+                setCryptoStats({
+                    currentValue: data.portfolio.p.EUR < 1 ? (data.portfolio.p.USD * exchangeRate) : data.portfolio.p.EUR,
+                    previousValue: cryptoStats.currentValue,
+                    portfolio: processCoins(data.portfolio.pi, exchangeRate),
+                });
+            })
+            .catch(err => {
+                setIsError(true);
             });
-        } catch (Error) {
-            setIsError(true);
-            return;
-        }
-
-        const exchangeRate = await getUsdToEurExchangeRate();
-
-        setCryptoStats({
-            currentValue: result.data.portfolio.p.EUR < 1 ? (result.data.portfolio.p.USD * exchangeRate) : result.data.portfolio.p.EUR,
-            previousValue: cryptoStats.currentValue,
-            portfolio: processCoins(result.data.portfolio.pi, exchangeRate),
-        });
-
-        setCryptoValueInLocalStorage(cryptoStats.currentValue);
+        setCryptoValueInLocalStorage(cryptoStats.currentValue);*/
     }
 
     return {

@@ -9,8 +9,8 @@ export const appContainerStyles = (theme: Theme): SxProps => ({
     display: 'flex',
     justifyContent: 'space-between',
     padding: theme.spacing(2),
-    fontFamily: '"Open Sans"',
-    fontWeight: 300,
+    fontFamily: 'Roboto',
+    fontWeight: 400,
 });
 
 export const appWidgetBoxStyles: SxProps = {
