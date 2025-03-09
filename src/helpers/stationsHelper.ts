@@ -1,6 +1,9 @@
-import {ILine, IStation, IStationRequest} from '../interfaces';
+import { ILine, IStation, IStationRequest } from '../interfaces';
 
-export const processStations = (station: IStationRequest, data: Record<string, any>[]): IStation => {
+export const processStations = (
+    station: IStationRequest,
+    data: Record<string, any>[],
+): IStation => {
     const lines = data
         .filter((monitor: Record<string, any>): boolean => {
             if (!station.lines) {
@@ -17,7 +20,10 @@ export const processStations = (station: IStationRequest, data: Record<string, a
                     return true;
                 }
 
-                if (line.name === monitor.lines[0].name && line.directions?.includes(monitor.lines[0].direction)) {
+                if (
+                    line.name === monitor.lines[0].name &&
+                    line.directions?.includes(monitor.lines[0].direction)
+                ) {
                     return true;
                 }
             }
@@ -28,12 +34,13 @@ export const processStations = (station: IStationRequest, data: Record<string, a
             return {
                 name: monitor.lines[0].name,
                 direction: monitor.lines[0].towards,
-                departures: monitor
-                    .lines[0]
-                    .departures
-                    .departure
+                departures: monitor.lines[0].departures.departure
                     .map((item: Record<string, any>): string | undefined => {
-                        return item.departureTime.timeReal || item.departureTime.timePlanned || undefined;
+                        return (
+                            item.departureTime.timeReal ||
+                            item.departureTime.timePlanned ||
+                            undefined
+                        );
                     })
                     .filter((item: string | undefined) => item),
             };
@@ -80,7 +87,7 @@ export const getFirstTwoCountdowns = (departures: string[]): number[] => {
 
 export const getTimeDifference = (dateTime: string): number => {
     const nowDate = Date.now();
-    const valueDate = (new Date(dateTime)).getTime();
+    const valueDate = new Date(dateTime).getTime();
 
     return Math.floor((valueDate - nowDate) / 1000 / 60);
-}
+};

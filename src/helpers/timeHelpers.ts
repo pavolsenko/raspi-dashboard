@@ -5,7 +5,7 @@ export const normalizeTime = (value?: number | Date): string => {
 
     let date: Date;
     if (Number.isInteger(value)) {
-        date = new Date((value || 0) as number * 1000);
+        date = new Date(((value || 0) as number) * 1000);
     } else {
         date = value as Date;
     }
@@ -58,7 +58,11 @@ export const getDayOfTheWeek = (dayOfTheWeek: number): string => {
     return '';
 };
 
-export const isDay = (sunriseMs?: number, sunsetMs?: number, dateTimeMs: number = Date.now()): boolean => {
+export const isDay = (
+    sunriseMs?: number,
+    sunsetMs?: number,
+    dateTimeMs: number = Date.now(),
+): boolean => {
     if (!sunriseMs || !sunsetMs) {
         return true;
     }

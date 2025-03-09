@@ -1,10 +1,15 @@
-import {ReactNode} from "react";
+import { ReactNode } from 'react';
 
-import {Box} from '@mui/material';
-import {mdiCircle, mdiClockRemoveOutline} from '@mdi/js';
+import { Box } from '@mui/material';
+import { mdiCircle, mdiClockRemoveOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 
-import {countdownBlinkingStyles, countdownErrorStyles, countdownStyles, countdownsWrapperStyles} from "./styles";
+import {
+    countdownBlinkingStyles,
+    countdownErrorStyles,
+    countdownStyles,
+    countdownsWrapperStyles,
+} from './styles';
 
 interface ICountdownsProps {
     values: number[];
@@ -15,10 +20,7 @@ export function Countdowns(props: ICountdownsProps) {
         if (value === 0) {
             return (
                 <Box sx={countdownBlinkingStyles}>
-                    <Icon
-                        path={mdiCircle}
-                        size="12px"
-                    />
+                    <Icon path={mdiCircle} size="12px" />
                 </Box>
             );
         }
@@ -30,10 +32,7 @@ export function Countdowns(props: ICountdownsProps) {
         if (!props.values[0] && !props.values[1]) {
             return (
                 <Box sx={countdownErrorStyles}>
-                    <Icon
-                        path={mdiClockRemoveOutline}
-                        size="22px"
-                    />
+                    <Icon path={mdiClockRemoveOutline} size="22px" />
                 </Box>
             );
         }
@@ -50,9 +49,5 @@ export function Countdowns(props: ICountdownsProps) {
         );
     }
 
-    return (
-        <Box sx={countdownsWrapperStyles}>
-            {renderCountdowns()}
-        </Box>
-    );
+    return <Box sx={countdownsWrapperStyles}>{renderCountdowns()}</Box>;
 }

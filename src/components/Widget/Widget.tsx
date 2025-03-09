@@ -8,9 +8,5 @@ export interface IWidgetProps extends PropsWithChildren {
 }
 
 export function Widget(props: IWidgetProps) {
-    return (
-        <Box sx={widgetStyles}>
-            {props.children}
-        </Box>
-    )
+    return <Box sx={widgetStyles}>{props.children}</Box>;
 }

@@ -1,9 +1,9 @@
 import * as React from 'react';
 
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 
-import {ILine} from '../../interfaces';
-import {Line} from './Line';
+import { ILine } from '../../interfaces';
+import { Line } from './Line';
 
 interface IStationProps {
     name: string;
@@ -18,14 +18,14 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
     }
 
     const onLineClick = (index: number) => {
-        return function() {
+        return function () {
             props.onLineClick?.(props.name, index);
-        }
+        };
     };
 
     const onStationClick = () => {
         props.onStationClick?.(props.name);
-    }
+    };
 
     const renderLines = (): React.ReactNode | React.ReactNode[] => {
         if (!props.lines) {
@@ -44,7 +44,7 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
                     key={index.toString()}
                     line={line}
                     onClick={onLineClick(index)}
-                />
+                />,
             );
         });
 
@@ -52,9 +52,11 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
     };
 
     return (
-        <Box sx={{
-            width: '100%',
-        }}>
+        <Box
+            sx={{
+                width: '100%',
+            }}
+        >
             <Box
                 onClick={onStationClick}
                 sx={{

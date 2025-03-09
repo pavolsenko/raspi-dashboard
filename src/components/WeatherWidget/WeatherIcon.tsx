@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import {Box, SxProps} from '@mui/material';
+import { Box, SxProps } from '@mui/material';
 import Icon from '@mdi/react';
 
-import {isDay} from '../../helpers/timeHelpers';
-import {getWeatherIcon} from '../../helpers/weatherHelpers';
+import { isDay } from '../../helpers/timeHelpers';
+import { getWeatherIcon } from '../../helpers/weatherHelpers';
 
 export interface IWeatherIconProps {
     size?: string;
@@ -14,7 +14,9 @@ export interface IWeatherIconProps {
     sx?: SxProps;
 }
 
-export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProps) => {
+export const WeatherIcon: React.FC<IWeatherIconProps> = (
+    props: IWeatherIconProps,
+) => {
     if (!props.iconId) {
         return null;
     }
@@ -26,10 +28,7 @@ export const WeatherIcon: React.FC<IWeatherIconProps> = (props: IWeatherIconProp
 
     return (
         <Box sx={props.sx}>
-            <Icon
-                path={icon}
-                size={props.size}
-            />
+            <Icon path={icon} size={props.size} />
         </Box>
     );
 };

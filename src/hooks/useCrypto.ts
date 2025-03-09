@@ -1,7 +1,11 @@
 import * as React from 'react';
 
 import { AppConfig } from '../config/appConfig';
-import { getCryptoValueFromLocalStorage, processCoins, setCryptoValueInLocalStorage } from '../helpers/cryptoHelpers';
+import {
+    getCryptoValueFromLocalStorage,
+    processCoins,
+    setCryptoValueInLocalStorage,
+} from '../helpers/cryptoHelpers';
 import { useCurrency } from './useCurrency';
 import { ICurrency } from '../interfaces';
 
@@ -24,7 +28,7 @@ export function useCrypto() {
 
     async function loadCryptoStats(): Promise<void> {
         setIsError(false);
-     /*   const exchangeRate = await getUsdToEurExchangeRate();
+        /*   const exchangeRate = await getUsdToEurExchangeRate();
 
         sdk.auth(AppConfig.coinStatsPortfolioToken);
         sdk.getPortfolioCoins({sharetoken: 'ZlBDSlLodnesGt4'})

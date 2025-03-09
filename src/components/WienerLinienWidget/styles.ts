@@ -17,7 +17,7 @@ export const departuresIconStyles: SxProps = {
 
 export const departuresTimeStyles = (theme: Theme): SxProps => ({
     fontSize: '46px',
-    marginLeft: theme.spacing(1)
+    marginLeft: theme.spacing(1),
 });
 
 export const countdownsWrapperStyles: SxProps = {
@@ -31,7 +31,7 @@ export const countdownBlinkingStyles: SxProps = {
     marginTop: '4px',
 
     '@keyframes blink': {
-        '50%': {opacity: 0},
+        '50%': { opacity: 0 },
     },
 };
 

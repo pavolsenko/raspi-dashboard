@@ -12,22 +12,21 @@ import { normalizeTime } from '../../helpers/timeHelpers';
 import { IWidgetProps, Widget } from '../Widget/Widget';
 import { Error } from '../Widget/Error';
 
-import { departuresIconStyles, departuresStyles, departuresTimeStyles } from './styles';
+import {
+    departuresIconStyles,
+    departuresStyles,
+    departuresTimeStyles,
+} from './styles';
 
 export function WienerLinienWidget(props: IWidgetProps) {
     const theme = useTheme();
     const dateTime = useDateTime();
-    const {
-        departures,
-        isError,
-        removeStation,
-        removeLine,
-        resetCache,
-    } = useDepartures();
+    const { departures, isError, removeStation, removeLine, resetCache } =
+        useDepartures();
 
     function renderStatus(): ReactNode {
         if (isError) {
-            return <Error/>;
+            return <Error />;
         }
 
         return null;
@@ -49,7 +48,7 @@ export function WienerLinienWidget(props: IWidgetProps) {
                         name={station.name}
                         onStationClick={removeStation}
                         onLineClick={removeLine}
-                    />
+                    />,
                 );
             });
 
@@ -63,14 +62,8 @@ export function WienerLinienWidget(props: IWidgetProps) {
                 subtitle="Departures"
                 backgroundColor={props.headerBackgroundColor}
             >
-                <Box
-                    sx={departuresIconStyles}
-                    onClick={resetCache}
-                >
-                    <Icon
-                        path={mdiBusClock}
-                        size={'58px'}
-                    />
+                <Box sx={departuresIconStyles} onClick={resetCache}>
+                    <Icon path={mdiBusClock} size={'58px'} />
                     <Box sx={departuresTimeStyles(theme)}>
                         {normalizeTime(dateTime)}
                     </Box>

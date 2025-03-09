@@ -1,13 +1,15 @@
 import * as React from 'react';
 
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 
 interface ILineNumberProps {
     onClick?: () => void;
     value: string;
 }
 
-export const LineNumber: React.FC<ILineNumberProps> = (props: ILineNumberProps) => {
+export const LineNumber: React.FC<ILineNumberProps> = (
+    props: ILineNumberProps,
+) => {
     const getBackgroundColor = () => {
         if (props.value === 'U1') {
             return '#e20210';

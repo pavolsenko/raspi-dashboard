@@ -1,14 +1,14 @@
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import {WrapperTestComponent} from '../../../testUtils';
-import {Humidity} from '../Humidity';
+import { WrapperTestComponent } from '../../../testUtils';
+import { Humidity } from '../Humidity';
 
 describe('<Humidity/> component"', () => {
     it('should display humidity data correctly', () => {
         render(
             <WrapperTestComponent>
-                <Humidity humidity={35}/>
-            </WrapperTestComponent>
+                <Humidity humidity={35} />
+            </WrapperTestComponent>,
         );
 
         let component = screen.getByText('35');
@@ -21,8 +21,8 @@ describe('<Humidity/> component"', () => {
     it('should display humidity as zero when no data is provided', () => {
         render(
             <WrapperTestComponent>
-                <Humidity/>
-            </WrapperTestComponent>
+                <Humidity />
+            </WrapperTestComponent>,
         );
 
         let component = screen.getByText('0');

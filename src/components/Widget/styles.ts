@@ -1,4 +1,4 @@
-import {SxProps} from '@mui/material';
+import { SxProps } from '@mui/material';
 
 export const errorStyles: SxProps = {
     display: 'flex',
@@ -24,7 +24,9 @@ export const widgetHeaderStyles = (backgroundColor?: string): SxProps => ({
     backgroundColor,
 });
 
-export const widgetHeaderTitleWrapperStyles = (textAlign?: string): SxProps => ({
+export const widgetHeaderTitleWrapperStyles = (
+    textAlign?: string,
+): SxProps => ({
     margin: '16px 16px 0 16px',
     textAlign: textAlign ?? 'center',
 });

@@ -5,7 +5,8 @@ import {
     widgetHeaderContentStyles,
     widgetHeaderStyles,
     widgetHeaderSubtitleStyles,
-    widgetHeaderTitleStyles, widgetHeaderTitleWrapperStyles
+    widgetHeaderTitleStyles,
+    widgetHeaderTitleWrapperStyles,
 } from './styles';
 
 interface IWidgetHeaderProps extends PropsWithChildren<any> {
@@ -15,7 +16,7 @@ interface IWidgetHeaderProps extends PropsWithChildren<any> {
     title: string;
 }
 
-export function WidgetHeader(props:IWidgetHeaderProps) {
+export function WidgetHeader(props: IWidgetHeaderProps) {
     return (
         <Box sx={widgetHeaderStyles(props.backgroundColor)}>
             <Box sx={widgetHeaderTitleWrapperStyles(props.align)}>
@@ -24,9 +25,7 @@ export function WidgetHeader(props:IWidgetHeaderProps) {
                     <Box sx={widgetHeaderSubtitleStyles}>{props.subtitle}</Box>
                 </Box>
             </Box>
-            <Box sx={widgetHeaderContentStyles}>
-                {props.children}
-            </Box>
+            <Box sx={widgetHeaderContentStyles}>{props.children}</Box>
         </Box>
     );
 }

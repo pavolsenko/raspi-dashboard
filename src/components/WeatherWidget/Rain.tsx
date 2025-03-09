@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {mdiUmbrellaOutline} from '@mdi/js';
+import { mdiUmbrellaOutline } from '@mdi/js';
 
-import {WidgetSubtitle} from '../Widget/WidgetSubtitle';
+import { WidgetSubtitle } from '../Widget/WidgetSubtitle';
 
 export interface IRainProps {
     percentage?: number;

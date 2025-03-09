@@ -1,10 +1,12 @@
 import axios from 'axios';
 
-import {AppConfig} from '../config/appConfig';
-import {getCurrencyValueFromLocalStorage, setCurrencyValueInLocalStorage} from '../helpers/cryptoHelpers';
+import { AppConfig } from '../config/appConfig';
+import {
+    getCurrencyValueFromLocalStorage,
+    setCurrencyValueInLocalStorage,
+} from '../helpers/cryptoHelpers';
 
 export function useCurrency() {
-
     async function getUsdToEurExchangeRate(): Promise<number> {
         const cachedValue = getCurrencyValueFromLocalStorage();
 

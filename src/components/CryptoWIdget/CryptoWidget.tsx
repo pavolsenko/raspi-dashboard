@@ -15,11 +15,7 @@ import { cryptoWidgetStyles } from './styles';
 export function CryptoWidget(props: IWidgetProps) {
     const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
-    const {
-        isError,
-        cryptoStats,
-        loadCryptoStats,
-    } = useCrypto();
+    const { isError, cryptoStats, loadCryptoStats } = useCrypto();
 
     useEffect(() => {
         if (isInitialLoad) {
@@ -35,13 +31,12 @@ export function CryptoWidget(props: IWidgetProps) {
         return () => clearInterval(interval);
     }, [loadCryptoStats, isInitialLoad, setIsInitialLoad]);
 
-
     function renderCurrencyList(): ReactNode {
         if (isError) {
-            return <Error/>;
+            return <Error />;
         }
 
-        return <CurrencyList currencies={cryptoStats.portfolio}/>;
+        return <CurrencyList currencies={cryptoStats.portfolio} />;
     }
 
     return (
@@ -57,9 +52,7 @@ export function CryptoWidget(props: IWidgetProps) {
                 />
             </WidgetHeader>
 
-            <Box sx={cryptoWidgetStyles}>
-                {renderCurrencyList()}
-            </Box>
+            <Box sx={cryptoWidgetStyles}>{renderCurrencyList()}</Box>
         </Widget>
     );
 }

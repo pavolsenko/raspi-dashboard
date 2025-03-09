@@ -1,15 +1,17 @@
 import * as React from 'react';
 
-import {mdiWeatherSunsetDown} from '@mdi/js';
+import { mdiWeatherSunsetDown } from '@mdi/js';
 
-import {WidgetSubtitle} from '../Widget/WidgetSubtitle';
-import {normalizeTime} from '../../helpers/timeHelpers';
+import { WidgetSubtitle } from '../Widget/WidgetSubtitle';
+import { normalizeTime } from '../../helpers/timeHelpers';
 
 export interface ISunsetSunsetProps {
     sunset?: number;
 }
 
-export const Sunset: React.FC<ISunsetSunsetProps> = (props: ISunsetSunsetProps) => {
+export const Sunset: React.FC<ISunsetSunsetProps> = (
+    props: ISunsetSunsetProps,
+) => {
     return (
         <WidgetSubtitle
             icon={mdiWeatherSunsetDown}

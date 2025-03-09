@@ -3,7 +3,10 @@ import axios from 'axios';
 
 import { AppConfig } from '../config/appConfig';
 import { getHourlyForecast } from '../helpers/weatherHelpers';
-import { DAILY_FORECAST_COUNT, DEFAULT_LOCATION } from '../config/weatherConfig';
+import {
+    DAILY_FORECAST_COUNT,
+    DEFAULT_LOCATION,
+} from '../config/weatherConfig';
 
 export type TUnits = 'metric' | 'imperial';
 

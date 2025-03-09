@@ -1,54 +1,56 @@
 {
-  "name": "raspi-dashboard",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "start": "vite",
-    "build": "vite build"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@fontsource/open-sans": "^5.2.5",
-    "@mdi/font": "^7.4.47",
-    "@mdi/js": "^7.4.47",
-    "@mdi/react": "^1.6.1",
-    "@mui/material": "^6.4.7",
-    "axios": "^1.8.2",
-    "immutable": "^5.0.3",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-redux": "^9.2.0"
-  },
-  "devDependencies": {
-    "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/jest": "^29.5.14",
-    "@types/node": "^22.13.10",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
-    "@vitejs/plugin-react": "^4.3.4",
-    "typescript": "^5.8.2",
-    "vite": "^6.2.1"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+    "name": "raspi-dashboard",
+    "version": "0.1.0",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "start": "vite",
+        "build": "vite build",
+        "prettier": "prettier --write ."
+    },
+    "dependencies": {
+        "@emotion/react": "^11.14.0",
+        "@emotion/styled": "^11.14.0",
+        "@fontsource/open-sans": "^5.2.5",
+        "@mdi/font": "^7.4.47",
+        "@mdi/js": "^7.4.47",
+        "@mdi/react": "^1.6.1",
+        "@mui/material": "^6.4.7",
+        "axios": "^1.8.2",
+        "immutable": "^5.0.3",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1",
+        "react-redux": "^9.2.0"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^6.6.3",
+        "@testing-library/react": "^16.2.0",
+        "@testing-library/user-event": "^14.6.1",
+        "@types/jest": "^29.5.14",
+        "@types/node": "^22.13.10",
+        "@types/react": "^18.3.18",
+        "@types/react-dom": "^18.3.5",
+        "@vitejs/plugin-react": "^4.3.4",
+        "prettier": "^3.5.3",
+        "typescript": "^5.8.2",
+        "vite": "^6.2.1"
+    },
+    "eslintConfig": {
+        "extends": [
+            "react-app",
+            "react-app/jest"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
 }

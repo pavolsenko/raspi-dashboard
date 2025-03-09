@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {mdiArrowUp} from '@mdi/js';
+import { mdiArrowUp } from '@mdi/js';
 
-import {WidgetSubtitle} from '../Widget/WidgetSubtitle';
+import { WidgetSubtitle } from '../Widget/WidgetSubtitle';
 
 export interface IWindProps {
     direction?: number;

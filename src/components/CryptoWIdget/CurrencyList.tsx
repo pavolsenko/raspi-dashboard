@@ -1,16 +1,21 @@
 import * as React from 'react';
 
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 
-import {CURRENCY_MAX_COUNT, CURRENCY_VALUE_THRESHOLD} from '../../config/cryptoConfig';
-import {CurrencyListItem} from './CurrencyListItem';
-import {ICurrency} from "../../interfaces";
+import {
+    CURRENCY_MAX_COUNT,
+    CURRENCY_VALUE_THRESHOLD,
+} from '../../config/cryptoConfig';
+import { CurrencyListItem } from './CurrencyListItem';
+import { ICurrency } from '../../interfaces';
 
 interface ICurrencyListProps {
     currencies: ICurrency[];
 }
 
-export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListProps) => {
+export const CurrencyList: React.FC<ICurrencyListProps> = (
+    props: ICurrencyListProps,
+) => {
     let counter = 0;
     let valueCounter = 0;
     let currencyRestValue = 0;
@@ -25,17 +30,18 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
 
             counter++;
 
-            if (currency?.totalValueInEur < CURRENCY_VALUE_THRESHOLD || counter > CURRENCY_MAX_COUNT) {
+            if (
+                currency?.totalValueInEur < CURRENCY_VALUE_THRESHOLD ||
+                counter > CURRENCY_MAX_COUNT
+            ) {
                 valueCounter++;
-                currencyRestValue = currencyRestValue + currency.totalValueInEur;
+                currencyRestValue =
+                    currencyRestValue + currency.totalValueInEur;
                 return;
             }
 
             result.push(
-                <CurrencyListItem
-                    key={currency.symbol}
-                    currency={currency}
-                />
+                <CurrencyListItem key={currency.symbol} currency={currency} />,
             );
         });
 
@@ -45,10 +51,12 @@ export const CurrencyList: React.FC<ICurrencyListProps> = (props: ICurrencyListP
     return (
         <>
             {renderCurrencies()}
-            <Box sx={{
-                textAlign: 'center',
-                marginTop: '16px',
-            }}>
+            <Box
+                sx={{
+                    textAlign: 'center',
+                    marginTop: '16px',
+                }}
+            >
                 +{valueCounter} more (€ {currencyRestValue.toFixed(2)})
             </Box>
         </>

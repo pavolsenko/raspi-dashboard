@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import {mdiWaterOpacity} from '@mdi/js';
+import { mdiWaterOpacity } from '@mdi/js';
 
-import {WidgetSubtitle} from '../Widget/WidgetSubtitle';
+import { WidgetSubtitle } from '../Widget/WidgetSubtitle';
 
 interface IHumidityProps {
     humidity?: number;

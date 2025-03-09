@@ -1,4 +1,4 @@
-import {getDayOfTheWeek, isDay, normalizeTime} from '../timeHelpers';
+import { getDayOfTheWeek, isDay, normalizeTime } from '../timeHelpers';
 
 describe('timeHelper helper:', () => {
     describe('normalizeTime:', () => {
@@ -37,7 +37,6 @@ describe('timeHelper helper:', () => {
 
         it('should return empty string on invalid day of the week', () => {
             expect(getDayOfTheWeek(24)).toBe('');
-
         });
     });
 

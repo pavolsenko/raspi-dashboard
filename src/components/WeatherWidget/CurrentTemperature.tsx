@@ -13,16 +13,14 @@ export function CurrentTemperature(props: ITemperatureProps) {
             return '--';
         }
 
-        return props.value < 0 ? Math.floor(props.value) : Math.ceil(props.value);
+        return props.value < 0
+            ? Math.floor(props.value)
+            : Math.ceil(props.value);
     }
     return (
-        <Box sx={{display: 'flex'}}>
-            <Box sx={{fontSize: '72px'}}>
-                {getValue()}
-            </Box>
-            <Box sx={currentTemperatureStyles}>
-                °C
-            </Box>
+        <Box sx={{ display: 'flex' }}>
+            <Box sx={{ fontSize: '72px' }}>{getValue()}</Box>
+            <Box sx={currentTemperatureStyles}>°C</Box>
         </Box>
     );
 }

@@ -1,14 +1,14 @@
-import {render, screen} from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 
-import {WrapperTestComponent} from '../../../testUtils';
-import {Rain} from '../Rain';
+import { WrapperTestComponent } from '../../../testUtils';
+import { Rain } from '../Rain';
 
 describe('<Rain/> component:', () => {
     it('should display rain data correctly', () => {
         render(
             <WrapperTestComponent>
-                <Rain percentage={0.23}/>
-            </WrapperTestComponent>
+                <Rain percentage={0.23} />
+            </WrapperTestComponent>,
         );
 
         let component = screen.getByText('23');

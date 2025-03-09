@@ -25,11 +25,10 @@ export interface IWeatherProps extends IWidgetProps {
 export function WeatherWidget(props: IWeatherProps) {
     const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
-    const {
-        weather,
-        loadWeather,
-        isError,
-    } = useWeather(DEFAULT_LOCATION, props.units);
+    const { weather, loadWeather, isError } = useWeather(
+        DEFAULT_LOCATION,
+        props.units,
+    );
 
     useEffect(() => {
         if (isInitialLoad) {
@@ -51,8 +50,8 @@ export function WeatherWidget(props: IWeatherProps) {
         }
 
         return (
-            <Box sx={{color: '#a0a0a0'}}>
-                <Icon path={mdiWeatherCloudyAlert} size={'36px'}/>
+            <Box sx={{ color: '#a0a0a0' }}>
+                <Icon path={mdiWeatherCloudyAlert} size={'36px'} />
             </Box>
         );
     }
@@ -69,35 +68,39 @@ export function WeatherWidget(props: IWeatherProps) {
                     sunsetMs={weather?.sunset}
                     sunriseMs={weather?.sunrise}
                     size={'68px'}
-                    sx={{marginTop: '16px', marginRight: '4px'}}
+                    sx={{ marginTop: '16px', marginRight: '4px' }}
                 />
-                <CurrentTemperature value={weather?.temp}/>
+                <CurrentTemperature value={weather?.temp} />
             </WidgetHeader>
 
-            <Box sx={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                backgroundColor: '#e0e0e0',
-                color: '#666666',
-                padding: '8px',
-            }}>
-                <Rain percentage={weather?.pop}/>
-                <Humidity humidity={weather?.humidity}/>
+            <Box
+                sx={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    backgroundColor: '#e0e0e0',
+                    color: '#666666',
+                    padding: '8px',
+                }}
+            >
+                <Rain percentage={weather?.pop} />
+                <Humidity humidity={weather?.humidity} />
                 <Wind
                     direction={weather?.wind_deg}
                     speed={weather?.wind_speed}
                 />
-                <Sunrise sunrise={weather?.sunrise}/>
-                <Sunset sunset={weather?.sunset}/>
+                <Sunrise sunrise={weather?.sunrise} />
+                <Sunset sunset={weather?.sunset} />
             </Box>
 
-            <Box sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                flexGrow: 1,
-                backgroundColor: '#f0f0f0',
-                color: '#666666',
-            }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'column',
+                    flexGrow: 1,
+                    backgroundColor: '#f0f0f0',
+                    color: '#666666',
+                }}
+            >
                 {renderError()}
 
                 <HourlyForecast
@@ -106,7 +109,7 @@ export function WeatherWidget(props: IWeatherProps) {
                     hours={weather?.hourly}
                 />
 
-                <DailyForecast days={weather?.daily}/>
+                <DailyForecast days={weather?.daily} />
             </Box>
         </Widget>
     );

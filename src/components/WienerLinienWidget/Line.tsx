@@ -1,12 +1,12 @@
 import * as React from 'react';
 
-import {Box} from '@mui/material';
+import { Box } from '@mui/material';
 
-import {LineNumber} from './LineNumber';
-import {LineDirection} from './LineDirection';
-import {Countdowns} from './Countdowns';
-import {ILine} from '../../interfaces';
-import {getFirstTwoCountdowns} from "../../helpers/stationsHelper";
+import { LineNumber } from './LineNumber';
+import { LineDirection } from './LineDirection';
+import { Countdowns } from './Countdowns';
+import { ILine } from '../../interfaces';
+import { getFirstTwoCountdowns } from '../../helpers/stationsHelper';
 
 interface ILineProps {
     line: ILine;
@@ -23,17 +23,16 @@ export const Line: React.FC<ILineProps> = (props: ILineProps) => {
                 marginTop: '8px',
             }}
         >
-            <Box sx={{
-                display: 'flex',
-                alignItems: 'center',
-            }}>
-                <LineNumber
-                    value={props.line.name}
-                    onClick={props.onClick}
-                />
-                <LineDirection direction={props.line.direction}/>
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                }}
+            >
+                <LineNumber value={props.line.name} onClick={props.onClick} />
+                <LineDirection direction={props.line.direction} />
             </Box>
-            <Countdowns values={getFirstTwoCountdowns(props.line.departures)}/>
+            <Countdowns values={getFirstTwoCountdowns(props.line.departures)} />
         </Box>
     );
-}
+};
