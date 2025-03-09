@@ -1,6 +1,6 @@
 import {ILine, IStation, IStationRequest} from '../interfaces';
 
-export const processStations = (station: IStationRequest, data: Record<string, any>): IStation => {
+export const processStations = (station: IStationRequest, data: Record<string, any>[]): IStation => {
     const lines = data
         .filter((monitor: Record<string, any>): boolean => {
             if (!station.lines) {

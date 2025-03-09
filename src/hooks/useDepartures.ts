@@ -32,10 +32,10 @@ export const useDepartures = () => {
                 },
             )
                 .then((response: AxiosResponse) => {
-                    const data = response?.data?.data?.monitors as unknown;
+                    const data = response?.data?.data?.monitors as Record<string, any>[];
 
                     let departure;
-                    if (data) {
+                    if (data && data.length > 0) {
                         departure = processStations(station, data);
                     }
 
@@ -50,7 +50,8 @@ export const useDepartures = () => {
                         newDepartures,
                     );
                 })
-                .catch(() => {
+                .catch((reason) => {
+                    console.log(reason);
                     setIsError(true);
                 })
                 .finally(() => {
