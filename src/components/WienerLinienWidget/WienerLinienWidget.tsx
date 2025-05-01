@@ -5,9 +5,11 @@ import { useDepartures } from '../../hooks/useDepartures';
 import { Station } from './Station';
 import { Widget } from '../Widget/Widget';
 import { Error } from '../Widget/Error';
+import { Box } from '@mui/material';
 
 export function WienerLinienWidget() {
-    const { departures, isError, removeStation, removeLine } = useDepartures();
+    const { departures, isError, removeStation, removeLine, resetCache } =
+        useDepartures();
 
     function renderStations(): ReactNode | ReactNode[] {
         if (departures.count() === 0 || isError) {
@@ -36,5 +38,9 @@ export function WienerLinienWidget() {
         return <Error />;
     }
 
-    return <Widget>{renderStations()}</Widget>;
+    return (
+        <Widget>
+            <Box onClick={() => resetCache()}>{renderStations()}</Box>
+        </Widget>
+    );
 }
