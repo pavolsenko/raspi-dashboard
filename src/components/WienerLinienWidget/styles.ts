@@ -1,24 +1,4 @@
-import { SxProps, Theme } from '@mui/material';
-
-export const departuresStyles: SxProps = {
-    display: 'flex',
-    flexDirection: 'column',
-    flexGrow: 1,
-    backgroundColor: '#f0f0f0',
-    color: '#666666',
-    padding: '0 16px 16px 16px',
-};
-
-export const departuresIconStyles: SxProps = {
-    marginTop: '12px',
-    display: 'flex',
-    cursor: 'pointer',
-};
-
-export const departuresTimeStyles = (theme: Theme): SxProps => ({
-    fontSize: '46px',
-    marginLeft: theme.spacing(1),
-});
+import { SxProps } from '@mui/material';
 
 export const countdownsWrapperStyles: SxProps = {
     display: 'flex',

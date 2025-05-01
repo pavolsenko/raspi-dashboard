@@ -1,6 +1,4 @@
 import * as React from 'react';
-
-import { Box, SxProps } from '@mui/material';
 import Icon from '@mdi/react';
 
 import { isDay } from '../../helpers/timeHelpers';
@@ -11,7 +9,6 @@ export interface IWeatherIconProps {
     iconId?: number;
     sunsetMs?: number;
     sunriseMs?: number;
-    sx?: SxProps;
 }
 
 export const WeatherIcon: React.FC<IWeatherIconProps> = (
@@ -26,9 +23,5 @@ export const WeatherIcon: React.FC<IWeatherIconProps> = (
         isDay(props.sunriseMs, props.sunsetMs, Date.now()),
     );
 
-    return (
-        <Box sx={props.sx}>
-            <Icon path={icon} size={props.size} />
-        </Box>
-    );
+    return <Icon path={icon} size={props.size} />;
 };

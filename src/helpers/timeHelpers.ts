@@ -26,38 +26,6 @@ export const normalizeTime = (value?: number | Date): string => {
     return result;
 };
 
-export const getDayOfTheWeek = (dayOfTheWeek: number): string => {
-    if (dayOfTheWeek === 0) {
-        return 'Sunday';
-    }
-
-    if (dayOfTheWeek === 1) {
-        return 'Monday';
-    }
-
-    if (dayOfTheWeek === 2) {
-        return 'Tuesday';
-    }
-
-    if (dayOfTheWeek === 3) {
-        return 'Wednesday';
-    }
-
-    if (dayOfTheWeek === 4) {
-        return 'Thursday';
-    }
-
-    if (dayOfTheWeek === 5) {
-        return 'Friday';
-    }
-
-    if (dayOfTheWeek === 6) {
-        return 'Saturday';
-    }
-
-    return '';
-};
-
 export const isDay = (
     sunriseMs?: number,
     sunsetMs?: number,

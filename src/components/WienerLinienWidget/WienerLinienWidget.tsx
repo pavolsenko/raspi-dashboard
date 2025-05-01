@@ -1,36 +1,13 @@
 import { ReactNode } from 'react';
-import { Box, useTheme } from '@mui/material';
-import Icon from '@mdi/react';
-import { mdiBusClock } from '@mdi/js';
 
 import { IStation } from '../../interfaces';
-import { WidgetHeader } from '../Widget/WidgetHeader';
 import { useDepartures } from '../../hooks/useDepartures';
 import { Station } from './Station';
-import { useDateTime } from '../../hooks/useDateTime';
-import { normalizeTime } from '../../helpers/timeHelpers';
-import { IWidgetProps, Widget } from '../Widget/Widget';
+import { Widget } from '../Widget/Widget';
 import { Error } from '../Widget/Error';
 
-import {
-    departuresIconStyles,
-    departuresStyles,
-    departuresTimeStyles,
-} from './styles';
-
-export function WienerLinienWidget(props: IWidgetProps) {
-    const theme = useTheme();
-    const dateTime = useDateTime();
-    const { departures, isError, removeStation, removeLine, resetCache } =
-        useDepartures();
-
-    function renderStatus(): ReactNode {
-        if (isError) {
-            return <Error />;
-        }
-
-        return null;
-    }
+export function WienerLinienWidget() {
+    const { departures, isError, removeStation, removeLine } = useDepartures();
 
     function renderStations(): ReactNode | ReactNode[] {
         if (departures.count() === 0 || isError) {
@@ -55,25 +32,9 @@ export function WienerLinienWidget(props: IWidgetProps) {
         return result;
     }
 
-    return (
-        <Widget>
-            <WidgetHeader
-                title="Wiener Linien"
-                subtitle="Departures"
-                backgroundColor={props.headerBackgroundColor}
-            >
-                <Box sx={departuresIconStyles} onClick={resetCache}>
-                    <Icon path={mdiBusClock} size={'58px'} />
-                    <Box sx={departuresTimeStyles(theme)}>
-                        {normalizeTime(dateTime)}
-                    </Box>
-                </Box>
-            </WidgetHeader>
+    if (isError || departures.count() === 0) {
+        return <Error />;
+    }
 
-            <Box sx={departuresStyles}>
-                {renderStatus()}
-                {renderStations()}
-            </Box>
-        </Widget>
-    );
+    return <Widget>{renderStations()}</Widget>;
 }

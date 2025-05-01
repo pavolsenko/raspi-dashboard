@@ -4,15 +4,13 @@ import { Box } from '@mui/material';
 
 import { useCrypto } from '../../hooks/useCrypto';
 import { AppConfig } from '../../config/appConfig';
-import { WidgetHeader } from '../Widget/WidgetHeader';
-import { CurrentValue } from './CurrentValue';
 import { CurrencyList } from './CurrencyList';
 import { Error } from '../Widget/Error';
-import { IWidgetProps, Widget } from '../Widget/Widget';
+import { Widget } from '../Widget/Widget';
 
 import { cryptoWidgetStyles } from './styles';
 
-export function CryptoWidget(props: IWidgetProps) {
+export function CryptoWidget() {
     const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
     const { isError, cryptoStats, loadCryptoStats } = useCrypto();
@@ -32,26 +30,15 @@ export function CryptoWidget(props: IWidgetProps) {
     }, [loadCryptoStats, isInitialLoad, setIsInitialLoad]);
 
     function renderCurrencyList(): ReactNode {
-        if (isError) {
-            return <Error />;
-        }
-
         return <CurrencyList currencies={cryptoStats.portfolio} />;
+    }
+
+    if (isError || !cryptoStats || cryptoStats.portfolio.length === 0) {
+        return <Error />;
     }
 
     return (
         <Widget>
-            <WidgetHeader
-                title="CoinStats"
-                subtitle="Crypto portfolio"
-                backgroundColor={props.headerBackgroundColor}
-            >
-                <CurrentValue
-                    currentValue={cryptoStats.currentValue}
-                    previousValue={cryptoStats.previousValue}
-                />
-            </WidgetHeader>
-
             <Box sx={cryptoWidgetStyles}>{renderCurrencyList()}</Box>
         </Widget>
     );

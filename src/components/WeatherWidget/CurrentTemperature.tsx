@@ -1,7 +1,5 @@
 import { ReactNode } from 'react';
-import { Box } from '@mui/material';
-
-import { currentTemperatureStyles } from './style';
+import { Box, Typography } from '@mui/material';
 
 export interface ITemperatureProps {
     value?: number;
@@ -18,9 +16,13 @@ export function CurrentTemperature(props: ITemperatureProps) {
             : Math.ceil(props.value);
     }
     return (
-        <Box sx={{ display: 'flex' }}>
-            <Box sx={{ fontSize: '72px' }}>{getValue()}</Box>
-            <Box sx={currentTemperatureStyles}>°C</Box>
-        </Box>
+        <>
+            <Typography variant={'body1'} component={Box}>
+                {getValue()}
+            </Typography>
+            <Typography variant={'body2'} component={Box}>
+                °C
+            </Typography>
+        </>
     );
 }

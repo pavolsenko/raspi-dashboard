@@ -1,5 +1,4 @@
 import * as React from 'react';
-
 import { Box } from '@mui/material';
 
 import { ILine } from '../../interfaces';
@@ -21,10 +20,6 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
         return function () {
             props.onLineClick?.(props.name, index);
         };
-    };
-
-    const onStationClick = () => {
-        props.onStationClick?.(props.name);
     };
 
     const renderLines = (): React.ReactNode | React.ReactNode[] => {
@@ -57,21 +52,6 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
                 width: '100%',
             }}
         >
-            <Box
-                onClick={onStationClick}
-                sx={{
-                    fontSize: '12px',
-                    backgroundColor: '#dddddd',
-                    width: '130px',
-                    textAlign: 'center',
-                    borderRadius: '12px',
-                    padding: '0 8px',
-                    marginBottom: '16px',
-                    marginTop: '16px',
-                }}
-            >
-                {props.name}
-            </Box>
             {renderLines()}
         </Box>
     );

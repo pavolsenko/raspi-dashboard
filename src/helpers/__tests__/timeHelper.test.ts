@@ -1,4 +1,4 @@
-import { getDayOfTheWeek, isDay, normalizeTime } from '../timeHelpers';
+import { isDay, normalizeTime } from '../timeHelpers';
 
 describe('timeHelper helper:', () => {
     describe('normalizeTime:', () => {
@@ -21,22 +21,6 @@ describe('timeHelper helper:', () => {
         // TODO: fix for timezones
         it.skip('should format time property if Date object is provided', () => {
             expect(normalizeTime(new Date(1238384332))).toBe('08:59');
-        });
-    });
-
-    describe('getDayOfTheWeek:', () => {
-        it('should return correct day of the week', () => {
-            expect(getDayOfTheWeek(0)).toBe('Sunday');
-            expect(getDayOfTheWeek(1)).toBe('Monday');
-            expect(getDayOfTheWeek(2)).toBe('Tuesday');
-            expect(getDayOfTheWeek(3)).toBe('Wednesday');
-            expect(getDayOfTheWeek(4)).toBe('Thursday');
-            expect(getDayOfTheWeek(5)).toBe('Friday');
-            expect(getDayOfTheWeek(6)).toBe('Saturday');
-        });
-
-        it('should return empty string on invalid day of the week', () => {
-            expect(getDayOfTheWeek(24)).toBe('');
         });
     });
 

@@ -2,7 +2,6 @@ import * as React from 'react';
 
 import { Box } from '@mui/material';
 
-import { getDayOfTheWeek } from '../../helpers/timeHelpers';
 import { WeatherIcon } from './WeatherIcon';
 import { Thermometer } from './Thermometer';
 
@@ -24,17 +23,6 @@ export const DailyForecastItem: React.FC<IDailyForecastItemProps> = (
                 padding: '12px 16px',
             }}
         >
-            <Box
-                sx={{
-                    width: '20px',
-                    fontSize: '18px',
-                }}
-            >
-                {getDayOfTheWeek(
-                    new Date(props.day.dt * 1000).getDay(),
-                ).substring(0, 3)}
-            </Box>
-
             <Box sx={{ display: 'flex', marginLeft: '8px' }}>
                 <WeatherIcon iconId={props.day.weather[0].id} size={'42px'} />
 
