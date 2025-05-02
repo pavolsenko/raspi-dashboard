@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
+
 import { getRandomHexColor } from '../../helpers/themeHelper';
 import { antiBurnStyles } from './styles';
 

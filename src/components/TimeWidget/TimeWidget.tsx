@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@mui/material';
+import { Box, Typography, useTheme } from '@mui/material';
 
 import { normalizeTime } from '../../helpers/timeHelpers';
 import { useDateTime } from '../../hooks/useDateTime';
@@ -12,17 +12,27 @@ export function TimeWidget() {
 
     return (
         <Widget>
-            <Box sx={timeStyles}>{normalizeTime(dateTime)}</Box>
-            <Box sx={dateStyles(theme)}>
+            <Typography variant={'body1'} sx={timeStyles} component={Box}>
+                {normalizeTime(dateTime)}
+            </Typography>
+            <Typography
+                variant={'body2'}
+                sx={dateStyles(theme)}
+                component={Box}
+            >
                 {dateTime.toLocaleDateString('default', { weekday: 'long' })}
-            </Box>
-            <Box sx={dateStyles(theme)}>
+            </Typography>
+            <Typography
+                variant={'body2'}
+                sx={dateStyles(theme)}
+                component={Box}
+            >
                 {dateTime.toLocaleDateString('default', {
                     day: 'numeric',
                     month: 'long',
                     year: 'numeric',
                 })}
-            </Box>
+            </Typography>
         </Widget>
     );
 }

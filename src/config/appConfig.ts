@@ -3,7 +3,7 @@ export interface IAppConfig {
     openWeatherAppId: string;
 
     coinStatsApiEndpoint: string;
-    coinStatsPortfolioToken: string;
+    coinStatsApiKey: string;
 
     wienerLinienApiEndpoint: string;
     wienerLinienApiUpdateInterval: number;
@@ -20,11 +20,10 @@ export const AppConfig: IAppConfig = {
     // @ts-ignore
     openWeatherAppId: import.meta.env.VITE_OPENWEATHER_APP_ID || '',
 
-    coinStatsApiEndpoint:
-        'https://api.coin-stats.com/v6/portfolios/analytics?currency=EUR&range=24h&type=portfolio-pie-chart&visibility=personal&filter=all',
-    coinStatsPortfolioToken:
+    coinStatsApiEndpoint: 'https://openapiv1.coinstats.app/coins/',
+    coinStatsApiKey:
         // @ts-ignore
-        import.meta.env.VITE_COINSTATS_PORTFOLIO_TOKEN || '',
+        import.meta.env.VITE_COINSTATS_API_KEY || '',
 
     wienerLinienApiEndpoint: 'https://vtapi.floscodes.net/monitor/',
     wienerLinienApiUpdateInterval: 1000 * 90,

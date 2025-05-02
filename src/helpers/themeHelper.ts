@@ -2,8 +2,8 @@ import { createTheme } from '@mui/material';
 
 export const DISPLAY_HEIGHT = 740;
 export const DISPLAY_WIDTH = 1280;
-export const DEFAULT_FONT_SIZE = '112px';
-export const DEFAULT_FONT_SECONDARY_SIZE = '36px';
+export const DEFAULT_FONT_SIZE = '120px';
+export const DEFAULT_FONT_SECONDARY_SIZE = '32px';
 
 export function getTheme() {
     return createTheme({
@@ -17,6 +17,7 @@ export function getTheme() {
             },
         },
         typography: {
+            fontFamily: 'Nunito, sans-serif',
             body1: {
                 lineHeight: 1,
                 fontSize: DEFAULT_FONT_SIZE,

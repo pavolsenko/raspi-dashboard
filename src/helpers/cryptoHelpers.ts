@@ -1,54 +1,22 @@
-import { ICurrency } from '../interfaces';
+import { AxiosRequestConfig } from 'axios';
+import { AppConfig } from '../config/appConfig';
 
-const LOCAL_STORAGE_CRYPTO_KEY: string = 'crypto_value';
-const LOCAL_STORAGE_CURRENCY_KEY: string = 'crypto_currency';
-
-export const getCryptoValueFromLocalStorage = (): number => {
-    return (
-        parseFloat(localStorage.getItem(LOCAL_STORAGE_CRYPTO_KEY) || '0') || 0
-    );
+export const setCurrencyValueInLocalStorage = (
+    currency: string,
+    value: number = 0,
+) => {
+    localStorage.setItem(currency, value.toString());
 };
 
-export const setCryptoValueInLocalStorage = (value: number = 0) => {
-    localStorage.setItem(LOCAL_STORAGE_CRYPTO_KEY, value.toString());
+export const getCurrencyValueFromLocalStorage = (currency: string): number => {
+    return parseFloat(localStorage.getItem(currency) || '1') || 1;
 };
 
-export const setCurrencyValueInLocalStorage = (value: number = 0) => {
-    localStorage.setItem(LOCAL_STORAGE_CURRENCY_KEY, value.toString());
-};
-
-export const getCurrencyValueFromLocalStorage = (): number => {
-    return (
-        parseFloat(localStorage.getItem(LOCAL_STORAGE_CURRENCY_KEY) || '1') || 1
-    );
-};
-
-export const processCoins = (
-    portfolio?: Record<string, any>[],
-    exchangeRate: number = 1,
-): ICurrency[] => {
-    if (!portfolio) {
-        return [];
-    }
-
-    return portfolio
-        .map((item: Record<string, any>): ICurrency => {
-            const eurValue = item.p?.EUR
-                ? item.p?.EUR
-                : item.p?.USD * exchangeRate;
-
-            return {
-                name: item.coin?.n,
-                symbol: item.coin?.s,
-                iconUrl: item.coin?.ic,
-                count: item.c,
-                priceInEur: eurValue,
-                totalValueInEur: eurValue * item.c,
-            };
-        })
-        .filter((item: ICurrency): boolean => Boolean(item.totalValueInEur))
-        .sort(
-            (a: ICurrency, b: ICurrency): number =>
-                (b.totalValueInEur || 0) - (a.totalValueInEur || 0),
-        );
+export const coinStatsOptions: AxiosRequestConfig = {
+    headers: {
+        'X-API-KEY': AppConfig.coinStatsApiKey,
+    },
+    params: {
+        currency: 'EUR',
+    },
 };

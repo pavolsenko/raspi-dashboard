@@ -17,7 +17,7 @@ export const widgetStyles = (theme: Theme): SxProps => ({
     alignItems: 'center',
     borderRadius: '16px',
     overflow: 'hidden',
-    backgroundColor: '#202226',
+    backgroundColor: '#292b2d',
     color: theme.palette.primary.main,
 });
 

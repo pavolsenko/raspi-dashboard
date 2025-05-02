@@ -4,10 +4,10 @@ import { Box } from '@mui/material';
 
 import { useCrypto } from '../../hooks/useCrypto';
 import { AppConfig } from '../../config/appConfig';
-import { CurrencyList } from './CurrencyList';
 import { Error } from '../Widget/Error';
 import { Widget } from '../Widget/Widget';
-
+import { CryptoValue } from './CryptoValue';
+import { Ethereum } from './icons/Ethereum';
 import { cryptoWidgetStyles } from './styles';
 
 export function CryptoWidget() {
@@ -29,17 +29,24 @@ export function CryptoWidget() {
         return () => clearInterval(interval);
     }, [loadCryptoStats, isInitialLoad, setIsInitialLoad]);
 
-    function renderCurrencyList(): ReactNode {
-        return <CurrencyList currencies={cryptoStats.portfolio} />;
-    }
-
-    if (isError || !cryptoStats || cryptoStats.portfolio.length === 0) {
+    if (isError || !cryptoStats) {
         return <Error />;
     }
 
     return (
         <Widget>
-            <Box sx={cryptoWidgetStyles}>{renderCurrencyList()}</Box>
+            <Box sx={cryptoWidgetStyles}>
+                <CryptoValue
+                    title={'Ethereum'}
+                    value={cryptoStats.ethereum}
+                    trend={cryptoStats.ethereumTrend}
+                />
+                <CryptoValue
+                    title={'Bitcoin'}
+                    value={cryptoStats.bitcoin}
+                    trend={cryptoStats.bitcoinTrend}
+                />
+            </Box>
         </Widget>
     );
 }

@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
-import { DEFAULT_FONT_SIZE } from '../../helpers/themeHelper';
 
 import { Error } from '../Widget/Error';
+import { DEFAULT_FONT_SIZE } from '../../helpers/themeHelper';
 import { DailyForecast } from './DailyForecast';
-import { currentTemperatureBoxStyles } from './styles';
 import { WeatherIcon } from './WeatherIcon';
 import { useWeather } from '../../hooks/useWeather';
 import { AppConfig } from '../../config/appConfig';
 import { CurrentTemperature } from './CurrentTemperature';
 import { Widget } from '../Widget/Widget';
 import { DEFAULT_LOCATION } from '../../config/weatherConfig';
+
+import { currentTemperatureBoxStyles } from './styles';
 
 export interface IWeatherProps {
     units?: 'metric' | 'imperial';
@@ -52,8 +53,8 @@ export function WeatherWidget(props: IWeatherProps) {
                     size={DEFAULT_FONT_SIZE}
                 />
                 <CurrentTemperature value={weather?.temp} />
-                <DailyForecast />
             </Box>
+            <DailyForecast days={weather?.daily} />
         </Widget>
     );
 }

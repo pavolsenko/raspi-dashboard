@@ -9,8 +9,6 @@ export const appContainerStyles = (theme: Theme): SxProps => ({
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridTemplateRows: '1fr 1fr',
-    gap: theme.spacing(2),
-    fontFamily: '"Open Sans", sans-serif',
-    fontWeight: 400,
-    padding: theme.spacing(2),
+    gap: theme.spacing(4),
+    padding: theme.spacing(4),
 });
