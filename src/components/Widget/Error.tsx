@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
 import { mdiCloudCancelOutline } from '@mdi/js';
 import Icon from '@mdi/react';
-import { DEFAULT_FONT_SIZE } from '../../helpers/themeHelper';
 
+import { DEFAULT_FONT_SIZE } from '../../helpers/themeHelper';
 import { Widget } from './Widget';
 
 import { errorStyles } from './styles';
