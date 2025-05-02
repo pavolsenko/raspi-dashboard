@@ -8,6 +8,7 @@ on:
 
 env:
     VITE_OPENWEATHER_APP_ID: ${{ secrets.VITE_OPENWEATHER_APP_ID }}
+    VITE_COINSTATS_API_KEY: ${{ secrets.VITE_COINSTATS_API_KEY }}
 
 jobs:
     build:

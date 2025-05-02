@@ -1,4 +1,4 @@
-import { SxProps, Theme } from '@mui/material';
+import { SxProps } from '@mui/material';
 
 export const currentTemperatureBoxStyles: SxProps = {
     display: 'flex',
@@ -6,16 +6,27 @@ export const currentTemperatureBoxStyles: SxProps = {
     marginBottom: 2,
 };
 
-export const dailyForecastStyles = (theme: Theme): SxProps => ({
+export const dailyForecastStyles = {
     display: 'flex',
     flexDirection: 'row',
-    gap: theme.spacing(6),
-});
+    gap: 4,
+};
 
-export const dailyForecastItem = (theme: Theme): SxProps => ({
+export const dailyForecastItem = {
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    gap: theme.spacing(1),
-});
+    gap: 1,
+};
+
+export const dailyForecastUnits: SxProps = {
+    fontSize: '18px',
+    marginTop: '4px',
+    marginLeft: '2px',
+};
+
+export const dailyForecastTemperature: SxProps = {
+    display: 'flex',
+    marginLeft: 1,
+};

@@ -1,9 +1,8 @@
 import * as React from 'react';
 
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 
 import { DailyForecastItem } from './DailyForecastItem';
-import { DEFAULT_TEMPERATURE_OFFSET } from '../../config/weatherConfig';
 import { dailyForecastStyles } from './styles';
 
 interface IForecastProps {
@@ -13,8 +12,6 @@ interface IForecastProps {
 export const DailyForecast: React.FC<IForecastProps> = (
     props: IForecastProps,
 ) => {
-    const theme = useTheme();
-
     if (!props.days) {
         return null;
     }
@@ -31,5 +28,5 @@ export const DailyForecast: React.FC<IForecastProps> = (
         );
     });
 
-    return <Box sx={dailyForecastStyles(theme)}>{result}</Box>;
+    return <Box sx={dailyForecastStyles}>{result}</Box>;
 };
