@@ -2,7 +2,8 @@ import { SxProps } from '@mui/material';
 
 export const countdownsWrapperStyles: SxProps = {
     display: 'flex',
-    fontSize: '22px',
+    gap: 3,
+    marginLeft: 5,
 };
 
 export const countdownBlinkingStyles: SxProps = {
@@ -15,8 +16,7 @@ export const countdownBlinkingStyles: SxProps = {
     },
 };
 
-export const countdownStyles: SxProps = {
-    width: '38px',
+export const countdownNumberStyles: SxProps = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -27,4 +27,27 @@ export const countdownErrorStyles: SxProps = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+};
+
+export const lineNumberStyles = (backgroundColor: string): SxProps => ({
+    width: '72px',
+    height: '72px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    background: backgroundColor,
+    boxShadow: '0 0 12px #222222',
+    borderRadius: '16px',
+    marginRight: 2,
+});
+
+export const lineStyles: SxProps = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    marginBottom: 2,
+};
+
+export const lineNameStyles: SxProps = {
+    display: 'flex',
+    alignItems: 'center',
 };

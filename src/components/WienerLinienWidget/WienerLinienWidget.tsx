@@ -8,8 +8,7 @@ import { Error } from '../Widget/Error';
 import { Box } from '@mui/material';
 
 export function WienerLinienWidget() {
-    const { departures, isError, removeStation, removeLine, resetCache } =
-        useDepartures();
+    const { departures, isError, resetCache } = useDepartures();
 
     function renderStations(): ReactNode | ReactNode[] {
         if (departures.count() === 0 || isError) {
@@ -25,8 +24,6 @@ export function WienerLinienWidget() {
                         key={station.name}
                         lines={station.lines}
                         name={station.name}
-                        onStationClick={removeStation}
-                        onLineClick={removeLine}
                     />,
                 );
             });

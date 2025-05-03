@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { mdiCircle, mdiClockRemoveOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 
 import {
     countdownBlinkingStyles,
     countdownErrorStyles,
-    countdownStyles,
+    countdownNumberStyles,
     countdownsWrapperStyles,
 } from './styles';
 
@@ -39,12 +39,20 @@ export function Countdowns(props: ICountdownsProps) {
 
         return (
             <>
-                <Box sx={countdownStyles}>
+                <Typography
+                    variant={'body2'}
+                    sx={countdownNumberStyles}
+                    component={Box}
+                >
                     {renderCountdown(props.values[0])}
-                </Box>
-                <Box sx={countdownStyles}>
+                </Typography>
+                <Typography
+                    variant={'body2'}
+                    sx={countdownNumberStyles}
+                    component={Box}
+                >
                     {renderCountdown(props.values[1])}
-                </Box>
+                </Typography>
             </>
         );
     }

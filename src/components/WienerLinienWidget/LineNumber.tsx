@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { Box, Typography } from '@mui/material';
 
-import { Box } from '@mui/material';
+import { lineNumberStyles } from './styles';
 
 interface ILineNumberProps {
     onClick?: () => void;
@@ -36,28 +37,20 @@ export const LineNumber: React.FC<ILineNumberProps> = (
         }
 
         if (props.value.includes('A') || props.value.includes('B')) {
-            return '#001c7e';
+            return 'linear-gradient(315deg, hsla(227, 100%, 25%, 1) 0%, hsla(215, 100%, 28%, 1) 100%)';
         }
 
-        return '#cc0000';
+        return 'linear-gradient(315deg, hsla(0, 100%, 40%, 1) 0%, hsla(0, 100%, 27%, 1) 100%)';
     };
 
     return (
-        <Box
+        <Typography
+            variant={'body2'}
             onClick={props.onClick}
-            sx={{
-                width: '38px',
-                height: '38px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                backgroundColor: getBackgroundColor(),
-                color: '#ffffff',
-                fontSize: '18px',
-                borderRadius: '4px',
-            }}
+            sx={lineNumberStyles(getBackgroundColor())}
+            component={Box}
         >
             {props.value}
-        </Box>
+        </Typography>
     );
 };

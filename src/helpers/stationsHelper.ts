@@ -4,33 +4,8 @@ export const processStations = (
     station: IStationRequest,
     data: Record<string, any>[],
 ): IStation => {
-    const lines = data
-        .filter((monitor: Record<string, any>): boolean => {
-            if (!station.lines) {
-                return true;
-            }
-
-            // exclude lines heading to depots
-            if (monitor.lines[0].towards.includes('Betriebsbhf')) {
-                return false;
-            }
-
-            for (const line of station.lines) {
-                if (line.name === monitor.lines[0].name && !line.directions) {
-                    return true;
-                }
-
-                if (
-                    line.name === monitor.lines[0].name &&
-                    line.directions?.includes(monitor.lines[0].direction)
-                ) {
-                    return true;
-                }
-            }
-
-            return false;
-        })
-        .map((monitor: Record<string, any>): ILine => {
+    const lines = [data[2], data[1]].map(
+        (monitor: Record<string, any>): ILine => {
             return {
                 name: monitor.lines[0].name,
                 direction: monitor.lines[0].towards,
@@ -44,7 +19,8 @@ export const processStations = (
                     })
                     .filter((item: string | undefined) => item),
             };
-        });
+        },
+    );
 
     return {
         name: data[0].locationStop.properties.title,

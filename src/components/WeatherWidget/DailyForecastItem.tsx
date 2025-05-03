@@ -34,9 +34,12 @@ export const DailyForecastItem: React.FC<IDailyForecastItemProps> = (
                 variant={'body2'}
                 color={'secondary'}
                 sx={dailyForecastTemperature}
+                component={Box}
             >
                 {Math.floor(props.day.temp.day)}
-                <Typography sx={dailyForecastUnits}>°C</Typography>
+                <Typography sx={dailyForecastUnits} component={Box}>
+                    °C
+                </Typography>
             </Typography>
         </Box>
     );

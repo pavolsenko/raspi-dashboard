@@ -3,8 +3,8 @@ import { Map as ImmutableMap } from 'immutable';
 import axios, { AxiosResponse } from 'axios';
 
 import { AppConfig } from '../config/appConfig';
-import { DEPARTURES_KEY, STATIONS } from '../config/departuresConfig';
-import { IStation, IStationRequest } from '../interfaces';
+import { DEPARTURES_KEY, STATION } from '../config/departuresConfig';
+import { IStation } from '../interfaces';
 import { processStations } from '../helpers/stationsHelper';
 
 export const useDepartures = () => {
@@ -16,7 +16,6 @@ export const useDepartures = () => {
         ),
     );
     const [isError, setIsError] = useState<boolean>(false);
-    const [currentStationIndex, setCurrentStationIndex] = useState<number>(0);
     const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
     const setLocalStorageDepartures = (
@@ -31,12 +30,11 @@ export const useDepartures = () => {
     useEffect(() => {
         const loadDeparture = () => {
             setIsError(false);
-            const station: IStationRequest = STATIONS[currentStationIndex];
-
             axios
                 .get(AppConfig.wienerLinienApiEndpoint, {
                     params: {
-                        station: station.name,
+                        station: STATION.name,
+                        line: STATION.lines[0].name,
                     },
                 })
                 .then((response: AxiosResponse) => {
@@ -47,7 +45,7 @@ export const useDepartures = () => {
 
                     let departure;
                     if (data && data.length > 0) {
-                        departure = processStations(station, data);
+                        departure = processStations(STATION, data);
                     }
 
                     if (!departure) {
@@ -65,13 +63,6 @@ export const useDepartures = () => {
                 .catch((reason) => {
                     console.log(reason);
                     setIsError(true);
-                })
-                .finally(() => {
-                    if (currentStationIndex === STATIONS.length - 1) {
-                        setCurrentStationIndex(0);
-                    } else {
-                        setCurrentStationIndex(currentStationIndex + 1);
-                    }
                 });
         };
 
@@ -87,7 +78,7 @@ export const useDepartures = () => {
         );
 
         return () => clearInterval(intervalId);
-    }, [currentStationIndex, departures, isInitialLoad]);
+    }, [departures, isInitialLoad]);
 
     const removeStation = (stationIndex: string) => {
         const newDepartures = departures.remove(stationIndex);

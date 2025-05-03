@@ -26,7 +26,7 @@ export const AppConfig: IAppConfig = {
         import.meta.env.VITE_COINSTATS_API_KEY || '',
 
     wienerLinienApiEndpoint: 'https://vtapi.floscodes.net/monitor/',
-    wienerLinienApiUpdateInterval: 1000 * 90,
+    wienerLinienApiUpdateInterval: 1000 * 45,
     wienerLinienTimetableUpdateInterval: 1000 * 25,
 
     exchangeRateApiEndpoint:
