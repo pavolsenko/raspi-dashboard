@@ -1,22 +1,20 @@
-import * as React from 'react';
-
+import { ReactNode } from 'react';
 import { Box } from '@mui/material';
 
 import { DailyForecastItem } from './DailyForecastItem';
+
 import { dailyForecastStyles } from './styles';
 
 interface IForecastProps {
     days?: Record<string, any>[];
 }
 
-export const DailyForecast: React.FC<IForecastProps> = (
-    props: IForecastProps,
-) => {
+export function DailyForecast(props: IForecastProps) {
     if (!props.days) {
         return null;
     }
 
-    const result: React.ReactNode[] = [];
+    const result: ReactNode[] = [];
 
     props.days.forEach((day: Record<string, any>, index: number) => {
         result.push(
@@ -29,4 +27,4 @@ export const DailyForecast: React.FC<IForecastProps> = (
     });
 
     return <Box sx={dailyForecastStyles}>{result}</Box>;
-};
+}

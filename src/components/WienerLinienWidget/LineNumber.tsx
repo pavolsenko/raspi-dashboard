@@ -1,16 +1,13 @@
-import * as React from 'react';
 import { Box, Typography } from '@mui/material';
 
 import { lineNumberStyles } from './styles';
 
-interface ILineNumberProps {
+interface LineNumberProps {
     onClick?: () => void;
     value: string;
 }
 
-export const LineNumber: React.FC<ILineNumberProps> = (
-    props: ILineNumberProps,
-) => {
+export function LineNumber(props: LineNumberProps) {
     const getBackgroundColor = () => {
         if (props.value === 'U1') {
             return '#e20210';
@@ -53,4 +50,4 @@ export const LineNumber: React.FC<ILineNumberProps> = (
             {props.value}
         </Typography>
     );
-};
+}

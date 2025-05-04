@@ -4,16 +4,14 @@ import Icon from '@mdi/react';
 import { isDay } from '../../helpers/timeHelpers';
 import { getWeatherIcon } from '../../helpers/weatherHelpers';
 
-export interface IWeatherIconProps {
+export interface WeatherIconProps {
     size?: string;
     iconId?: number;
     sunsetMs?: number;
     sunriseMs?: number;
 }
 
-export const WeatherIcon: React.FC<IWeatherIconProps> = (
-    props: IWeatherIconProps,
-) => {
+export function WeatherIcon(props: WeatherIconProps) {
     if (!props.iconId) {
         return null;
     }
@@ -24,4 +22,4 @@ export const WeatherIcon: React.FC<IWeatherIconProps> = (
     );
 
     return <Icon path={icon} size={props.size} />;
-};
+}

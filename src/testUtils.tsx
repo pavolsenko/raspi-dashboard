@@ -1,11 +1,9 @@
-import * as React from 'react';
+import { PropsWithChildren } from 'react';
 
 import { createTheme, ThemeProvider } from '@mui/material';
 
-export const WrapperTestComponent: React.FC<React.PropsWithChildren<any>> = (
-    props: React.PropsWithChildren<any>,
-) => {
+export function WrapperTestComponent(props: PropsWithChildren<any>) {
     return (
         <ThemeProvider theme={createTheme()}>{props.children}</ThemeProvider>
     );
-};
+}

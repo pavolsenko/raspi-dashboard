@@ -13,7 +13,7 @@ interface ILineProps {
     line: ILine;
 }
 
-export const Line: React.FC<ILineProps> = (props: ILineProps) => {
+export function Line(props: ILineProps) {
     return (
         <Box sx={lineStyles}>
             <Box sx={lineNameStyles}>
@@ -23,4 +23,4 @@ export const Line: React.FC<ILineProps> = (props: ILineProps) => {
             <Countdowns values={getFirstTwoCountdowns(props.line.departures)} />
         </Box>
     );
-};
+}

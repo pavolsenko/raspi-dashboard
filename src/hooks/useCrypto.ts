@@ -1,19 +1,19 @@
 import axios from 'axios';
-import * as React from 'react';
+import { useState } from 'react';
 
 import { AppConfig } from '../config/appConfig';
 import { coinStatsOptions } from '../helpers/cryptoHelpers';
+import { CryptoStats } from '../interfaces/crypto';
 
-export interface ICryptoStats {
-    ethereum: number;
-    ethereumTrend: number;
-    bitcoin: number;
-    bitcoinTrend: number;
+export interface UseCrypto {
+    cryptoStats?: CryptoStats;
+    loadCryptoStats: () => void;
+    isError: boolean;
 }
 
-export function useCrypto() {
-    const [isError, setIsError] = React.useState<boolean>(false);
-    const [cryptoStats, setCryptoStats] = React.useState<ICryptoStats>();
+export function useCrypto(): UseCrypto {
+    const [isError, setIsError] = useState<boolean>(false);
+    const [cryptoStats, setCryptoStats] = useState<CryptoStats>();
 
     async function loadCryptoStats(): Promise<void> {
         setIsError(false);

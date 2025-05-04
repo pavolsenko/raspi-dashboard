@@ -15,9 +15,7 @@ interface IDailyForecastItemProps {
     index: number;
 }
 
-export const DailyForecastItem: React.FC<IDailyForecastItemProps> = (
-    props: IDailyForecastItemProps,
-) => {
+export function DailyForecastItem(props: IDailyForecastItemProps) {
     const dateTime = useDateTime();
     const date = new Date().setDate(dateTime.getDate() + props.index + 1);
 
@@ -43,4 +41,4 @@ export const DailyForecastItem: React.FC<IDailyForecastItemProps> = (
             </Typography>
         </Box>
     );
-};
+}

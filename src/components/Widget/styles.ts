@@ -28,3 +28,9 @@ export const antiBurnStyles: SxProps = {
     width: '100%',
     height: '150px',
 };
+
+export const dividerStyles: SxProps = {
+    backgroundColor: '#171a1c',
+    height: '3px',
+    width: '100%',
+};

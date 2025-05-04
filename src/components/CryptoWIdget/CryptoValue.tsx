@@ -3,6 +3,7 @@ import { Box, Typography } from '@mui/material';
 import { CryptoTrendIcon } from './icons/CryptoTrendIcon';
 
 import {
+    cryptoNameStyles,
     cryptoTrendStyles,
     cryptoValueNumberStyles,
     cryptoValueStyles,
@@ -11,11 +12,20 @@ import {
 export interface CryptoValueProps {
     value: number;
     trendValue: number;
+    name: string;
 }
 
 export function CryptoValue(props: CryptoValueProps) {
     return (
         <Box sx={cryptoValueStyles}>
+            <Typography
+                component={Box}
+                variant={'body2'}
+                color={'secondary'}
+                sx={cryptoNameStyles}
+            >
+                {props.name}
+            </Typography>
             <Typography
                 variant={'body2'}
                 component={Box}

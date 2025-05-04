@@ -1,5 +1,5 @@
-import * as React from 'react';
 import { Box } from '@mui/material';
+import { ReactNode } from 'react';
 
 import { ILine } from '../../interfaces';
 import { Line } from './Line';
@@ -9,17 +9,17 @@ interface IStationProps {
     lines?: ILine[];
 }
 
-export const Station: React.FC<IStationProps> = (props: IStationProps) => {
+export function Station(props: IStationProps) {
     if (!props.lines) {
         return null;
     }
 
-    const renderLines = (): React.ReactNode | React.ReactNode[] => {
+    const renderLines = (): ReactNode => {
         if (!props.lines) {
             return null;
         }
 
-        const result: React.ReactNode[] = [];
+        const result: ReactNode[] = [];
 
         props.lines.forEach((line: ILine, index: number) => {
             if (!line.departures || line.departures.length === 0) {
@@ -33,4 +33,4 @@ export const Station: React.FC<IStationProps> = (props: IStationProps) => {
     };
 
     return <Box>{renderLines()}</Box>;
-};
+}

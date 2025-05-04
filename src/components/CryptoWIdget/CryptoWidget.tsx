@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-
 import { Box } from '@mui/material';
 
 import { useCrypto } from '../../hooks/useCrypto';
 import { AppConfig } from '../../config/appConfig';
 import { Error } from '../Widget/Error';
 import { Widget } from '../Widget/Widget';
-import { CryptoName } from './CryptoName';
 import { CryptoValue } from './CryptoValue';
+import { Bitcoin } from './icons/Bitcoin';
+import { Ethereum } from './icons/Ethereum';
+import { CryptoIcon } from './icons/CryptoIcon';
+
 import { cryptoStyles, cryptoWidgetStyles } from './styles';
 
 export function CryptoWidget() {
@@ -37,16 +39,21 @@ export function CryptoWidget() {
         <Widget>
             <Box sx={cryptoWidgetStyles}>
                 <Box sx={cryptoStyles}>
-                    <CryptoName name={'Ethereum'} />
+                    <CryptoIcon>
+                        <Ethereum />
+                    </CryptoIcon>
                     <CryptoValue
+                        name={'Ethereum'}
                         value={cryptoStats.ethereum}
                         trendValue={cryptoStats.ethereumTrend}
                     />
                 </Box>
                 <Box sx={cryptoStyles}>
-                    <CryptoName name={'Bitcoin'} />
-
+                    <CryptoIcon>
+                        <Bitcoin />
+                    </CryptoIcon>
                     <CryptoValue
+                        name={'Bitcoin'}
                         value={cryptoStats.bitcoin}
                         trendValue={cryptoStats.bitcoinTrend}
                     />

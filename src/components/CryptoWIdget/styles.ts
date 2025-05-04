@@ -3,7 +3,6 @@ import { SxProps } from '@mui/material';
 export const cryptoStyles: SxProps = {
     display: 'flex',
     gap: 6,
-    width: '65%',
     justifyContent: 'space-between',
 };
 
@@ -11,8 +10,7 @@ export const cryptoWidgetStyles: SxProps = {
     display: 'flex',
     flexDirection: 'column',
     gap: 4,
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
 };
 
 export const cryptoValueStyles: SxProps = {
@@ -31,4 +29,9 @@ export const cryptoTrendStyles = (trendValue: number): SxProps => ({
 
 export const cryptoValueNumberStyles: SxProps = {
     fontSize: '48px',
+    margin: 0,
+};
+
+export const cryptoNameStyles: SxProps = {
+    fontSize: '24px',
 };

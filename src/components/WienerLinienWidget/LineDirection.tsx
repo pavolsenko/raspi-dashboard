@@ -1,13 +1,10 @@
-import * as React from 'react';
 import { Box, Typography } from '@mui/material';
 
-interface ILineDirectionProps {
+interface LineDirectionProps {
     direction: string;
 }
 
-export const LineDirection: React.FC<ILineDirectionProps> = (
-    props: ILineDirectionProps,
-) => {
+export function LineDirection(props: LineDirectionProps) {
     return (
         <Typography variant={'body2'} color={'secondary'} component={Box}>
             {props.direction.includes(',')
@@ -15,4 +12,4 @@ export const LineDirection: React.FC<ILineDirectionProps> = (
                 : props.direction.split(' ')[0]}
         </Typography>
     );
-};
+}

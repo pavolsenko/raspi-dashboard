@@ -34,7 +34,6 @@ export const useDepartures = () => {
                 .get(AppConfig.wienerLinienApiEndpoint, {
                     params: {
                         station: STATION.name,
-                        line: STATION.lines[0].name,
                     },
                 })
                 .then((response: AxiosResponse) => {
@@ -47,6 +46,8 @@ export const useDepartures = () => {
                     if (data && data.length > 0) {
                         departure = processStations(STATION, data);
                     }
+
+                    console.log(data);
 
                     if (!departure) {
                         return;
