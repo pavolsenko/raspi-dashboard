@@ -17,6 +17,7 @@ export const countdownBlinkingStyles: SxProps = {
 };
 
 export const countdownNumberStyles: SxProps = {
+    width: '30px',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
@@ -44,7 +45,7 @@ export const lineNumberStyles = (backgroundColor: string): SxProps => ({
 export const lineStyles: SxProps = {
     display: 'flex',
     justifyContent: 'space-between',
-    marginBottom: 2,
+    padding: 1,
 };
 
 export const lineNameStyles: SxProps = {

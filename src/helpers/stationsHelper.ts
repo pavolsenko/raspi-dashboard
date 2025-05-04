@@ -4,7 +4,7 @@ export const processStations = (
     station: IStationRequest,
     data: Record<string, any>[],
 ): IStation => {
-    const lines = [data[2], data[1]].map(
+    const lines: ILine[] = [data[2], data[1]].map(
         (monitor: Record<string, any>): ILine => {
             return {
                 name: monitor.lines[0].name,

@@ -6,9 +6,9 @@ import { coinStatsOptions } from '../helpers/cryptoHelpers';
 
 export interface ICryptoStats {
     ethereum: number;
-    ethereumTrend: 'up' | 'down';
+    ethereumTrend: number;
     bitcoin: number;
-    bitcoinTrend: 'up' | 'down';
+    bitcoinTrend: number;
 }
 
 export function useCrypto() {
@@ -37,10 +37,9 @@ export function useCrypto() {
 
         setCryptoStats({
             ethereum: resultEthereum.data.price,
-            ethereumTrend:
-                resultEthereum.data.priceChange1w > 0 ? 'up' : 'down',
+            ethereumTrend: resultEthereum.data.priceChange1w,
             bitcoin: resultBitcoin.data.price,
-            bitcoinTrend: resultBitcoin.data.priceChange1w > 0 ? 'up' : 'down',
+            bitcoinTrend: resultBitcoin.data.priceChange1w,
         });
     }
 

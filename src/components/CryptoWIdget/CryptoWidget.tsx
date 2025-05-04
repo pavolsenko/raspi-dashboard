@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Box } from '@mui/material';
 
@@ -6,9 +6,9 @@ import { useCrypto } from '../../hooks/useCrypto';
 import { AppConfig } from '../../config/appConfig';
 import { Error } from '../Widget/Error';
 import { Widget } from '../Widget/Widget';
+import { CryptoName } from './CryptoName';
 import { CryptoValue } from './CryptoValue';
-import { Ethereum } from './icons/Ethereum';
-import { cryptoWidgetStyles } from './styles';
+import { cryptoStyles, cryptoWidgetStyles } from './styles';
 
 export function CryptoWidget() {
     const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
@@ -36,16 +36,21 @@ export function CryptoWidget() {
     return (
         <Widget>
             <Box sx={cryptoWidgetStyles}>
-                <CryptoValue
-                    title={'Ethereum'}
-                    value={cryptoStats.ethereum}
-                    trend={cryptoStats.ethereumTrend}
-                />
-                <CryptoValue
-                    title={'Bitcoin'}
-                    value={cryptoStats.bitcoin}
-                    trend={cryptoStats.bitcoinTrend}
-                />
+                <Box sx={cryptoStyles}>
+                    <CryptoName name={'Ethereum'} />
+                    <CryptoValue
+                        value={cryptoStats.ethereum}
+                        trendValue={cryptoStats.ethereumTrend}
+                    />
+                </Box>
+                <Box sx={cryptoStyles}>
+                    <CryptoName name={'Bitcoin'} />
+
+                    <CryptoValue
+                        value={cryptoStats.bitcoin}
+                        trendValue={cryptoStats.bitcoinTrend}
+                    />
+                </Box>
             </Box>
         </Widget>
     );

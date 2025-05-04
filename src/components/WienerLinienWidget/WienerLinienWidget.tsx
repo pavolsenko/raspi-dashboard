@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
+import { Box } from '@mui/material';
 
 import { IStation } from '../../interfaces';
 import { useDepartures } from '../../hooks/useDepartures';
 import { Station } from './Station';
 import { Widget } from '../Widget/Widget';
 import { Error } from '../Widget/Error';
-import { Box } from '@mui/material';
 
 export function WienerLinienWidget() {
     const { departures, isError, resetCache } = useDepartures();
@@ -16,17 +16,15 @@ export function WienerLinienWidget() {
         }
 
         const result: ReactNode[] = [];
-        departures
-            .sort((a: IStation, b: IStation): number => a.order - b.order)
-            .forEach((station: IStation) => {
-                result.push(
-                    <Station
-                        key={station.name}
-                        lines={station.lines}
-                        name={station.name}
-                    />,
-                );
-            });
+        departures.forEach((station: IStation) => {
+            result.push(
+                <Station
+                    key={station.name}
+                    lines={station.lines}
+                    name={station.name}
+                />,
+            );
+        });
 
         return result;
     }

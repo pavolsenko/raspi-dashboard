@@ -52,10 +52,9 @@ export const useDepartures = () => {
                         return;
                     }
 
-                    const newDepartures = departures.set(
-                        departure.name,
-                        departure,
-                    );
+                    const newDepartures = departures
+                        .clear()
+                        .set(departure.name, departure);
                     setLocalStorageDepartures(newDepartures);
 
                     setDepartures(newDepartures);
@@ -86,17 +85,8 @@ export const useDepartures = () => {
         setLocalStorageDepartures(newDepartures);
     };
 
-    const removeLine = (stationIndex: string, lineIndex: number) => {
-        const newDepartures = departures.removeIn([
-            stationIndex,
-            'lines',
-            lineIndex,
-        ]);
-        setDepartures(newDepartures);
-        setLocalStorageDepartures(newDepartures);
-    };
-
     const resetCache = () => {
+        setDepartures(departures.clear());
         window.localStorage.setItem(DEPARTURES_KEY, '');
     };
 
@@ -105,6 +95,5 @@ export const useDepartures = () => {
         isError,
         resetCache,
         removeStation,
-        removeLine,
     };
 };
