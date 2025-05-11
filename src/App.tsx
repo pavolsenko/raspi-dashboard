@@ -1,7 +1,7 @@
 import { Box, useTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
-import { TimeWidget } from './components/TimeWidget/TimeWidget';
 
+import { TimeWidget } from './components/TimeWidget/TimeWidget';
 import { WeatherWidget } from './components/WeatherWidget/WeatherWidget';
 import { AntiScreenBurn } from './components/Widget/AntiScreenBurn';
 import { WienerLinienWidget } from './components/WienerLinienWidget/WienerLinienWidget';

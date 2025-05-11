@@ -40,7 +40,7 @@ export function CryptoValue(props: CryptoValueProps) {
                 sx={cryptoTrendStyles(props.trendValue)}
             >
                 <CryptoTrendIcon trendValue={props.trendValue} />
-                <Box>{props.trendValue.toFixed(2)}</Box>
+                <Box>{props.trendValue.toFixed(2)}%</Box>
             </Typography>
         </Box>
     );

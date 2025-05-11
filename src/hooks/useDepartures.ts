@@ -4,7 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 
 import { AppConfig } from '../config/appConfig';
 import { DEPARTURES_KEY, STATION } from '../config/departuresConfig';
-import { IStation } from '../interfaces';
+import { IStation } from '../interfaces/departures';
 import { processStations } from '../helpers/stationsHelper';
 
 export const useDepartures = () => {
@@ -34,6 +34,7 @@ export const useDepartures = () => {
                 .get(AppConfig.wienerLinienApiEndpoint, {
                     params: {
                         station: STATION.name,
+                        line: STATION.lines[0].name,
                     },
                 })
                 .then((response: AxiosResponse) => {
@@ -47,8 +48,6 @@ export const useDepartures = () => {
                         departure = processStations(STATION, data);
                     }
 
-                    console.log(data);
-
                     if (!departure) {
                         return;
                     }
@@ -61,7 +60,7 @@ export const useDepartures = () => {
                     setDepartures(newDepartures);
                 })
                 .catch((reason) => {
-                    console.log(reason);
+                    console.error(reason);
                     setIsError(true);
                 });
         };
@@ -88,7 +87,7 @@ export const useDepartures = () => {
 
     const resetCache = () => {
         setDepartures(departures.clear());
-        window.localStorage.setItem(DEPARTURES_KEY, '');
+        window.localStorage.setItem(DEPARTURES_KEY, '{}');
     };
 
     return {

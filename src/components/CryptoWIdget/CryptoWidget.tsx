@@ -14,7 +14,6 @@ import { cryptoStyles, cryptoWidgetStyles } from './styles';
 
 export function CryptoWidget() {
     const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
-
     const { isError, cryptoStats, loadCryptoStats } = useCrypto();
 
     useEffect(() => {

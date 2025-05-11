@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { Box } from '@mui/material';
 
-import { IStation } from '../../interfaces';
+import { IStation } from '../../interfaces/departures';
 import { useDepartures } from '../../hooks/useDepartures';
 import { Station } from './Station';
 import { Widget } from '../Widget/Widget';

@@ -1,11 +1,9 @@
-import * as React from 'react';
 import { Box } from '@mui/material';
 
 import { LineNumber } from './LineNumber';
 import { LineDirection } from './LineDirection';
 import { Countdowns } from './Countdowns';
-import { ILine } from '../../interfaces';
-import { getFirstTwoCountdowns } from '../../helpers/stationsHelper';
+import { ILine } from '../../interfaces/departures';
 
 import { lineNameStyles, lineStyles } from './styles';
 
@@ -20,7 +18,7 @@ export function Line(props: ILineProps) {
                 <LineNumber value={props.line.name} />
                 <LineDirection direction={props.line.direction} />
             </Box>
-            <Countdowns values={getFirstTwoCountdowns(props.line.departures)} />
+            <Countdowns departures={props.line.departures} />
         </Box>
     );
 }

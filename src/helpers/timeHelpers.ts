@@ -41,3 +41,9 @@ export const isDay = (
 
     return timeHours > sunriseHours && timeHours < sunsetHours;
 };
+
+export function getDayName(index: number): string {
+    return new Date(new Date().setDate(new Date().getDate() + index))
+        .toLocaleDateString('default', { weekday: 'long' })
+        .substring(0, 3);
+}

@@ -1,8 +1,9 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { Box, Typography } from '@mui/material';
 import { mdiCircle, mdiClockRemoveOutline } from '@mdi/js';
 import Icon from '@mdi/react';
+import { getFirstTwoCountdowns } from '../../helpers/stationsHelper';
 
 import {
     countdownBlinkingStyles,
@@ -12,14 +13,25 @@ import {
 } from './styles';
 
 interface ICountdownsProps {
-    values: number[];
+    departures: string[];
 }
 
 export function Countdowns(props: ICountdownsProps) {
+    const [tick, setTick] = useState<number>(0);
+
+    useEffect(() => {
+        const interval = setInterval(
+            () => setTick((tick: number) => Number(!Boolean(tick))),
+            1000 * 30,
+        );
+
+        return () => clearInterval(interval);
+    }, []);
+
     function renderCountdown(value: number): ReactNode {
         if (value === 0) {
             return (
-                <Box sx={countdownBlinkingStyles}>
+                <Box sx={countdownBlinkingStyles} data-tick={tick}>
                     <Icon path={mdiCircle} size="12px" />
                 </Box>
             );
@@ -29,7 +41,9 @@ export function Countdowns(props: ICountdownsProps) {
     }
 
     function renderCountdowns(): ReactNode {
-        if (!props.values[0] && !props.values[1]) {
+        const values = getFirstTwoCountdowns(props.departures);
+
+        if (!values[0] && !values[1]) {
             return (
                 <Box sx={countdownErrorStyles}>
                     <Icon path={mdiClockRemoveOutline} size="22px" />
@@ -44,14 +58,14 @@ export function Countdowns(props: ICountdownsProps) {
                     sx={countdownNumberStyles}
                     component={Box}
                 >
-                    {renderCountdown(props.values[0])}
+                    {renderCountdown(values[0])}
                 </Typography>
                 <Typography
                     variant={'body2'}
                     sx={countdownNumberStyles}
                     component={Box}
                 >
-                    {renderCountdown(props.values[1])}
+                    {renderCountdown(values[1])}
                 </Typography>
             </>
         );

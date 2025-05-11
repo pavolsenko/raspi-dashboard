@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import { ReactNode } from 'react';
 
-import { ILine } from '../../interfaces';
+import { ILine } from '../../interfaces/departures';
 import { Line } from './Line';
 
 interface IStationProps {

@@ -1,9 +1,9 @@
-import { ILine, IStation, IStationRequest } from '../interfaces';
+import { ILine, IStation, IStationRequest } from '../interfaces/departures';
 
-export const processStations = (
+export function processStations(
     station: IStationRequest,
     data: Record<string, any>[],
-): IStation => {
+): IStation {
     const lines: ILine[] = [data[2], data[1]].map(
         (monitor: Record<string, any>): ILine => {
             return {
@@ -27,9 +27,9 @@ export const processStations = (
         lines,
         order: station.order,
     };
-};
+}
 
-export const getFirstTwoCountdowns = (departures: string[]): number[] => {
+export function getFirstTwoCountdowns(departures: string[]): number[] {
     let newCountdowns: number[] = [];
 
     departures.forEach((value: string) => {
@@ -59,11 +59,43 @@ export const getFirstTwoCountdowns = (departures: string[]): number[] => {
     }
 
     return newCountdowns;
-};
+}
 
-export const getTimeDifference = (dateTime: string): number => {
+export function getTimeDifference(dateTime: string): number {
     const nowDate = Date.now();
     const valueDate = new Date(dateTime).getTime();
 
     return Math.floor((valueDate - nowDate) / 1000 / 60);
-};
+}
+
+export function getBackgroundColor(lineName: string): string {
+    if (lineName === 'U1') {
+        return '#e20210';
+    }
+
+    if (lineName === 'U2') {
+        return '#935e98';
+    }
+
+    if (lineName === 'U3') {
+        return '#ef7e00';
+    }
+
+    if (lineName === 'U4') {
+        return '#079243';
+    }
+
+    if (lineName === 'U5') {
+        return '#008F96';
+    }
+
+    if (lineName === 'U6') {
+        return '#a4642c';
+    }
+
+    if (lineName.includes('A') || lineName.includes('B')) {
+        return 'linear-gradient(315deg, hsla(227, 100%, 25%, 1) 0%, hsla(215, 100%, 28%, 1) 100%)';
+    }
+
+    return 'linear-gradient(315deg, hsla(0, 100%, 40%, 1) 0%, hsla(0, 100%, 27%, 1) 100%)';
+}

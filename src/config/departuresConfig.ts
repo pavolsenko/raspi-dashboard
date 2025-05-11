@@ -1,4 +1,4 @@
-import { IStationRequest } from '../interfaces';
+import { IStationRequest } from '../interfaces/departures';
 
 export const STATION: IStationRequest = {
     name: 'Alfred-Adler-Straße',

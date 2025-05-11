@@ -2,7 +2,6 @@ import { useState } from 'react';
 import axios from 'axios';
 
 import { AppConfig } from '../config/appConfig';
-import { getHourlyForecast } from '../helpers/weatherHelpers';
 import {
     DAILY_FORECAST_COUNT,
     DEFAULT_LOCATION,
@@ -60,7 +59,6 @@ export function useWeather(location: ILatLon, units?: TUnits): IUseWeather {
         setWeather({
             ...result.data.current,
             daily: result.data.daily.slice(1, DAILY_FORECAST_COUNT + 1),
-            hourly: getHourlyForecast(result.data.hourly),
             icon: result.data.current.weather[0].id,
             pop: result.data.hourly[0].pop,
         });
