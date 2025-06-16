@@ -15,7 +15,8 @@ import {
     mdiWeatherSnowyRainy,
     mdiWeatherSunny,
 } from '@mdi/js';
-import { DEFAULT_WEATHER_ICON_ID } from '../config/weatherConfig';
+
+import { DEFAULT_WEATHER_ICON_ID } from '@app/config/weatherConfig';
 
 const weatherIcons: Record<string, { day: string; night: string }> = {
     '200': { day: mdiWeatherLightning, night: mdiWeatherLightning },

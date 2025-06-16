@@ -2,10 +2,10 @@ import { Box } from '@mui/material';
 import { mdiCloudCancelOutline } from '@mdi/js';
 import Icon from '@mdi/react';
 
-import { DEFAULT_FONT_SIZE } from '../../helpers/themeHelper';
-import { Widget } from './Widget';
+import { DEFAULT_FONT_SIZE } from '@app/helpers/themeHelper';
+import { Widget } from '@app/components/Widget/Widget';
 
-import { errorStyles } from './styles';
+import { errorStyles } from './antiBurnStyles';
 
 export function Error() {
     return (

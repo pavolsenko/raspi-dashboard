@@ -1,7 +1,7 @@
 import { mdiArrowDown, mdiArrowUp } from '@mdi/js';
 import Icon from '@mdi/react';
 
-import { DEFAULT_FONT_SECONDARY_SIZE } from '../../../helpers/themeHelper';
+import { DEFAULT_FONT_SECONDARY_SIZE } from '@app/helpers/themeHelper';
 
 export interface CryptoTrendIconProps {
     trendValue: number;

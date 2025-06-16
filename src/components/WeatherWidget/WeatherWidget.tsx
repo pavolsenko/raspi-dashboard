@@ -1,23 +1,23 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 
-import { Error } from '../Widget/Error';
-import { DEFAULT_FONT_SIZE } from '../../helpers/themeHelper';
-import { DailyForecast } from './DailyForecast';
-import { WeatherIcon } from './WeatherIcon';
-import { useWeather } from '../../hooks/useWeather';
-import { AppConfig } from '../../config/appConfig';
-import { CurrentTemperature } from './CurrentTemperature';
-import { Widget } from '../Widget/Widget';
-import { DEFAULT_LOCATION } from '../../config/weatherConfig';
+import { Error } from '@app/components/Widget/Error';
+import { DEFAULT_FONT_SIZE } from '@app/helpers/themeHelper';
+import { DailyForecast } from '@app/components/WeatherWidget/DailyForecast';
+import { WeatherIcon } from '@app/components/WeatherWidget/WeatherIcon';
+import { Units, useWeather } from '@app/hooks/useWeather';
+import { appConfig } from '@app/config/appConfig';
+import { CurrentTemperature } from '@app/components/WeatherWidget/CurrentTemperature';
+import { Widget } from '@app/components/Widget/Widget';
+import { DEFAULT_LOCATION } from '@app/config/weatherConfig';
 
-import { currentTemperatureBoxStyles } from './styles';
+import { currentTemperatureBoxStyles } from './weatherStyles';
 
-export interface IWeatherProps {
-    units?: 'metric' | 'imperial';
+export interface WeatherProps {
+    units?: Units;
 }
 
-export function WeatherWidget(props: IWeatherProps) {
+export function WeatherWidget(props: Readonly<WeatherProps>) {
     const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
 
     const { weather, loadWeather, isError } = useWeather(
@@ -33,7 +33,7 @@ export function WeatherWidget(props: IWeatherProps) {
 
         const interval = setInterval(
             loadWeather,
-            AppConfig.defaultUpdateInterval,
+            appConfig.defaultUpdateInterval,
         );
 
         return () => clearInterval(interval);

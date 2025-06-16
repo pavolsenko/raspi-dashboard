@@ -4,7 +4,7 @@ interface LineDirectionProps {
     direction: string;
 }
 
-export function LineDirection(props: LineDirectionProps) {
+export function LineDirection(props: Readonly<LineDirectionProps>) {
     return (
         <Typography variant={'body2'} color={'secondary'} component={Box}>
             {props.direction.includes(',')

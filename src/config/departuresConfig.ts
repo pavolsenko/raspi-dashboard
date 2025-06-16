@@ -1,6 +1,6 @@
-import { IStationRequest } from '../interfaces/departures';
+import { StationRequest } from '@app/interfaces/departures';
 
-export const STATION: IStationRequest = {
+export const STATION: StationRequest = {
     name: 'Alfred-Adler-Straße',
     lines: [
         { name: 'D', directions: ['H'] },

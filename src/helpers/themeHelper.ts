@@ -1,11 +1,11 @@
-import { createTheme } from '@mui/material';
+import { createTheme, Theme } from '@mui/material';
 
 export const DISPLAY_HEIGHT = 740;
 export const DISPLAY_WIDTH = 1280;
 export const DEFAULT_FONT_SIZE = '120px';
 export const DEFAULT_FONT_SECONDARY_SIZE = '32px';
 
-export function getTheme() {
+export function getTheme(): Theme {
     return createTheme({
         palette: {
             mode: 'dark',
@@ -31,7 +31,7 @@ export function getTheme() {
     });
 }
 
-export function getRandomHexColor() {
+export function getRandomHexColor(): string {
     const hex = Math.floor(Math.random() * 0xffffff).toString(16);
     return `#${hex.padStart(6, '0')}`;
 }

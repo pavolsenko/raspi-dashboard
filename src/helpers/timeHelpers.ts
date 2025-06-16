@@ -1,4 +1,4 @@
-export const normalizeTime = (value?: number | Date): string => {
+export function normalizeTime(value?: number | Date): string {
     if (!value) {
         return '00:00';
     }
@@ -24,13 +24,13 @@ export const normalizeTime = (value?: number | Date): string => {
     }
 
     return result;
-};
+}
 
-export const isDay = (
+export function isDay(
     sunriseMs?: number,
     sunsetMs?: number,
     dateTimeMs: number = Date.now(),
-): boolean => {
+): boolean {
     if (!sunriseMs || !sunsetMs) {
         return true;
     }
@@ -40,7 +40,7 @@ export const isDay = (
     const timeHours = new Date(dateTimeMs).getHours();
 
     return timeHours > sunriseHours && timeHours < sunsetHours;
-};
+}
 
 export function getDayName(index: number): string {
     return new Date(new Date().setDate(new Date().getDate() + index))

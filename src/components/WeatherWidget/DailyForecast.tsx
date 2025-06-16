@@ -1,16 +1,16 @@
 import { ReactNode, useCallback } from 'react';
 import { Box } from '@mui/material';
 
-import { getDayName } from '../../helpers/timeHelpers';
-import { DailyForecastItem } from './DailyForecastItem';
+import { getDayName } from '@app/helpers/timeHelpers';
+import { DailyForecastItem } from '@app/components/WeatherWidget/DailyForecastItem';
 
-import { dailyForecastStyles } from './styles';
+import { dailyForecastStyles } from './weatherStyles';
 
-interface IForecastProps {
+interface ForecastProps {
     days?: Record<string, any>[];
 }
 
-export function DailyForecast(props: IForecastProps) {
+export function DailyForecast(props: Readonly<ForecastProps>) {
     const dailyForecast = useCallback((): ReactNode => {
         return props.days?.map(
             (day: Record<string, any>, index: number): ReactNode => {

@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 
-import { getRandomHexColor } from '../../helpers/themeHelper';
+import { getRandomHexColor } from '@app/helpers/themeHelper';
 
-import { antiBurnStyles } from './styles';
+import { antiBurnStyles } from './antiBurnStyles';
 
 export function AntiScreenBurn() {
     const [screen, setScreen] = useState<number>(0);

@@ -1,8 +1,8 @@
 import * as React from 'react';
 import Icon from '@mdi/react';
 
-import { isDay } from '../../helpers/timeHelpers';
-import { getWeatherIcon } from '../../helpers/weatherHelpers';
+import { isDay } from '@app/helpers/timeHelpers';
+import { getWeatherIcon } from '@app/helpers/weatherHelpers';
 
 export interface WeatherIconProps {
     size?: string;

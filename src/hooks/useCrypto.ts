@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { useState } from 'react';
 
-import { AppConfig } from '../config/appConfig';
-import { coinStatsOptions } from '../helpers/cryptoHelpers';
-import { CryptoStats } from '../interfaces/crypto';
+import { appConfig } from '@app/config/appConfig';
+import { coinStatsOptions } from '@app/helpers/cryptoHelpers';
+import { CryptoStats } from '@app/interfaces/crypto';
 
 export interface UseCrypto {
     cryptoStats?: CryptoStats;
@@ -22,12 +22,12 @@ export function useCrypto(): UseCrypto {
         let resultBitcoin: any;
         try {
             resultEthereum = await axios.get(
-                AppConfig.coinStatsApiEndpoint + 'ethereum',
+                appConfig.coinStatsApiEndpoint + 'ethereum',
                 coinStatsOptions,
             );
 
             resultBitcoin = await axios.get(
-                AppConfig.coinStatsApiEndpoint + 'bitcoin',
+                appConfig.coinStatsApiEndpoint + 'bitcoin',
                 coinStatsOptions,
             );
         } catch (Error) {

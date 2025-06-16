@@ -1,15 +1,15 @@
-import { Box } from '@mui/material';
 import { ReactNode } from 'react';
+import { Box } from '@mui/material';
 
-import { ILine } from '../../interfaces/departures';
-import { Line } from './Line';
+import { LineDeparture } from '@app/interfaces/departures';
+import { Line } from '@app/components/WienerLinienWidget/Line';
 
-interface IStationProps {
+interface StationProps {
     name: string;
-    lines?: ILine[];
+    lines?: LineDeparture[];
 }
 
-export function Station(props: IStationProps) {
+export function Station(props: Readonly<StationProps>) {
     if (!props.lines) {
         return null;
     }
@@ -21,7 +21,7 @@ export function Station(props: IStationProps) {
 
         const result: ReactNode[] = [];
 
-        props.lines.forEach((line: ILine, index: number) => {
+        props.lines.forEach((line: LineDeparture, index: number) => {
             if (!line.departures || line.departures.length === 0) {
                 return;
             }

@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 import { Box } from '@mui/material';
 
-import { IStation } from '../../interfaces/departures';
-import { useDepartures } from '../../hooks/useDepartures';
-import { Station } from './Station';
-import { Widget } from '../Widget/Widget';
-import { Error } from '../Widget/Error';
+import { StationDeparture } from '@app/interfaces/departures';
+import { useDepartures } from '@app/hooks/useDepartures';
+import { Station } from '@app/components/WienerLinienWidget/Station';
+import { Widget } from '@app/components/Widget/Widget';
+import { Error } from '@app/components/Widget/Error';
 
 export function WienerLinienWidget() {
     const { departures, isError, resetCache } = useDepartures();
@@ -16,7 +16,7 @@ export function WienerLinienWidget() {
         }
 
         const result: ReactNode[] = [];
-        departures.forEach((station: IStation) => {
+        departures.forEach((station: StationDeparture) => {
             result.push(
                 <Station
                     key={station.name}

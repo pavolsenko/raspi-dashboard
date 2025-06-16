@@ -1,22 +1,22 @@
 import { ReactNode, useEffect, useState } from 'react';
-
 import { Box, Typography } from '@mui/material';
 import { mdiCircle, mdiClockRemoveOutline } from '@mdi/js';
 import Icon from '@mdi/react';
-import { getFirstTwoCountdowns } from '../../helpers/stationsHelper';
+
+import { getFirstTwoCountdowns } from '@app/helpers/stationsHelper';
 
 import {
     countdownBlinkingStyles,
     countdownErrorStyles,
     countdownNumberStyles,
     countdownsWrapperStyles,
-} from './styles';
+} from './lineStyles';
 
-interface ICountdownsProps {
+interface CountdownsProps {
     departures: string[];
 }
 
-export function Countdowns(props: ICountdownsProps) {
+export function Countdowns(props: Readonly<CountdownsProps>) {
     const [tick, setTick] = useState<number>(0);
 
     useEffect(() => {

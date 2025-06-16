@@ -1,17 +1,17 @@
 import { Box } from '@mui/material';
 
-import { LineNumber } from './LineNumber';
-import { LineDirection } from './LineDirection';
-import { Countdowns } from './Countdowns';
-import { ILine } from '../../interfaces/departures';
+import { LineNumber } from '@app/components/WienerLinienWidget/LineNumber';
+import { LineDirection } from '@app/components/WienerLinienWidget/LineDirection';
+import { Countdowns } from '@app/components/WienerLinienWidget/Countdowns';
+import { LineDeparture } from '@app/interfaces/departures';
 
-import { lineNameStyles, lineStyles } from './styles';
+import { lineNameStyles, lineStyles } from './lineStyles';
 
-interface ILineProps {
-    line: ILine;
+interface LineProps {
+    line: LineDeparture;
 }
 
-export function Line(props: ILineProps) {
+export function Line(props: Readonly<LineProps>) {
     return (
         <Box sx={lineStyles}>
             <Box sx={lineNameStyles}>

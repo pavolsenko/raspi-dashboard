@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 
-import { useCrypto } from '../../hooks/useCrypto';
-import { AppConfig } from '../../config/appConfig';
-import { Error } from '../Widget/Error';
-import { Widget } from '../Widget/Widget';
-import { CryptoValue } from './CryptoValue';
-import { Bitcoin } from './icons/Bitcoin';
-import { Ethereum } from './icons/Ethereum';
-import { CryptoIcon } from './icons/CryptoIcon';
+import { useCrypto } from '@app/hooks/useCrypto';
+import { appConfig } from '@app/config/appConfig';
+import { Error } from '@app/components/Widget/Error';
+import { Widget } from '@app/components/Widget/Widget';
+import { CryptoValue } from '@app/components/CryptoWIdget/CryptoValue';
+import { Bitcoin } from '@app/components/CryptoWIdget/icons/Bitcoin';
+import { Ethereum } from '@app/components/CryptoWIdget/icons/Ethereum';
+import { CryptoIcon } from '@app/components/CryptoWIdget/icons/CryptoIcon';
 
-import { cryptoStyles, cryptoWidgetStyles } from './styles';
+import { cryptoStyles, cryptoWidgetStyles } from './cryptoStyles';
 
 export function CryptoWidget() {
     const [isInitialLoad, setIsInitialLoad] = useState<boolean>(true);
@@ -24,7 +24,7 @@ export function CryptoWidget() {
 
         const interval = setInterval(
             loadCryptoStats,
-            AppConfig.defaultUpdateInterval,
+            appConfig.defaultUpdateInterval,
         );
 
         return () => clearInterval(interval);

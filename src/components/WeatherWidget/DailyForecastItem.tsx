@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { Box, Typography } from '@mui/material';
 
-import { WeatherIcon } from './WeatherIcon';
+import { WeatherIcon } from '@app/components/WeatherWidget/WeatherIcon';
 
 import {
     dailyForecastItem,
     dailyForecastTemperature,
     dailyForecastUnits,
-} from './styles';
+} from './weatherStyles';
 
-interface IDailyForecastItemProps {
+interface DailyForecastItemProps {
     day: Record<string, any>;
     dayName: string;
 }
 
-export function DailyForecastItem(props: IDailyForecastItemProps) {
+export function DailyForecastItem(props: Readonly<DailyForecastItemProps>) {
     return (
         <Box sx={dailyForecastItem}>
             <Typography variant={'body2'} color={'secondary'} component={Box}>

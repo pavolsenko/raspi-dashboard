@@ -1,10 +1,10 @@
 import { Box, Typography, useTheme } from '@mui/material';
 
-import { normalizeTime } from '../../helpers/timeHelpers';
-import { useDateTime } from '../../hooks/useDateTime';
-import { Widget } from '../Widget/Widget';
+import { normalizeTime } from '@app/helpers/timeHelpers';
+import { useDateTime } from '@app/hooks/useDateTime';
+import { Widget } from '@app/components/Widget/Widget';
 
-import { dateStyles, timeStyles } from './styles';
+import { dateStyles, timeStyles } from './timeStyles';
 
 export function TimeWidget() {
     const theme = useTheme();

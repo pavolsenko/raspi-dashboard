@@ -1,15 +1,15 @@
 import { Box, Typography } from '@mui/material';
 
-import { getBackgroundColor } from '../../helpers/stationsHelper';
+import { getBackgroundColor } from '@app/helpers/stationsHelper';
 
-import { lineNumberStyles } from './styles';
+import { lineNumberStyles } from './lineStyles';
 
 interface LineNumberProps {
     onClick?: () => void;
     value: string;
 }
 
-export function LineNumber(props: LineNumberProps) {
+export function LineNumber(props: Readonly<LineNumberProps>) {
     return (
         <Typography
             variant={'body2'}

@@ -1,4 +1,4 @@
-export interface IAppConfig {
+export interface AppConfig {
     openWeatherApiEndpoint: string;
     openWeatherAppId: string;
 
@@ -15,7 +15,7 @@ export interface IAppConfig {
     defaultUpdateInterval: number;
 }
 
-export const AppConfig: IAppConfig = {
+export const appConfig: AppConfig = {
     openWeatherApiEndpoint: 'https://api.openweathermap.org/data/3.0/onecall',
     // @ts-ignore
     openWeatherAppId: import.meta.env.VITE_OPENWEATHER_APP_ID || '',

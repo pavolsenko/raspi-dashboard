@@ -1,16 +1,16 @@
-export interface ILine {
+export interface LineDeparture {
     name: string;
     direction: string;
     departures: string[];
 }
 
-export interface IStation {
+export interface StationDeparture {
     name: string;
-    lines: ILine[];
+    lines: LineDeparture[];
     order?: number;
 }
 
-export interface IStationRequest {
+export interface StationRequest {
     name: string;
     lines: {
         name: string;

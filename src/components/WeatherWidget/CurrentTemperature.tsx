@@ -1,11 +1,11 @@
 import { ReactNode } from 'react';
 import { Box, Typography } from '@mui/material';
 
-export interface ITemperatureProps {
+export interface TemperatureProps {
     value?: number;
 }
 
-export function CurrentTemperature(props: ITemperatureProps) {
+export function CurrentTemperature(props: Readonly<TemperatureProps>) {
     function getValue(): ReactNode {
         if (!props.value) {
             return '--';

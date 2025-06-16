@@ -1,6 +1,6 @@
 import { SxProps, Theme } from '@mui/material';
 
-import { DISPLAY_HEIGHT, DISPLAY_WIDTH } from './helpers/themeHelper';
+import { DISPLAY_HEIGHT, DISPLAY_WIDTH } from '@app/helpers/themeHelper';
 
 export const appContainerStyles = (theme: Theme): SxProps => ({
     width: DISPLAY_WIDTH,

@@ -1,14 +1,14 @@
 import { Box, useTheme } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 
-import { TimeWidget } from './components/TimeWidget/TimeWidget';
-import { WeatherWidget } from './components/WeatherWidget/WeatherWidget';
-import { AntiScreenBurn } from './components/Widget/AntiScreenBurn';
-import { WienerLinienWidget } from './components/WienerLinienWidget/WienerLinienWidget';
-import { CryptoWidget } from './components/CryptoWIdget/CryptoWidget';
-import { getTheme } from './helpers/themeHelper';
+import { TimeWidget } from '@app/components/TimeWidget/TimeWidget';
+import { WeatherWidget } from '@app/components/WeatherWidget/WeatherWidget';
+import { AntiScreenBurn } from '@app/components/Widget/AntiScreenBurn';
+import { WienerLinienWidget } from '@app/components/WienerLinienWidget/WienerLinienWidget';
+import { CryptoWidget } from '@app/components/CryptoWIdget/CryptoWidget';
+import { getTheme } from '@app/helpers/themeHelper';
 
-import { appContainerStyles } from './styles';
+import { appContainerStyles } from './appStyles';
 
 export function App() {
     const theme = useTheme();

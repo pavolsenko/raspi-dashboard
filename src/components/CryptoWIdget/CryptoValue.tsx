@@ -1,13 +1,13 @@
 import { Box, Typography } from '@mui/material';
 
-import { CryptoTrendIcon } from './icons/CryptoTrendIcon';
+import { CryptoTrendIcon } from '@app/components/CryptoWIdget/icons/CryptoTrendIcon';
 
 import {
     cryptoNameStyles,
     cryptoTrendStyles,
     cryptoValueNumberStyles,
     cryptoValueStyles,
-} from './styles';
+} from './cryptoStyles';
 
 export interface CryptoValueProps {
     value: number;

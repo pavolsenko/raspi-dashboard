@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 const DEFAULT_INTERVAL = 2500;
 
-export const useDateTime = (ms?: number): Date => {
+export function useDateTime(ms?: number): Date {
     const [dateTime, setDateTime] = useState<Date>(new Date());
 
     useEffect(() => {
@@ -16,4 +16,4 @@ export const useDateTime = (ms?: number): Date => {
     }, [ms]);
 
     return dateTime;
-};
+}

@@ -1,11 +1,15 @@
-import { ILine, IStation, IStationRequest } from '../interfaces/departures';
+import {
+    LineDeparture,
+    StationDeparture,
+    StationRequest,
+} from '@app/interfaces/departures';
 
 export function processStations(
-    station: IStationRequest,
+    station: StationRequest,
     data: Record<string, any>[],
-): IStation {
-    const lines: ILine[] = [data[2], data[1]].map(
-        (monitor: Record<string, any>): ILine => {
+): StationDeparture {
+    const lines: LineDeparture[] = [data[2], data[1]].map(
+        (monitor: Record<string, any>): LineDeparture => {
             return {
                 name: monitor.lines[0].name,
                 direction: monitor.lines[0].towards,
