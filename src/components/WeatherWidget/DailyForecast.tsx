@@ -7,13 +7,16 @@ import { DailyForecastItem } from '@app/components/WeatherWidget/DailyForecastIt
 import { dailyForecastStyles } from './weatherStyles';
 
 interface ForecastProps {
-    days?: Record<string, any>[];
+    days?: Record<string, Record<string, unknown>>[];
 }
 
 export function DailyForecast(props: Readonly<ForecastProps>) {
     const dailyForecast = useCallback((): ReactNode => {
         return props.days?.map(
-            (day: Record<string, any>, index: number): ReactNode => {
+            (
+                day: Record<string, Record<string, unknown>>,
+                index: number,
+            ): ReactNode => {
                 const dayName: string = getDayName(index + 1);
                 return (
                     <DailyForecastItem

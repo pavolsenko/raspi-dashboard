@@ -17,12 +17,12 @@ export interface AppConfig {
 
 export const appConfig: AppConfig = {
     openWeatherApiEndpoint: 'https://api.openweathermap.org/data/3.0/onecall',
-    // @ts-ignore
+    // @ts-expect-error env is defined and works in vite
     openWeatherAppId: import.meta.env.VITE_OPENWEATHER_APP_ID || '',
 
     coinStatsApiEndpoint: 'https://openapiv1.coinstats.app/coins/',
     coinStatsApiKey:
-        // @ts-ignore
+        // @ts-expect-error env is defined and works in vite
         import.meta.env.VITE_COINSTATS_API_KEY || '',
 
     wienerLinienApiEndpoint: 'https://vtapi.floscodes.net/monitor/',
@@ -31,7 +31,7 @@ export const appConfig: AppConfig = {
 
     exchangeRateApiEndpoint:
         'https://api.apilayer.com/exchangerates_data/latest?base=USD&symbols=EUR',
-    // @ts-ignore
+    // @ts-expect-error env is defined and works in vite
     exchangeRateApiToken: import.meta.env.VITE_EXCHANGE_RATE_TOKEN || '',
 
     defaultUpdateInterval: 1000 * 60 * 60,

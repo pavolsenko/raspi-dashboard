@@ -9,7 +9,7 @@ export function AntiScreenBurn() {
     const [screen, setScreen] = useState<number>(0);
 
     useEffect(() => {
-        let timer = setInterval(() => setScreen(1), 5 * 60 * 1000);
+        const timer = setInterval(() => setScreen(1), 5 * 60 * 1000);
 
         return () => {
             clearInterval(timer);
@@ -26,7 +26,7 @@ export function AntiScreenBurn() {
             return;
         }
 
-        let timer = setInterval(
+        const timer = setInterval(
             () => setScreen((prevState: number) => prevState + 1),
             700,
         );

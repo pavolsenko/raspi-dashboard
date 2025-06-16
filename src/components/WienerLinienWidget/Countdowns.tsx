@@ -21,7 +21,7 @@ export function Countdowns(props: Readonly<CountdownsProps>) {
 
     useEffect(() => {
         const interval = setInterval(
-            () => setTick((tick: number) => Number(!Boolean(tick))),
+            () => setTick((tick: number) => Number(!tick)),
             1000 * 30,
         );
 

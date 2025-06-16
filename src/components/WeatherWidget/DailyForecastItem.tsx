@@ -10,7 +10,7 @@ import {
 } from './weatherStyles';
 
 interface DailyForecastItemProps {
-    day: Record<string, any>;
+    day: Record<string, Record<string, unknown>>;
     dayName: string;
 }
 
@@ -20,7 +20,10 @@ export function DailyForecastItem(props: Readonly<DailyForecastItemProps>) {
             <Typography variant={'body2'} color={'secondary'} component={Box}>
                 {props.dayName}
             </Typography>
-            <WeatherIcon iconId={props.day.weather[0].id} size={'42px'} />
+            <WeatherIcon
+                iconId={(props.day.weather[0] as Record<string, number>).id}
+                size={'42px'}
+            />
 
             <Typography
                 variant={'body2'}
@@ -28,7 +31,7 @@ export function DailyForecastItem(props: Readonly<DailyForecastItemProps>) {
                 sx={dailyForecastTemperature}
                 component={Box}
             >
-                {props.day.temp.day.toFixed()}
+                {(props.day.temp.day as number).toFixed()}
                 <Typography sx={dailyForecastUnits} component={Box}>
                     °C
                 </Typography>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 import { appConfig } from '@app/config/appConfig';
 import {
@@ -15,8 +15,8 @@ export interface LatLon {
 }
 
 export interface Weather {
-    daily: Record<string, any>[];
-    hourly: Record<string, any>[];
+    daily: Record<string, string>[];
+    hourly: Record<string, string>[];
     description?: string;
     humidity?: number;
     icon?: number;
@@ -41,7 +41,7 @@ export function useWeather(location: LatLon, units?: Units): UseWeather {
     async function loadWeather(): Promise<void> {
         setIsError(false);
 
-        let result: any;
+        let result: AxiosResponse;
         try {
             result = await axios.get(appConfig.openWeatherApiEndpoint, {
                 params: {
@@ -51,7 +51,8 @@ export function useWeather(location: LatLon, units?: Units): UseWeather {
                     units: units || 'metric',
                 },
             });
-        } catch (Error) {
+        } catch (error) {
+            console.error(error);
             setIsError(true);
             return;
         }

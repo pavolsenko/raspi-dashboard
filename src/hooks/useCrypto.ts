@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 import { appConfig } from '@app/config/appConfig';
@@ -18,8 +18,8 @@ export function useCrypto(): UseCrypto {
     async function loadCryptoStats(): Promise<void> {
         setIsError(false);
 
-        let resultEthereum: any;
-        let resultBitcoin: any;
+        let resultEthereum: AxiosResponse;
+        let resultBitcoin: AxiosResponse;
         try {
             resultEthereum = await axios.get(
                 appConfig.coinStatsApiEndpoint + 'ethereum',
@@ -30,7 +30,8 @@ export function useCrypto(): UseCrypto {
                 appConfig.coinStatsApiEndpoint + 'bitcoin',
                 coinStatsOptions,
             );
-        } catch (Error) {
+        } catch (error) {
+            console.error(error);
             setIsError(true);
             return;
         }

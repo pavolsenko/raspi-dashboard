@@ -45,7 +45,7 @@ export function useDepartures(): UseDepartures {
                 .then((response: AxiosResponse) => {
                     const data = response?.data?.data?.monitors as Record<
                         string,
-                        any
+                        string
                     >[];
 
                     let departure;
