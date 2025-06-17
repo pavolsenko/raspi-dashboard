@@ -8,7 +8,7 @@ import { WienerLinienWidget } from '@app/components/WienerLinienWidget/WienerLin
 import { CryptoWidget } from '@app/components/CryptoWIdget/CryptoWidget';
 import { getTheme } from '@app/helpers/themeHelper';
 
-import '@fontsource/nunito';
+import '@fontsource/nunito/latin-400.css';
 import { appContainerStyles } from './appStyles';
 
 export function App() {
