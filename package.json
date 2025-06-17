@@ -6,9 +6,12 @@
     "scripts": {
         "start": "vite",
         "build": "vite build",
-        "test": "jest --coverage",
-        "prettier": "prettier --write .",
-        "eslint": "eslint . --ext .ts,.tsx --fix"
+        "test": "jest",
+        "test:watch": "jest --watch --coverage",
+        "prettier": "prettier --check .",
+        "prettier:fix": "prettier --write .",
+        "eslint": "eslint . --ext .ts,.tsx",
+        "eslint:fix": "eslint . --ext .ts,.tsx --fix"
     },
     "dependencies": {
         "@emotion/react": "^11.14.0",

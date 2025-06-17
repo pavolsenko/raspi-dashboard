@@ -24,6 +24,8 @@ export default [
                 tsconfigRootDir: process.cwd(),
             },
         },
-        rules: {},
+        rules: {
+            '@typescript-eslint/no-explicit-any': 'warn',
+        },
     },
 ];
