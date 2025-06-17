@@ -32,7 +32,7 @@ export function Countdowns(props: Readonly<CountdownsProps>) {
         if (value === 0) {
             return (
                 <Box sx={countdownBlinkingStyles} data-tick={tick}>
-                    <Icon path={mdiCircle} size="12px" />
+                    <Icon path={mdiCircle} size={'12px'} />
                 </Box>
             );
         }
@@ -46,7 +46,7 @@ export function Countdowns(props: Readonly<CountdownsProps>) {
         if (!values[0] && !values[1]) {
             return (
                 <Box sx={countdownErrorStyles}>
-                    <Icon path={mdiClockRemoveOutline} size="22px" />
+                    <Icon path={mdiClockRemoveOutline} size={'22px'} />
                 </Box>
             );
         }

@@ -15,7 +15,7 @@ export interface LatLon {
 }
 
 export interface Weather {
-    daily: Record<string, string>[];
+    daily: Record<string, Record<string, string>>[];
     hourly: Record<string, string>[];
     description?: string;
     humidity?: number;
