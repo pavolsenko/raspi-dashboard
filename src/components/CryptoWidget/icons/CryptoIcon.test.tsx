@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 
-import { Bitcoin } from '@app/components/CryptoWIdget/icons/Bitcoin';
-import { Ethereum } from '@app/components/CryptoWIdget/icons/Ethereum';
-import { CryptoIcon } from '@app/components/CryptoWIdget/icons/CryptoIcon';
+import { Bitcoin } from '@app/components/CryptoWidget/icons/Bitcoin';
+import { Ethereum } from '@app/components/CryptoWidget/icons/Ethereum';
+import { CryptoIcon } from '@app/components/CryptoWidget/icons/CryptoIcon';
 
 describe('<CryptoIcon />', () => {
     it('should render bitcoin correctly', () => {

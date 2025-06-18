@@ -5,10 +5,10 @@ import { useCrypto } from '@app/hooks/useCrypto';
 import { appConfig } from '@app/config/appConfig';
 import { ErrorCloud } from '@app/components/Widget/ErrorCloud';
 import { Widget } from '@app/components/Widget/Widget';
-import { CryptoValue } from '@app/components/CryptoWIdget/CryptoValue';
-import { Bitcoin } from '@app/components/CryptoWIdget/icons/Bitcoin';
-import { Ethereum } from '@app/components/CryptoWIdget/icons/Ethereum';
-import { CryptoIcon } from '@app/components/CryptoWIdget/icons/CryptoIcon';
+import { CryptoValue } from '@app/components/CryptoWidget/CryptoValue';
+import { Bitcoin } from '@app/components/CryptoWidget/icons/Bitcoin';
+import { Ethereum } from '@app/components/CryptoWidget/icons/Ethereum';
+import { CryptoIcon } from '@app/components/CryptoWidget/icons/CryptoIcon';
 
 import { cryptoStyles, cryptoWidgetStyles } from './cryptoStyles';
 

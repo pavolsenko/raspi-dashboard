@@ -2,7 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { useState } from 'react';
 
 import { appConfig } from '@app/config/appConfig';
-import { coinStatsOptions } from '@app/helpers/cryptoHelpers';
+import { coinStatsOptions } from '@app/config/cryptoConfig';
 import { CryptoStats } from '@app/interfaces/crypto';
 
 export interface UseCrypto {

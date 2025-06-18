@@ -9,6 +9,8 @@ export default [
             '**/*.config.ts',
             '**/*.d.ts',
             'main.tsx',
+            '__mocks__/**',
+            'jest.setup.ts',
         ],
     },
 

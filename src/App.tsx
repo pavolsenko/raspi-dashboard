@@ -5,7 +5,7 @@ import { TimeWidget } from '@app/components/TimeWidget/TimeWidget';
 import { WeatherWidget } from '@app/components/WeatherWidget/WeatherWidget';
 import { AntiScreenBurn } from '@app/components/Widget/AntiScreenBurn';
 import { WienerLinienWidget } from '@app/components/WienerLinienWidget/WienerLinienWidget';
-import { CryptoWidget } from '@app/components/CryptoWIdget/CryptoWidget';
+import { CryptoWidget } from '@app/components/CryptoWidget/CryptoWidget';
 import { getTheme } from '@app/helpers/themeHelper';
 
 import '@fontsource/nunito/latin-400.css';

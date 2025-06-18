@@ -9,9 +9,6 @@ export interface AppConfig {
     wienerLinienApiUpdateInterval: number;
     wienerLinienTimetableUpdateInterval: number;
 
-    exchangeRateApiEndpoint: string;
-    exchangeRateApiToken: string;
-
     defaultUpdateInterval: number;
 }
 
@@ -28,11 +25,6 @@ export const appConfig: AppConfig = {
     wienerLinienApiEndpoint: 'https://vtapi.floscodes.net/monitor/',
     wienerLinienApiUpdateInterval: 1000 * 45,
     wienerLinienTimetableUpdateInterval: 1000 * 25,
-
-    exchangeRateApiEndpoint:
-        'https://api.apilayer.com/exchangerates_data/latest?base=USD&symbols=EUR',
-    // @ts-expect-error env is defined and works in vite
-    exchangeRateApiToken: import.meta.env.VITE_EXCHANGE_RATE_TOKEN || '',
 
     defaultUpdateInterval: 1000 * 60 * 60,
 };

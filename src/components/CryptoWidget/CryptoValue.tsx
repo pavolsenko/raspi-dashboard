@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material';
 
-import { CryptoTrendIcon } from '@app/components/CryptoWIdget/icons/CryptoTrendIcon';
+import { CryptoTrendIcon } from '@app/components/CryptoWidget/icons/CryptoTrendIcon';
 
 import {
     cryptoNameStyles,

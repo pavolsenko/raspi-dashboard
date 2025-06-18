@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { CryptoTrendIcon } from '@app/components/CryptoWIdget/icons/CryptoTrendIcon';
+import { CryptoTrendIcon } from '@app/components/CryptoWidget/icons/CryptoTrendIcon';
 
 describe('<CryptoTrendIcon/>', () => {
     it('should render increase', () => {
