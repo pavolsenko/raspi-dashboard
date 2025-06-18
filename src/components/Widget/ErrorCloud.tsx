@@ -7,7 +7,7 @@ import { Widget } from '@app/components/Widget/Widget';
 
 import { errorStyles } from './antiBurnStyles';
 
-export function Error() {
+export function ErrorCloud() {
     return (
         <Widget>
             <Box sx={errorStyles}>

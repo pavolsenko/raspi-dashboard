@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 
 import { useCrypto } from '@app/hooks/useCrypto';
 import { appConfig } from '@app/config/appConfig';
-import { Error } from '@app/components/Widget/Error';
+import { ErrorCloud } from '@app/components/Widget/ErrorCloud';
 import { Widget } from '@app/components/Widget/Widget';
 import { CryptoValue } from '@app/components/CryptoWIdget/CryptoValue';
 import { Bitcoin } from '@app/components/CryptoWIdget/icons/Bitcoin';
@@ -31,7 +31,7 @@ export function CryptoWidget() {
     }, [loadCryptoStats, isInitialLoad, setIsInitialLoad]);
 
     if (isError || !cryptoStats) {
-        return <Error />;
+        return <ErrorCloud />;
     }
 
     return (

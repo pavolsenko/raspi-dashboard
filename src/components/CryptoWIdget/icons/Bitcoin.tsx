@@ -1,6 +1,12 @@
 export function Bitcoin() {
     return (
-        <svg xmlns="http://www.w3.org/2000/svg" height="64" width="64">
+        <svg
+            xmlns="http://www.w3.org/2000/svg"
+            height="64"
+            width="64"
+            role="presentation"
+            viewBox="0 0 64 64"
+        >
             <g transform="translate(0.00630876,-0.00301984)">
                 <path
                     fill="#f7931a"

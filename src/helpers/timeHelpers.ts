@@ -47,3 +47,25 @@ export function getDayName(index: number): string {
         .toLocaleDateString('default', { weekday: 'long' })
         .substring(0, 3);
 }
+
+export function formatDateWithOffset(date: Date): string {
+    function pad(n: number) {
+        return String(n).padStart(2, '0');
+    }
+
+    const year: number = date.getFullYear();
+    const month: string = pad(date.getMonth() + 1);
+    const day: string = pad(date.getDate());
+    const hours: string = pad(date.getHours());
+    const minutes: string = pad(date.getMinutes());
+    const seconds: string = pad(date.getSeconds());
+    const millis: string = String(date.getMilliseconds()).padStart(3, '0');
+
+    const offsetMinutes: number = date.getTimezoneOffset(); // in minutes
+    const absOffset: number = Math.abs(offsetMinutes);
+    const offsetHours: string = pad(Math.floor(absOffset / 60));
+    const offsetMins: string = pad(absOffset % 60);
+    const offsetSign = offsetMinutes > 0 ? '-' : '+';
+
+    return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}.${millis}${offsetSign}${offsetHours}${offsetMins}`;
+}

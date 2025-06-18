@@ -5,7 +5,7 @@ import { StationDeparture } from '@app/interfaces/departures';
 import { useDepartures } from '@app/hooks/useDepartures';
 import { Station } from '@app/components/WienerLinienWidget/Station';
 import { Widget } from '@app/components/Widget/Widget';
-import { Error } from '@app/components/Widget/Error';
+import { ErrorCloud } from '@app/components/Widget/ErrorCloud';
 
 export function WienerLinienWidget() {
     const { departures, isError, resetCache } = useDepartures();
@@ -30,7 +30,7 @@ export function WienerLinienWidget() {
     }
 
     if (isError || departures.count() === 0) {
-        return <Error />;
+        return <ErrorCloud />;
     }
 
     return (

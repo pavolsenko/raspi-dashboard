@@ -9,6 +9,7 @@ export function Ethereum() {
             y="0px"
             viewBox="0 0 327.5 533.3"
             xmlSpace="preserve"
+            role="presentation"
         >
             <path fill="#8A92B2" d="M163.7,197.2V0L0,271.6L163.7,197.2z" />
             <path

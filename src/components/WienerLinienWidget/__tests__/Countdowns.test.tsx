@@ -1,25 +1,39 @@
-import { render } from '@testing-library/react';
+import { formatDateWithOffset } from '@app/helpers/timeHelpers';
+import { render, screen } from '@testing-library/react';
 
 import { Countdowns } from '@app/components/WienerLinienWidget/Countdowns';
 
 describe('<Countdowns/>', () => {
     it('should render countdowns correctly', () => {
+        const now = new Date();
+        const twoMinutesLater = new Date(now.getTime() + 2 * 60 * 1000 + 3000);
+        const fourMinutesLater = new Date(now.getTime() + 4 * 60 * 1000 + 3000);
+
         render(
             <Countdowns
                 departures={[
-                    '2025-06-17T15:25:29.000+0200',
-                    '2025-06-17T15:34:27.000+0200',
-                    '2025-06-17T15:40:43.000+0200',
-                    '2025-06-17T15:47:10.000+0200',
-                    '2025-06-17T15:53:50.000+0200',
-                    '2025-06-17T16:00:30.000+0200',
-                    '2025-06-17T16:07:10.000+0200',
-                    '2025-06-17T16:13:50.000+0200',
-                    '2025-06-17T16:20:30.000+0200',
-                    '2025-06-17T16:27:10.000+0200',
-                    '2025-06-17T16:33:50.000+0200',
+                    formatDateWithOffset(twoMinutesLater),
+                    formatDateWithOffset(fourMinutesLater),
                 ]}
             />,
         );
+        expect(screen.getByText('2')).toBeTruthy();
+        expect(screen.getByText('4')).toBeTruthy();
+    });
+
+    it('should render zero countdown with icon', () => {
+        const now = new Date();
+        const fourMinutesLater = new Date(now.getTime() + 4 * 60 * 1000 + 3000);
+
+        render(
+            <Countdowns
+                departures={[
+                    formatDateWithOffset(new Date(now.getTime() + 3000)),
+                    formatDateWithOffset(fourMinutesLater),
+                ]}
+            />,
+        );
+        expect(screen.getByRole('presentation')).toBeTruthy();
+        expect(screen.getByText('4')).toBeTruthy();
     });
 });

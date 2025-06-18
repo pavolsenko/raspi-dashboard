@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Box } from '@mui/material';
 
-import { Error } from '@app/components/Widget/Error';
+import { ErrorCloud } from '@app/components/Widget/ErrorCloud';
 import { DEFAULT_FONT_SIZE } from '@app/helpers/themeHelper';
 import { DailyForecast } from '@app/components/WeatherWidget/DailyForecast';
 import { WeatherIcon } from '@app/components/WeatherWidget/WeatherIcon';
@@ -40,7 +40,7 @@ export function WeatherWidget(props: Readonly<WeatherProps>) {
     }, [loadWeather, isInitialLoad, setIsInitialLoad]);
 
     if (isError || !weather) {
-        return <Error />;
+        return <ErrorCloud />;
     }
 
     return (
