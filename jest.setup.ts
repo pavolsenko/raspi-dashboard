@@ -1,4 +1,5 @@
 import axios from 'axios';
+import '@testing-library/jest-dom';
 
 import { mockBitcoinResponse } from './__mocks__/mockBitcoinResponse';
 import { mockEthereumResponse } from './__mocks__/mockEthereumResponse';

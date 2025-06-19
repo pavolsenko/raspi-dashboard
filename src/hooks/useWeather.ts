@@ -1,3 +1,4 @@
+import { ForecastDay } from '@app/interfaces/weather';
 import { useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 
@@ -15,7 +16,7 @@ export interface LatLon {
 }
 
 export interface Weather {
-    daily: Record<string, Record<string, string>>[];
+    daily: ForecastDay[];
     hourly: Record<string, string>[];
     description?: string;
     humidity?: number;
