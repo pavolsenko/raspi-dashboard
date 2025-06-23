@@ -42,6 +42,7 @@ export function AntiScreenBurn() {
 
     return (
         <Box
+            data-testid={'AntiScreenBurn'}
             sx={{
                 ...antiBurnStyles,
                 backgroundColor: getRandomHexColor(),
