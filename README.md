@@ -17,5 +17,4 @@ Optimized for continuous use, it’s perfect as a smart desk or wall-mounted inf
 - Add station name and displayed lines in `departuresConfig.ts`
 - Run `npm run start`.
 
-
 ![Screenshot](screenshot.png)
