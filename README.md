@@ -11,6 +11,8 @@ To protect your display, the dashboard includes an anti-burn mechanism that shif
 
 Optimized for continuous use, it’s perfect as a smart desk or wall-mounted information hub.
 
+[Demo](https://dashboard.webtip.sk)
+
 ### Development
 
 - Add your OpenWeather and CoinStats API keys to `.env`
